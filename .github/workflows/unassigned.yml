@@ -7,7 +7,7 @@ name: Move unassigned card
 on:
   issues:
     types:
-      - unassign
+      - unassigned
 jobs:
   move-unassigned-card:
     runs-on: ubuntu-latest
