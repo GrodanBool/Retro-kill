@@ -4,9 +4,12 @@ using UnityEngine;
 using Mirror;
 using Steamworks;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SteamLobby : MonoBehaviour
 {
+    public static SteamLobby instance;
+
     //Callbacks
     protected Callback<LobbyCreated_t> lobbyCreated;
     protected Callback<GameLobbyJoinRequested_t> JoinRequest;
@@ -17,13 +20,10 @@ public class SteamLobby : MonoBehaviour
     private const string hostAddressKey = "HostAddress";
     private CustomNetworkManager manager;
 
-    //GameObject
-    public GameObject hostButton;
-    public Text lobbyNameText;
-
     private void Start()
     {
         if (!SteamManager.Initialized) { return; }
+        if (instance == null) { instance = this; }
         manager = GetComponent<CustomNetworkManager>();
 
         lobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
@@ -53,10 +53,7 @@ public class SteamLobby : MonoBehaviour
     private void OnLobbyEntered(LobbyEnter_t callback)
     {
         //Everyone
-        hostButton.SetActive(false);
         currentLobbyID = callback.m_ulSteamIDLobby;
-        lobbyNameText.gameObject.SetActive(true);
-        lobbyNameText.text = SteamMatchmaking.GetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), "name");
 
         //Clients
         if (NetworkServer.active) { return; }
