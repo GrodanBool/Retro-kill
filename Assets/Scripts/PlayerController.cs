@@ -74,24 +74,23 @@ public class PlayerController : MonoBehaviour
         }
 
         // Check if the player is grounded. Meaning, we can jump
-        canJump = Physics.OverlapSphere(groundCheckPoint.position, .25f, whatIsGround).Length > 0;
+        canJump = Physics.OverlapSphere(groundCheckPoint.position, 1f, whatIsGround).Length > 0;
 
         // Handle jumping
         // If the SPACE key is pressed, and canJump is true, change the move input for the y axis to the jump power
         // public variable value
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            moveInput.y = jumpPower;
-
-            // You are now able to double jump
-            canDoubleJump = true;
-        }
-        // Next up, see if we can double jump AND the SPACE key is pressed, then jump again.
-        // Then set canDoubleJump to false, so we cannot do it again
-        else if (canDoubleJump && Input.GetKeyDown(KeyCode.Space))
-        {
-            moveInput.y = jumpPower;
-            canDoubleJump = false;
+            if (canJump)
+            {
+                moveInput.y = jumpPower;
+                canDoubleJump = true;
+            }
+            else if (canDoubleJump == true)
+            {
+                moveInput.y = jumpPower;
+                canDoubleJump = false;
+            }
         }
 
         // Move the character
@@ -102,7 +101,7 @@ public class PlayerController : MonoBehaviour
 
         if (invertX)
         {
-            mouseInput.x = -mouseInput.x;
+            mouseInput.x = -mouseInput.x; 
         }
         if (invertY)
         {
@@ -121,26 +120,21 @@ public class PlayerController : MonoBehaviour
 
             if (Physics.Raycast(camTrans.position, camTrans.forward, out hit, 50f))
             {
-                // Check to see if we are very close to environment,
-                // then dont adjust to look at the hit point
                 if (Vector3.Distance(camTrans.position, hit.point) > 2f)
                 {
                     firePoint.LookAt(hit.point);
                 }
-
             }
             else
             {
                 firePoint.LookAt(camTrans.position + (camTrans.forward * 30f));
             }
-
-
             // Create a copy of something
             Instantiate(bullet, firePoint.position, firePoint.rotation);
         }
 
 
-        anim.SetFloat("moveSpeed", moveInput.magnitude);
-        anim.SetBool("onGround", canJump);
+        //anim.SetFloat("moveSpeed", moveInput.magnitude);
+        //anim.SetBool("onGround", canJump);
     }
 }
