@@ -10,6 +10,8 @@ public class BulletController : MonoBehaviour
 
     public GameObject impactEffect;
 
+    public int damage = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +21,7 @@ public class BulletController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Time.deltaTime not needed here this is 
+        // Time.deltaTime not needed here
         theRB.velocity = transform.forward * moveSpeed;
 
         lifeTime -= Time.deltaTime;
@@ -33,6 +35,12 @@ public class BulletController : MonoBehaviour
     // Checks if this script is connected to an object and does something
     private void OnTriggerEnter(Collider other)
     {
+        if (other.tag == "Enemy")
+        {
+            // If it's an enemy, fetch the class and run the correct function
+            other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy(damage);
+        }
+
         Destroy(gameObject);
         Instantiate(impactEffect, transform.position, transform.rotation);
     }
