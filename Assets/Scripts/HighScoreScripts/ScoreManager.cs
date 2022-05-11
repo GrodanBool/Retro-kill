@@ -13,13 +13,25 @@ public class ScoreManager : MonoBehaviour
 
     public IEnumerable<Score> GetHighScores()
     {
-        return sd.scores.OrderByDescending(x => x.score);
+        IEnumerable<Score> scores = new List<Score>();
+        IEnumerable<Score> scoresTop5 = new List<Score>();
+
+        scores = sd.scores.OrderByDescending(x => x.score);
+        scoresTop5 = scores.Take(5).ToList();
+
+        return scoresTop5;
     }
 
     public void AddScore(Score score)
     {
-        //needs more management for updating/not adding the same score/removing old score/adding correctly new score
-        sd.scores.Add(score);
+        if (!sd.scores.Any(s => s.id == score.id))
+        {
+            sd.scores.Add(score);
+        }
+        else if (sd.scores.Where(s => s.id == score.id).Any(s => s.score < score.score))
+        {
+            sd.scores.Where(s => s.id == score.id).Select(s => { s.score = score.score; return score; }).ToList();
+        }
     }
 
     private void OnDestroy()

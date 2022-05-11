@@ -8,6 +8,6 @@ public class ScoreData
 
     public ScoreData()
     {
-        scores= new List<Score>();
+        scores = new List<Score>();
     }
 }
