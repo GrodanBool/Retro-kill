@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public string firstLevel;
+    public string start, options, highscore;
 
     // Start is called before the first frame update
     void Start()
@@ -23,9 +23,25 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(PlayerPrefs.GetString("CurrentLevel"));
     }
 
-    public void PlayGame()
+    public void StartGame()
     {
-        SceneManager.LoadScene(firstLevel);
+        SceneManager.LoadScene(start);
+
+        PlayerPrefs.SetString("CurrentLevel", "");
+
+    }
+
+    public void Options()
+    {
+        SceneManager.LoadScene(options);
+
+        PlayerPrefs.SetString("CurrentLevel", "");
+
+    }
+
+    public void Highscore()
+    {
+        SceneManager.LoadScene(highscore);
 
         PlayerPrefs.SetString("CurrentLevel", "");
 
