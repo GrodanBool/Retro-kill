@@ -1626,4 +1626,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: PerkScreen
   options: OptionsScreen
-  highscore: 
+  highscore: HighScoreScreen

@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/OptionsScreen.unity
     guid: 795f48a593d6f7a4294d06356bca7f28
   - enabled: 1
+    path: Assets/Scenes/HighScoreScreen.unity
+    guid: ea7cbf34c39476945be55c441fae7897
+  - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: fa29ac5978f8353458a09ff3cf30ef70
   - enabled: 1
