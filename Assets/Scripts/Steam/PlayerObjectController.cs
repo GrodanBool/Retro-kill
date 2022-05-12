@@ -6,11 +6,13 @@ using Steamworks;
 
 public class PlayerObjectController : NetworkBehaviour
 {
+
     //PlayerData
     [SyncVar] public int connectionsID;
     [SyncVar] public int PlayerIDNumber;
     [SyncVar] public ulong PlayerSteamID;
     [SyncVar(hook = nameof(PlayerNameUpdate))] public string PlayerName;
+    [SyncVar(hook = nameof(PlayerReadyUpdate))] public bool Ready;
 
     private CustomNetworkManager manager;
     private CustomNetworkManager Manager
@@ -21,6 +23,38 @@ public class PlayerObjectController : NetworkBehaviour
             return manager = CustomNetworkManager.singleton as CustomNetworkManager;
         }
     }
+
+    private void Start()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
+    private void PlayerReadyUpdate(bool oldValue, bool newValue)
+    {
+        if (isServer)
+        {
+            this.Ready = newValue;
+        }
+        if (isClient)
+        {
+            LobbyController.instance.UpdatePlayerList();
+        }
+    }
+
+    [Command]
+    private void CmdSetPlayerReady()
+    {
+        this.PlayerReadyUpdate(this.Ready, !this.Ready);
+    }
+
+    public void ChangeReady()
+    {
+        if (hasAuthority)
+        {
+            CmdSetPlayerReady();
+        }
+    }
+
 
     public override void OnStartAuthority()
     {
@@ -59,5 +93,20 @@ public class PlayerObjectController : NetworkBehaviour
         {
             LobbyController.instance.UpdatePlayerList();
         }
+    }
+
+    //start
+    public void CanStartGame(string sceneName)
+    {
+        if (hasAuthority)
+        {
+            CmdCanStartGame(sceneName);
+        }
+    }
+
+    [Command]
+    public void CmdCanStartGame(string sceneName)
+    {
+        manager.StartGame(sceneName);
     }
 }

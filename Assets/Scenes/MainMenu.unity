@@ -133,8 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 111592326}
   - component: {fileID: 111592325}
-  - component: {fileID: 111592324}
   - component: {fileID: 111592323}
+  - component: {fileID: 111592324}
   - component: {fileID: 111592322}
   m_Layer: 0
   m_Name: NetworkManager
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2023e64baf57e9e4aa2d10bcc071d64f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLobbyID: 69
+  currentLobbyID: 0
 --- !u!114 &111592323
 MonoBehaviour:
   m_ObjectHideFlags: 0
