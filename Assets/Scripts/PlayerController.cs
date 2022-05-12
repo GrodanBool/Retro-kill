@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     public GameObject bullet;
     public Transform firePoint;
 
+    public Gun activeGun;
+
     // Happens straight away in Unity (before start runs)
     private void Awake()
     {
@@ -36,7 +38,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
     }
 
     // Update is called once per frame
@@ -136,5 +138,20 @@ public class PlayerController : MonoBehaviour
 
         //anim.SetFloat("moveSpeed", moveInput.magnitude);
         //anim.SetBool("onGround", canJump);
+    }
+
+    public void FireShot()
+    {
+        if (activeGun.currentAmmo > 0)
+        {
+
+            activeGun.currentAmmo--;
+
+            Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation);
+
+            activeGun.fireCounter = activeGun.fireRate;
+
+            UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+        }
     }
 }
