@@ -33,7 +33,7 @@ public class PlayerTest : NetworkBehaviour
 
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == "OnlineLevel")
+        if (SceneManager.GetActiveScene().name == "OnlineLevel" || SceneManager.GetActiveScene().name == "Level1")
         {
             if (!PlayerModel.activeSelf)
             {

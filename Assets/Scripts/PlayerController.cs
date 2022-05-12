@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
     // Happens straight away in Unity (before start runs)
     private void Awake()
     {
-
         instance = this;
     }
 
