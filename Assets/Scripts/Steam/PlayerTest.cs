@@ -49,9 +49,9 @@ public class PlayerTest : MonoBehaviour
 
         // Lock cursor
 
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
 
-        Cursor.visible = false;
+        //Cursor.visible = false;
 
     }
 
