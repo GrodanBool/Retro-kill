@@ -7598,6 +7598,7 @@ GameObject:
   - component: {fileID: 1662618643}
   - component: {fileID: 1662618648}
   - component: {fileID: 1662618649}
+  - component: {fileID: 1662618650}
   m_Layer: 6
   m_Name: Plane
   m_TagString: Lava
@@ -7712,6 +7713,22 @@ MonoBehaviour:
   time: 5
   damge: 5
   takeDamage: 1
+--- !u!114 &1662618650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662618642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14e221b5c04966a4fb987cb4e512ddeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  engineBodyRenderer: {fileID: 1662618644}
+  speed: 1
+  startColor: {r: 0.9433962, g: 0.9433962, b: 0.9433962, a: 0}
+  endColor: {r: 0.6037736, g: 0.08771803, b: 0.28965265, a: 0}
 --- !u!1 &1715135587
 GameObject:
   m_ObjectHideFlags: 0
