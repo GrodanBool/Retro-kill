@@ -6,25 +6,25 @@ public class GroundDamage : MonoBehaviour
 {
     [SerializeField] float time = 5f, damge = 5f;
     [SerializeField] bool takeDamage = true;
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.tag == "Lava")
-        {
-            PlayerHealthController health = other.GetComponent<PlayerHealthController>();
-            TakeDamage(time,health);
+        
+        if(other.gameObject.tag == "Player")
+        {     
+             StartCoroutine(TakeDamage(time,other));
         }
-        Debug.Log("lava");
+        
+        
     }
 
-    IEnumerator TakeDamage(float time, PlayerHealthController health)
+    IEnumerator TakeDamage(float time, Collider other)
     {
         if (takeDamage)
         {
-            health.DamagePlayer(damge);
+           other.gameObject.GetComponent<PlayerHealthController>().DamagePlayer(damge);
             takeDamage = !takeDamage;
             yield return new WaitForSeconds(time);
             takeDamage = !takeDamage;
-        }
-
+        }       
     }
 }
