@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseScreen : MonoBehaviour
 {
-    public string mainMenuScene;
+    public string mainMenuScene, options;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +29,14 @@ public class PauseScreen : MonoBehaviour
         SceneManager.LoadScene(mainMenuScene);
 
         Time.timeScale = 1f;
+    }
+
+     public void Options()
+    {
+        SceneManager.LoadScene(options);
+
+        PlayerPrefs.SetString("CurrentLevel", "");
+
     }
 
     public void QuitGame()
