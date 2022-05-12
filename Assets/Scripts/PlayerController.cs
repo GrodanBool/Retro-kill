@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+        // UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
     }
 
     // Update is called once per frame

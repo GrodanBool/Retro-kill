@@ -6,7 +6,7 @@ public class PlayerHealthController : MonoBehaviour
 {
     public static PlayerHealthController instance;
 
-    public int maxHealth, currentHealth;
+    public float maxHealth, currentHealth;
 
     public float invincibleLength = 1f;
     private float invincCounter;
@@ -35,7 +35,7 @@ public class PlayerHealthController : MonoBehaviour
         }
     }
 
-    public void DamagePlayer(int damageAmount)
+    public void DamagePlayer(float damageAmount)
     {
         if (invincCounter <= 0 )
         {
