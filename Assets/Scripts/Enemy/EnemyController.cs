@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
 {
     public float moveSpeed = 5;
 
-    public Rigidbody enemyRigidbody;
+    //public Rigidbody enemyRigidbody;
 
     // The point that the enemy should move towards
     private Vector3 targetPoint;
