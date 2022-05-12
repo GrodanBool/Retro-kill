@@ -25,7 +25,7 @@ public class PlayerTest : NetworkBehaviour
     {
         characterController = GetComponent<CharacterController>();
         PlayerModel.SetActive(false);
-
+        //victory!
         // Lock cursor
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
