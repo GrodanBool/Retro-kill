@@ -16,7 +16,10 @@ public class EnemyController : MonoBehaviour
     // rate of fire
     public float fireRate;
 
-    // 
+    // How much time to wait before firing again
+    // This value is set to equal firerate in game
+    // Meaning first shot will be fired after 2 secs
+    // Second and on will be depending on the fire rate
     private float fireCount = 2f;
     
     // Start is called before the first frame update
@@ -28,6 +31,7 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Target the player instance position
         targetPoint = PlayerController.instance.transform.position;
         
         // Enemy will now never look up or down, only side to side
