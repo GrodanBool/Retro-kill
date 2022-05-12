@@ -37,7 +37,7 @@ public class PlayerTest : NetworkBehaviour
             if (!PlayerModel.activeSelf)
             {
                 PlayerModel.SetActive(true);
-                transform.position = new Vector3(Random.Range(-5, 5), 100, Random.Range(-5, 5));
+                transform.position = new Vector3(0, 100, 0);
             }
 
             if (hasAuthority)
