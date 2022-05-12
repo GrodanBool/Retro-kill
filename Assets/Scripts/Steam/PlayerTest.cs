@@ -10,7 +10,7 @@ public class PlayerTest : NetworkBehaviour
     public float runningSpeed = 11.5f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
-    public Camera playerCamera;
+    public GameObject cameraMountPoint;
     public GameObject PlayerModel;
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
@@ -24,7 +24,7 @@ public class PlayerTest : NetworkBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        //PlayerModel.SetActive(false);
+        PlayerModel.SetActive(false);
 
         // Lock cursor
         //Cursor.lockState = CursorLockMode.Locked;
@@ -37,7 +37,11 @@ public class PlayerTest : NetworkBehaviour
         {
             if (!PlayerModel.activeSelf)
             {
-                PlayerModel.SetActive(true);
+                PlayerModel.SetActive(true); 
+                Transform cameraTransform = Camera.main.gameObject.transform;  //Find main camera which is part of the scene instead of the prefab
+                cameraTransform.SetParent(cameraMountPoint.transform);  //Make the camera a child of the mount point
+                cameraTransform.position = cameraMountPoint.transform.position;  //Set position/rotation same as the mount point
+                cameraTransform.rotation = cameraMountPoint.transform.rotation;
             }
 
             if (hasAuthority)
@@ -78,7 +82,7 @@ public class PlayerTest : NetworkBehaviour
                 {
                     rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
                     rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-                    playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+                    cameraMountPoint.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
                     transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
                 }
             }
