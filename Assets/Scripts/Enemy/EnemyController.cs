@@ -7,8 +7,6 @@ public class EnemyController : MonoBehaviour
 {
     public float moveSpeed = 5;
 
-    //public Rigidbody enemyRigidbody;
-
     // The point that the enemy should move towards
     private Vector3 targetPoint;
 
@@ -28,11 +26,6 @@ public class EnemyController : MonoBehaviour
         // Enemy will now never look up or down, only side to side
         targetPoint.y = transform.position.y;
 
-        //transform.LookAt(targetPoint);
-
-        agent.destination = targetPoint;
-
-        // Move the enemy (rigidbody) towards where the player is
-        //enemyRigidbody.velocity = transform.forward * moveSpeed;
+        agent.SetDestination(targetPoint);
     }
 }
