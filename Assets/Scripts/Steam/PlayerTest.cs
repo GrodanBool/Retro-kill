@@ -15,19 +15,13 @@ public class PlayerTest : NetworkBehaviour
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
     CharacterController characterController;
-    Vector3 moveDirection = Vector3.zero;
-    float rotationX = 0;
 
     [HideInInspector]
     public bool canMove = true;
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
-
-        // Lock cursor
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        PlayerModel.SetActive(false);
     }
 
     void Update()
@@ -37,11 +31,12 @@ public class PlayerTest : NetworkBehaviour
             if (!PlayerModel.activeSelf)
             {
                 PlayerModel.SetActive(true);
-                transform.position = new Vector3(0, 100, 0);
             }
 
             if (hasAuthority)
             {
+                Vector3 moveDirection = Vector3.zero;
+                float rotationX = 0;
                 // We are grounded, so recalculate move direction based on axes
                 Vector3 forward = transform.TransformDirection(Vector3.forward);
                 Vector3 right = transform.TransformDirection(Vector3.right);
