@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(waitAfterDying);
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("GameOver");
     }
 
     public void PauseUnpause()

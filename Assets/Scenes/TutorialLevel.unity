@@ -7850,6 +7850,7 @@ GameObject:
   - component: {fileID: 1662618645}
   - component: {fileID: 1662618644}
   - component: {fileID: 1662618643}
+  - component: {fileID: 1662618649}
   - component: {fileID: 1662618648}
   - component: {fileID: 1662618647}
   m_Layer: 6
@@ -7969,6 +7970,19 @@ MonoBehaviour:
   time: 5
   damge: 5
   takeDamage: 1
+--- !u!65 &1662618649
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662618642}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 500, y: 1, z: 500}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1695091157
 GameObject:
   m_ObjectHideFlags: 0

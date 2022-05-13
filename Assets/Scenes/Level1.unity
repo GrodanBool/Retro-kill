@@ -6677,7 +6677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
-  currentHealth: 50
+  currentHealth: 5
   invincibleLength: 1
 --- !u!54 &1485615295
 Rigidbody:
