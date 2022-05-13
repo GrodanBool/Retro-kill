@@ -54,6 +54,7 @@ public class PlayerHealthController : MonoBehaviour
 
             invincCounter = invincibleLength;
 
+            // Not set to instance of object right now
             UIController.instance.healthSlider.value = currentHealth;
             UIController.instance.healthText.text = "HEALTH: " + currentHealth + "/" + maxHealth;
         }
