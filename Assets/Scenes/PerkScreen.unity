@@ -1431,6 +1431,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goToLevelScreen: SelectLevelScreen
+  activeMod1: 
+  lhNotPressed: 1
+  esNotPressed: 1
+  lohNotPressed: 1
+  ngNotPressed: 1
+  lowHealth: 
+  noGuns: 
+  enemySpawn: 
+  loseHealth: 
 --- !u!1 &1526341295
 GameObject:
   m_ObjectHideFlags: 0
@@ -1658,7 +1667,7 @@ GameObject:
   - component: {fileID: 1726030282}
   - component: {fileID: 1726030281}
   m_Layer: 5
-  m_Name: Loose health
+  m_Name: Lose health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1731,7 +1740,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1445350399}
         m_TargetAssemblyTypeName: PerkScreen, Assembly-CSharp
-        m_MethodName: LooseHealth
+        m_MethodName: LoseHealth
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class BulletController : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class BulletController : MonoBehaviour
     public Rigidbody theRB;
 
     public GameObject impactEffect;
+
+    public Action onHitEnemy;
 
     // Start is called before the first frame update
     void Start()
@@ -35,5 +38,10 @@ public class BulletController : MonoBehaviour
     {
         Destroy(gameObject);
         Instantiate(impactEffect, transform.position + (transform.forward * (-moveSpeed * Time.deltaTime) ), transform.rotation);
+
+        if (onHitEnemy != null)
+        {
+            onHitEnemy();
+        }
     }
 }

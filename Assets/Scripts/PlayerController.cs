@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -28,6 +29,13 @@ public class PlayerController : MonoBehaviour
 
     public Gun activeGun;
 
+    GameManager manager;
+
+    public int score = 0;
+
+       private string activeMod;
+
+
     // Happens straight away in Unity (before start runs)
     private void Awake()
     {
@@ -44,6 +52,28 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        string activeMod1 = PlayerPrefs.GetString("activemod");
+ 
+        // switch (activeMod1)
+        // {
+        //     case "lh":
+        //         activeMod += "\nLower Health";
+        //         break;
+        //     case "ng":
+        //         activeMod += "\nNo Guns";
+        //         break;
+        //     case "es":
+        //         activeMod += "\nEnemy Spawn Rate";
+        //         break;
+        //     case "loh":
+        //         activeMod += "\nLose Health";
+        //         break;
+        //     default:
+        //         break;
+        // }
+
+        UIController.instance.activeModifiers.text = "ACTIVE MODIFIERS: " + activeMod1;
         //moveInput.x = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         //moveInput.z = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
 
@@ -103,7 +133,7 @@ public class PlayerController : MonoBehaviour
 
         if (invertX)
         {
-            mouseInput.x = -mouseInput.x; 
+            mouseInput.x = -mouseInput.x;
         }
         if (invertY)
         {
@@ -133,6 +163,14 @@ public class PlayerController : MonoBehaviour
             }
             // Create a copy of something
             Instantiate(bullet, firePoint.position, firePoint.rotation);
+
+            BulletController bollet = bullet.GetComponent<BulletController>();
+            bollet.onHitEnemy = () =>
+            {
+                score++;
+            };
+
+            UIController.instance.score.text = "SCORE: " + score;
         }
 
 
