@@ -4,7 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Lava
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -16,7 +16,7 @@ TagManager:
   - Bullets
   - Player
   - Wall
-  - GroundDamage
+  - 
   - 
   - 
   - 
