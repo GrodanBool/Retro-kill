@@ -4687,6 +4687,7 @@ GameObject:
   - component: {fileID: 1485615289}
   - component: {fileID: 1485615288}
   - component: {fileID: 1485615290}
+  - component: {fileID: 1485615291}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -4758,6 +4759,7 @@ MonoBehaviour:
   anim: {fileID: 1485615290}
   bullet: {fileID: 9080689670234104266, guid: 26350d6da9a61974ead5fd7aecd3b191, type: 3}
   firePoint: {fileID: 408982083}
+  activeGun: {fileID: 0}
 --- !u!95 &1485615290
 Animator:
   serializedVersion: 4
@@ -4778,6 +4780,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1485615291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485615286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eada7b8a226d5ce4c9f5cd6748ebd037, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  currentHealth: 10
+  invincibleLength: 1
 --- !u!1 &1494476951
 GameObject:
   m_ObjectHideFlags: 0
@@ -6845,3 +6862,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82394a5ddc4c0cb409297ad72e550fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitAfterDying: 2

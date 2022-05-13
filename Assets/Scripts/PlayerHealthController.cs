@@ -39,8 +39,6 @@ public class PlayerHealthController : MonoBehaviour
     {
         if (invincCounter <= 0 )
         {
-            
-
             currentHealth -= damageAmount;
 
             // UIController.instance.ShowDamage();
@@ -52,12 +50,9 @@ public class PlayerHealthController : MonoBehaviour
                 currentHealth = 0;
 
                 GameManager.instance.PlayerDied();
-
-                
             }
 
             invincCounter = invincibleLength;
-
 
             UIController.instance.healthSlider.value = currentHealth;
             UIController.instance.healthText.text = "HEALTH: " + currentHealth + "/" + maxHealth;
