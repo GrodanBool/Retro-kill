@@ -4823,6 +4823,8 @@ MonoBehaviour:
   healthSlider: {fileID: 2096742036}
   healthText: {fileID: 465056569}
   ammoText: {fileID: 591378591}
+  score: {fileID: 2024564302}
+  activeModifiers: {fileID: 1554072693}
   pauseScreen: {fileID: 783338336}
 --- !u!114 &943307640
 MonoBehaviour:
@@ -6535,6 +6537,7 @@ MonoBehaviour:
   bullet: {fileID: 9080689670234104266, guid: 26350d6da9a61974ead5fd7aecd3b191, type: 3}
   firePoint: {fileID: 408982083}
   activeGun: {fileID: 0}
+  score: 0
 --- !u!95 &1485615290
 Animator:
   serializedVersion: 4

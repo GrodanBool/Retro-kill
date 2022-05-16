@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class BulletController : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class BulletController : MonoBehaviour
     public int damage = 1;
 
     public bool damagePlayer, damageEnemy;
+
+    public Action onHitEnemy;
 
     // Start is called before the first frame update
     void Start()

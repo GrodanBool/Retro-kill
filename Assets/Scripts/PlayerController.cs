@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
 
     public Gun activeGun;
 
+    public int score = 0;
+
     // Happens straight away in Unity (before start runs)
     private void Awake()
     {
@@ -135,6 +137,14 @@ public class PlayerController : MonoBehaviour
             }
             // Create a copy of something
             Instantiate(bullet, firePoint.position, firePoint.rotation);
+
+            BulletController bollet = bullet.GetComponent<BulletController>();
+            bollet.onHitEnemy = () =>
+            {
+                score++;
+            };
+
+            UIController.instance.score.text = "SCORE: " + score;
         }
 
 
