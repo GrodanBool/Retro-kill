@@ -8,6 +8,7 @@ public class PerkScreen : MonoBehaviour
     public static PerkScreen instance;
 
     public string goToLevelScreen;
+    public string returnTo;
 
     GameManager manager;
 
@@ -129,6 +130,13 @@ public class PerkScreen : MonoBehaviour
     {
         activeMod1 = "loh";
 
+    }
+
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene(returnTo);
+
+        PlayerPrefs.SetString("CurrentLevel", "");
     }
 
     public void StartGame()
