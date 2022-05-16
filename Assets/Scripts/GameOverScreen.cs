@@ -10,7 +10,7 @@ public class GameOverScreen : MonoBehaviour
 
     public float timeBetweenShowing, timeToMainMenu = 5f;
 
-    public GameObject textBox;
+    public GameObject score,burdText;
 
     public Image blackScreen;
     public float blackScreenFade = 2f;
@@ -20,6 +20,7 @@ public class GameOverScreen : MonoBehaviour
     {
         StartCoroutine(ShowObjectsCo());
         StartCoroutine(ShowObjectsCoCo());
+        UIController.instance.score.text = "SCORE: " +  ScoreController.instance.score.ToString();
 
         Cursor.lockState = CursorLockMode.None;
     }
@@ -39,7 +40,9 @@ public class GameOverScreen : MonoBehaviour
     {
         yield return new WaitForSeconds(timeBetweenShowing);
 
-        textBox.SetActive(true);
+        score.SetActive(true);
+        yield return new WaitForSeconds(timeBetweenShowing);
+        burdText.SetActive(true);
     }
 
     public IEnumerator ShowObjectsCoCo()
