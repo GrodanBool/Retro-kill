@@ -8,7 +8,7 @@ public class UIController : MonoBehaviour
     public static UIController instance;
 
     public Slider healthSlider;
-    public Text healthText, ammoText,score,activeModifiers;
+    public Text healthText, ammoText,score,activeModifiers,multiplier;
 
     // public Image damageEffect;
     // public float damageAlpha = .25f, damageFadeSpeed = 2f;
@@ -33,6 +33,7 @@ public class UIController : MonoBehaviour
     void Update()
     {
         score.text = "SCORE: " +  ScoreController.instance.score.ToString();
+        multiplier.text =  ScoreController.instance.totalMultiplier.ToString() + "x";
         // if(damageEffect.color.a != 0)
         // {
         //     damageEffect.color = new Color(damageEffect.color.r, damageEffect.color.g, damageEffect.color.b, Mathf.MoveTowards(damageEffect.color.a, 0f, damageFadeSpeed * Time.deltaTime));
