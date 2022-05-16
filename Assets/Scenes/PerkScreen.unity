@@ -1431,7 +1431,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Continuously loose health
+  m_Text: Continuously lose health
 --- !u!222 &1191131042
 CanvasRenderer:
   m_ObjectHideFlags: 0
