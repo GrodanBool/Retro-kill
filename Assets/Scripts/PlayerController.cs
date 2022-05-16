@@ -37,6 +37,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        string activeMod1 = PlayerPrefs.GetString("activemod");
+ 
+        UIController.instance.activeModifiers.text = "ACTIVE MODIFIERS: " + activeMod1;
         // UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
     }
 

@@ -5656,6 +5656,8 @@ MonoBehaviour:
   healthSlider: {fileID: 2005888745}
   healthText: {fileID: 909434593}
   ammoText: {fileID: 471608105}
+  score: {fileID: 2131652098}
+  activeModifiers: {fileID: 1652803098}
   pauseScreen: {fileID: 1121424272}
 --- !u!114 &1036711546
 MonoBehaviour:
