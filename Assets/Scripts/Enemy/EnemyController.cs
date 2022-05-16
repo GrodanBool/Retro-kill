@@ -21,6 +21,8 @@ public class EnemyController : MonoBehaviour
     // Meaning first shot will be fired after 2 secs
     // Second and on will be depending on the fire rate
     private float fireCount = 2f;
+
+    public Animator anim;
     
     // Start is called before the first frame update
     void Start()
@@ -38,6 +40,17 @@ public class EnemyController : MonoBehaviour
         targetPoint.y = transform.position.y;
 
         agent.SetDestination(targetPoint);
+
+        Debug.Log(agent.stoppingDistance);
+
+        if (agent.velocity.x <= 0 && agent.velocity.z <= 0)
+        {
+            anim.SetBool("isMoving", false);
+        }
+        else
+        {
+            anim.SetBool("isMoving", true);
+        }
 
         fireCount -= Time.deltaTime;
 
