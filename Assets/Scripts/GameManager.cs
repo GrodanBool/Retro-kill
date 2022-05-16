@@ -9,10 +9,6 @@ public class GameManager : MonoBehaviour
 
     public float waitAfterDying = 2f;
 
-     public float score;
-
-     public string activeMod;
-
     private void Awake()
     {
         instance = this;

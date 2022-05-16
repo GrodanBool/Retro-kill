@@ -8,7 +8,7 @@ public class UIController : MonoBehaviour
     public static UIController instance;
 
     public Slider healthSlider;
-    public Text healthText, ammoText, score, activeModifiers;
+    public Text healthText, ammoText;
 
     // public Image damageEffect;
     // public float damageAlpha = .25f, damageFadeSpeed = 2f;
