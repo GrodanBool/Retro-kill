@@ -536,7 +536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1764706, g: 0.8862745, b: 0.9019608, a: 1}
+  m_Color: {r: 0.1764706, g: 0.8862745, b: 0.9019608, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -616,7 +616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1764706, g: 0.8862745, b: 0.9019608, a: 1}
+  m_Color: {r: 0.1764706, g: 0.8862745, b: 0.9019608, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1192,6 +1192,10 @@ MonoBehaviour:
   noGuns: 
   enemySpawn: 
   loseHealth: 
+  buttonLowHealth: {fileID: 1714004769}
+  buttonNoGun: {fileID: 2088902914}
+  buttonEnemySpawnRate: {fileID: 652128471}
+  buttonLoseHealth: {fileID: 645429173}
 --- !u!114 &723087308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1331,7 +1335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1764706, g: 0.8862745, b: 0.9019608, a: 1}
+  m_Color: {r: 0.1764706, g: 0.8862745, b: 0.9019608, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1411,7 +1415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1764706, g: 0.8862745, b: 0.9019608, a: 1}
+  m_Color: {r: 0.1764706, g: 0.8862745, b: 0.9019608, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

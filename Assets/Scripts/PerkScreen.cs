@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
+using UnityEngine.UI;
 
 public class PerkScreen : MonoBehaviour
 {
@@ -13,17 +15,23 @@ public class PerkScreen : MonoBehaviour
 
     private string activeMod;
 
-    public string activeMod1;
+    [HideInInspector] public string activeMod1;
 
-    public bool lhNotPressed = true;
-    public bool esNotPressed = true;
-    public bool lohNotPressed = true;
-    public bool ngNotPressed = true;
+    [HideInInspector] public bool lhNotPressed = true;
+    [HideInInspector] public bool esNotPressed = true;
+    [HideInInspector] public bool lohNotPressed = true;
+    [HideInInspector] public bool ngNotPressed = true;
 
-    public string lowHealth;
-    public string noGuns;
-    public string enemySpawn;
-    public string loseHealth;
+    [HideInInspector] public string lowHealth;
+    [HideInInspector] public string noGuns;
+    [HideInInspector] public string enemySpawn;
+    [HideInInspector] public string loseHealth;
+
+    [Header("Button Binds")]
+    public GameObject buttonLowHealth;
+    public GameObject buttonNoGun;
+    public GameObject buttonEnemySpawnRate;
+    public GameObject buttonLoseHealth;
 
     private void Awake()
     {
@@ -111,23 +119,72 @@ public class PerkScreen : MonoBehaviour
     public void LowerHealth()
     {
         activeMod1 = "lh";
+        if (lhNotPressed)
+        {
+            Color selected = buttonLowHealth.GetComponentInChildren<Text>().color;
+            selected.a = 1f;
+            buttonLowHealth.GetComponentInChildren<Text>().color = selected;
+        }
+        else
+        {
+            Color selected = buttonLowHealth.GetComponentInChildren<Text>().color;
+            selected.a = 0.5f;
+            buttonLowHealth.GetComponentInChildren<Text>().color = selected;
+        }
+
     }
 
     public void NoGuns()
     {
         activeMod1 = "ng";
+        if (ngNotPressed)
+        {
+            Color selected = buttonNoGun.GetComponentInChildren<Text>().color;
+            selected.a = 1f;
+            buttonNoGun.GetComponentInChildren<Text>().color = selected;
+        }
+        else
+        {
+            Color selected = buttonNoGun.GetComponentInChildren<Text>().color;
+            selected.a = 0.5f;
+            buttonNoGun.GetComponentInChildren<Text>().color = selected;
+        }
 
     }
 
     public void EnemySpawnRate()
     {
         activeMod1 = "es";
+        if (esNotPressed)
+        {
+            Color selected = buttonEnemySpawnRate.GetComponentInChildren<Text>().color;
+            selected.a = 1f;
+            buttonEnemySpawnRate.GetComponentInChildren<Text>().color = selected;
+        }
+        else
+        {
+            Color selected = buttonEnemySpawnRate.GetComponentInChildren<Text>().color;
+            selected.a = 0.5f;
+            buttonEnemySpawnRate.GetComponentInChildren<Text>().color = selected;
+        }
 
     }
 
     public void LoseHealth()
     {
         activeMod1 = "loh";
+        if (lohNotPressed)
+        {
+            Color selected = buttonLoseHealth.GetComponentInChildren<Text>().color;
+            selected.a = 1f;
+            buttonLoseHealth.GetComponentInChildren<Text>().color = selected;
+        }
+        else
+        {
+            Color selected = buttonLoseHealth.GetComponentInChildren<Text>().color;
+            selected.a = 0.5f;
+            buttonLoseHealth.GetComponentInChildren<Text>().color = selected;
+        }
 
     }
 

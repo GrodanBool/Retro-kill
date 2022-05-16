@@ -22,7 +22,6 @@ public class LevelSelectScreen : MonoBehaviour
     {
         SceneManager.LoadScene(lvl1);
         PlayerPrefs.SetString("CurrentLevel", "");
-        Debug.Log("click");
     }
 
     public void ReturnTo()

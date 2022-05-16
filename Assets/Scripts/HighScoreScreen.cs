@@ -23,6 +23,5 @@ public class HighScoreScreen : MonoBehaviour
     {
         SceneManager.LoadScene(returnTo);
         PlayerPrefs.SetString("CurrentLevel", "");
-        Debug.Log("click");
     }
 }
