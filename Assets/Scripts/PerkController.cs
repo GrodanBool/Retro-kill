@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PerkScreen : MonoBehaviour
+public class PerkController : MonoBehaviour
 {
-    public static PerkScreen instance;
+    public static PerkController instance;
 
     public string goToLevelScreen;
     public string returnTo;

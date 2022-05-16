@@ -207,8 +207,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1445350399}
-        m_TargetAssemblyTypeName: PerkScreen, Assembly-CSharp
+      - m_Target: {fileID: 1445350400}
+        m_TargetAssemblyTypeName: PerkController, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -508,8 +508,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1445350399}
-        m_TargetAssemblyTypeName: PerkScreen, Assembly-CSharp
+      - m_Target: {fileID: 1445350400}
+        m_TargetAssemblyTypeName: PerkController, Assembly-CSharp
         m_MethodName: LowerHealth
         m_Mode: 1
         m_Arguments:
@@ -1100,8 +1100,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1445350399}
-        m_TargetAssemblyTypeName: PerkScreen, Assembly-CSharp
+      - m_Target: {fileID: 1445350400}
+        m_TargetAssemblyTypeName: PerkController, Assembly-CSharp
         m_MethodName: NoGuns
         m_Mode: 1
         m_Arguments:
@@ -1402,7 +1402,7 @@ GameObject:
   - component: {fileID: 1445350397}
   - component: {fileID: 1445350396}
   - component: {fileID: 1445350395}
-  - component: {fileID: 1445350399}
+  - component: {fileID: 1445350400}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1499,7 +1499,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1445350399
+--- !u!114 &1445350400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1508,7 +1508,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1445350394}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8084bd97e50b7434ca1920df0546d11d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c463cae6f2ad9a4db265debd9273cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   goToLevelScreen: SelectLevelScreen
@@ -1686,8 +1686,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1445350399}
-        m_TargetAssemblyTypeName: PerkScreen, Assembly-CSharp
+      - m_Target: {fileID: 1445350400}
+        m_TargetAssemblyTypeName: PerkController, Assembly-CSharp
         m_MethodName: EnemySpawnRate
         m_Mode: 1
         m_Arguments:
@@ -1820,8 +1820,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1445350399}
-        m_TargetAssemblyTypeName: PerkScreen, Assembly-CSharp
+      - m_Target: {fileID: 1445350400}
+        m_TargetAssemblyTypeName: PerkController, Assembly-CSharp
         m_MethodName: LoseHealth
         m_Mode: 1
         m_Arguments:
@@ -2021,8 +2021,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1445350399}
-        m_TargetAssemblyTypeName: PerkScreen, Assembly-CSharp
+      - m_Target: {fileID: 1445350400}
+        m_TargetAssemblyTypeName: PerkController, Assembly-CSharp
         m_MethodName: ReturnToMainMenu
         m_Mode: 1
         m_Arguments:
