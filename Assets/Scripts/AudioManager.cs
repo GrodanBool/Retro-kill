@@ -8,6 +8,8 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource bgm;
 
+    public AudioSource[] soundEffects;
+
     public void Awake()
     {
         instance = this;
@@ -17,17 +19,28 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void StopBGM()
     {
         bgm.Stop();
+    }
+
+    public void PlaySFX(int SFXNumber)
+    {
+        soundEffects[SFXNumber].Stop();
+        soundEffects[SFXNumber].Play();
+    }
+
+    public void StopSFX(int SFXNumber)
+    {
+        soundEffects[SFXNumber].Stop();
     }
 }

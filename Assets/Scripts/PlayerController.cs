@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour
     public Transform firePoint;
 
     public Gun activeGun;
+    public List<Gun> allGuns = new List<Gun>();
+    public List<Gun> unlockableGuns = new List<Gun>();
+    public int currentGun;
 
     
 
@@ -91,11 +94,13 @@ public class PlayerController : MonoBehaviour
             {
                 moveInput.y = jumpPower;
                 canDoubleJump = true;
+                AudioManager.instance.PlaySFX(7);
             }
             else if (canDoubleJump == true)
             {
                 moveInput.y = jumpPower;
                 canDoubleJump = false;
+                AudioManager.instance.PlaySFX(7);
             }
         }
 
@@ -160,6 +165,54 @@ public class PlayerController : MonoBehaviour
             activeGun.fireCounter = activeGun.fireRate;
 
             UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+        }
+    }
+
+    public void SwitchGun()
+    {
+        activeGun.gameObject.SetActive(false);
+
+        currentGun++;
+
+        if(currentGun >= allGuns.Count)
+        {
+            currentGun = 0;
+        }
+
+        activeGun = allGuns[currentGun];
+        activeGun.gameObject.SetActive(true);
+
+        UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+
+        firePoint.position = activeGun.firepoint.position;
+    }
+
+    public void AddGun(string gunToAdd)
+    {
+        bool gunUnlocked = false;
+
+        if(unlockableGuns.Count > 0)
+        {
+            for(int i = 0; i < unlockableGuns.Count; i++)
+            {
+                if(unlockableGuns[i].gunName == gunToAdd)
+                {
+                    gunUnlocked = true;
+
+                    allGuns.Add(unlockableGuns[i]);
+
+                    unlockableGuns.RemoveAt(i);
+
+                    i = unlockableGuns.Count;
+                }
+            }
+            
+        }
+
+        if(gunUnlocked)
+        {
+            currentGun = allGuns.Count - 2;
+            SwitchGun();
         }
     }
 }
