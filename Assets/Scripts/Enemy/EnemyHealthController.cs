@@ -25,6 +25,7 @@ public class EnemyHealthController : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            ScoreController.instance.OnEnemyKilled();
             Destroy(gameObject);
         }
     }
