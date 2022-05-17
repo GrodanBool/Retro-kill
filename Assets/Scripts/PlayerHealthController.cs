@@ -7,6 +7,8 @@ public class PlayerHealthController : MonoBehaviour
     public static PlayerHealthController instance;
 
     public float maxHealth, currentHealth;
+    [SerializeField] bool takeDamage = false;
+    [SerializeField] float time = 5f;
 
     public float invincibleLength = 1f;
     private float invincCounter;
@@ -19,7 +21,17 @@ public class PlayerHealthController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (PlayerPrefs.GetString("activemod").Contains("Lose Health"))
+        {
+            takeDamage = true;
+            StartCoroutine(DamageOvertime(time));
+        }
+
         currentHealth = maxHealth;
+        if (PlayerPrefs.GetString("activemod").Contains("Lower Health"))
+        {
+            currentHealth = maxHealth / 2;
+        }
 
         UIController.instance.healthSlider.maxValue = maxHealth;
         UIController.instance.healthSlider.value = currentHealth;
@@ -33,6 +45,8 @@ public class PlayerHealthController : MonoBehaviour
         {
             invincCounter -= Time.deltaTime;
         }
+
+
     }
 
     public void DamagePlayer(float damageAmount)
@@ -78,5 +92,16 @@ public class PlayerHealthController : MonoBehaviour
 
         UIController.instance.healthSlider.value = currentHealth;
         UIController.instance.healthText.text = "HEALTH: " + currentHealth + "/" + maxHealth;
+    }
+
+    IEnumerator DamageOvertime(float time)
+    {
+        while (takeDamage)
+        {
+            DamagePlayer(1);
+            takeDamage = !takeDamage;
+            yield return new WaitForSeconds(time);
+            takeDamage = !takeDamage;
+        }
     }
 }

@@ -7869,6 +7869,7 @@ MonoBehaviour:
   allGuns: []
   unlockableGuns: []
   currentGun: 0
+  maxViewAngle: 60
 --- !u!95 &1485615290
 Animator:
   serializedVersion: 4
@@ -7903,6 +7904,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   currentHealth: 10
+  takeDamage: 0
+  time: 1
   invincibleLength: 1
 --- !u!1 &1494476951
 GameObject:
@@ -11189,3 +11192,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitAfterDying: 2
+  escapedPressed: 0
