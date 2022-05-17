@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     public List<Gun> allGuns = new List<Gun>();
     public List<Gun> unlockableGuns = new List<Gun>();
     public int currentGun;
+    
+    public float maxViewAngle = 60f;
 
 
 
@@ -123,6 +125,13 @@ public class PlayerController : MonoBehaviour
 
         camTrans.rotation = Quaternion.Euler(camTrans.rotation.eulerAngles + new Vector3(-mouseInput.y, 0f, 0f));
 
+        if (camTrans.rotation.eulerAngles.x > maxViewAngle && camTrans.rotation.eulerAngles.x < 180f)
+        {
+            camTrans.rotation = Quaternion.Euler(maxViewAngle, camTrans.rotation.eulerAngles.y, camTrans.rotation.eulerAngles.z);
+        } else if(camTrans.rotation.eulerAngles.x > 180f && camTrans.rotation.eulerAngles.x < 360f - maxViewAngle)
+        {
+            camTrans.rotation = Quaternion.Euler(-maxViewAngle, camTrans.rotation.eulerAngles.y, camTrans.rotation.eulerAngles.z);
+        }
 
         // Handle shooting
         if (Input.GetMouseButtonDown(0))
