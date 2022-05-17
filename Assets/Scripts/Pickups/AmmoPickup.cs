@@ -14,7 +14,7 @@ public class AmmoPickup : MonoBehaviour
 
             Destroy(gameObject);
 
-            AudioManagerMusicSFX.instance.PlaySFX(2);
+            AudioManagerMusicSFX.instance.PlaySFX(7);
         }
     }
 }

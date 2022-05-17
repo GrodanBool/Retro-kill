@@ -96,13 +96,11 @@ public class PlayerController : MonoBehaviour
             {
                 moveInput.y = jumpPower;
                 canDoubleJump = true;
-                AudioManagerMusicSFX.instance.PlaySFX(7);
             }
             else if (canDoubleJump == true)
             {
                 moveInput.y = jumpPower;
-                canDoubleJump = false;
-                AudioManagerMusicSFX.instance.PlaySFX(7);
+                canDoubleJump = false;   
             }
         }
 

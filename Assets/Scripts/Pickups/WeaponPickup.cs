@@ -19,7 +19,7 @@ public class WeaponPickup : MonoBehaviour
 
             collected = true;
 
-            AudioManagerMusicSFX.instance.PlaySFX(3);
+            AudioManagerMusicSFX.instance.PlaySFX(0);
         }
     }
 }
