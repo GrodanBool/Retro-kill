@@ -60,17 +60,18 @@ public class EnemyController : MonoBehaviour
         {
             fireCount = fireRate;
 
+            // Keep agent facing player
             firePoint.LookAt(PlayerController.instance.transform.position);
 
             // Check the angle towards the player
-            //Vector3 targetDir = PlayerController.instance.transform.position - transform.position;
-            //float angle = Vector3.SignedAngle(targetDir, transform.forward, Vector3.up);
+            Vector3 targetDir = PlayerController.instance.transform.position - transform.position;
+            float angle = Vector3.SignedAngle(targetDir, transform.forward, Vector3.up);
 
-            //if (Mathf.Abs(angle) < 30f)
-            //{
+            if (Mathf.Abs(angle) < 30f)
+            {
                 Instantiate(bullet, firePoint.position, firePoint.rotation);
                 anim.SetTrigger("fireShot");
-            //}
+            }
 
             anim.SetBool("isMoving", false);
         }
