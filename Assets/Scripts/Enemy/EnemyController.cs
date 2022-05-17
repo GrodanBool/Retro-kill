@@ -39,9 +39,10 @@ public class EnemyController : MonoBehaviour
         // Enemy will now never look up or down, only side to side
         targetPoint.y = transform.position.y;
 
-        agent.SetDestination(targetPoint);
+        // Always face the player
+        transform.LookAt(PlayerController.instance.transform);
 
-        Debug.Log(agent.stoppingDistance);
+        agent.SetDestination(targetPoint);
 
         if (agent.velocity.x <= 0 && agent.velocity.z <= 0)
         {
@@ -54,11 +55,24 @@ public class EnemyController : MonoBehaviour
 
         fireCount -= Time.deltaTime;
 
+        
         if (fireCount <= 0)
         {
             fireCount = fireRate;
 
-            Instantiate(bullet, firePoint.position, firePoint.rotation);
+            firePoint.LookAt(PlayerController.instance.transform.position);
+
+            // Check the angle towards the player
+            //Vector3 targetDir = PlayerController.instance.transform.position - transform.position;
+            //float angle = Vector3.SignedAngle(targetDir, transform.forward, Vector3.up);
+
+            //if (Mathf.Abs(angle) < 30f)
+            //{
+                Instantiate(bullet, firePoint.position, firePoint.rotation);
+                anim.SetTrigger("fireShot");
+            //}
+
+            anim.SetBool("isMoving", false);
         }
     }
 }
