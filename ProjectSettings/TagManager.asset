@@ -18,8 +18,8 @@ TagManager:
   - Player
   - Wall
   - Lava
-  - 
-  - 
+  - LevelLight
+  - LavaLight
   - 
   - 
   - 
