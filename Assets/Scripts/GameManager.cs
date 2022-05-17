@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     public float waitAfterDying = 2f;
 
+    public bool escapedPressed = false;
+
     private void Awake()
     {
         instance = this;
@@ -24,9 +26,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !escapedPressed)
         {
             PauseUnpause();
+            escapedPressed = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && escapedPressed)
+        {
+
         }
     }
 
@@ -58,6 +66,8 @@ public class GameManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
 
             Time.timeScale = 1f;
+
+            escapedPressed = false;
         }
         else
         {
