@@ -35,9 +35,11 @@ public class EnemyController : MonoBehaviour
     {
         // Target the player instance position
         targetPoint = PlayerController.instance.transform.position;
-        
+
         // Enemy will now never look up or down, only side to side
         targetPoint.y = transform.position.y;
+
+        //Vector3 corrector = new Vector3(PlayerController.instance.transform.position.x, transform.position.y, PlayerController.instance.transform.position.z);
 
         // Always face the player
         transform.LookAt(PlayerController.instance.transform);
