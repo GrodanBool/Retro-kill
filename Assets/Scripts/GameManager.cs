@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-       
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseUnpause();
         }
@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDied()
     {
+        // GameObject go = GameObject.Find("Audio Manager");
+        // if (go)
+        // {
+        //     Destroy(go.gameObject);
+        // }
         StartCoroutine(PlayerDiedCo());
 
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -46,14 +51,15 @@ public class GameManager : MonoBehaviour
 
     public void PauseUnpause()
     {
-        if(UIController.instance.pauseScreen.activeInHierarchy)
+        if (UIController.instance.pauseScreen.activeInHierarchy)
         {
             UIController.instance.pauseScreen.SetActive(false);
 
             Cursor.lockState = CursorLockMode.Locked;
 
             Time.timeScale = 1f;
-        } else
+        }
+        else
         {
             UIController.instance.pauseScreen.SetActive(true);
 

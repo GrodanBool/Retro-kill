@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     public List<Gun> unlockableGuns = new List<Gun>();
     public int currentGun;
 
-    
+
 
     // Happens straight away in Unity (before start runs)
     private void Awake()
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         string activeMod1 = PlayerPrefs.GetString("activemod");
- 
+
         UIController.instance.activeModifiers.text = "ACTIVE MODIFIERS: " + activeMod1;
         // UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
     }
@@ -94,13 +94,13 @@ public class PlayerController : MonoBehaviour
             {
                 moveInput.y = jumpPower;
                 canDoubleJump = true;
-                AudioManager.instance.PlaySFX(7);
+                AudioManagerMusicSFX.instance.PlaySFX(7);
             }
             else if (canDoubleJump == true)
             {
                 moveInput.y = jumpPower;
                 canDoubleJump = false;
-                AudioManager.instance.PlaySFX(7);
+                AudioManagerMusicSFX.instance.PlaySFX(7);
             }
         }
 
@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
 
         if (invertX)
         {
-            mouseInput.x = -mouseInput.x; 
+            mouseInput.x = -mouseInput.x;
         }
         if (invertY)
         {
@@ -143,9 +143,9 @@ public class PlayerController : MonoBehaviour
             // Create a copy of something
             Instantiate(bullet, firePoint.position, firePoint.rotation);
 
-            
 
-            
+
+
         }
 
 
@@ -174,7 +174,7 @@ public class PlayerController : MonoBehaviour
 
         currentGun++;
 
-        if(currentGun >= allGuns.Count)
+        if (currentGun >= allGuns.Count)
         {
             currentGun = 0;
         }
@@ -191,11 +191,11 @@ public class PlayerController : MonoBehaviour
     {
         bool gunUnlocked = false;
 
-        if(unlockableGuns.Count > 0)
+        if (unlockableGuns.Count > 0)
         {
-            for(int i = 0; i < unlockableGuns.Count; i++)
+            for (int i = 0; i < unlockableGuns.Count; i++)
             {
-                if(unlockableGuns[i].gunName == gunToAdd)
+                if (unlockableGuns[i].gunName == gunToAdd)
                 {
                     gunUnlocked = true;
 
@@ -206,10 +206,10 @@ public class PlayerController : MonoBehaviour
                     i = unlockableGuns.Count;
                 }
             }
-            
+
         }
 
-        if(gunUnlocked)
+        if (gunUnlocked)
         {
             currentGun = allGuns.Count - 2;
             SwitchGun();

@@ -6335,7 +6335,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1013827836}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5354d26320913064a8b01d37afeb6a40, type: 3}
+  m_Script: {fileID: 11500000, guid: f3eabc25755577c4c82226ec67935624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bgm: {fileID: 278145035}
@@ -7866,6 +7866,9 @@ MonoBehaviour:
   bullet: {fileID: 9080689670234104266, guid: 26350d6da9a61974ead5fd7aecd3b191, type: 3}
   firePoint: {fileID: 408982083}
   activeGun: {fileID: 0}
+  allGuns: []
+  unlockableGuns: []
+  currentGun: 0
 --- !u!95 &1485615290
 Animator:
   serializedVersion: 4

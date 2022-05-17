@@ -29,7 +29,7 @@ public class PlayerHealthController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(invincCounter > 0)
+        if (invincCounter > 0)
         {
             invincCounter -= Time.deltaTime;
         }
@@ -37,9 +37,9 @@ public class PlayerHealthController : MonoBehaviour
 
     public void DamagePlayer(float damageAmount)
     {
-        if (invincCounter <= 0 )
+        if (invincCounter <= 0)
         {
-            AudioManager.instance.PlaySFX(6);
+            AudioManagerMusicSFX.instance.PlaySFX(6);
 
             currentHealth -= damageAmount;
 
@@ -51,11 +51,12 @@ public class PlayerHealthController : MonoBehaviour
 
                 currentHealth = 0;
 
+
                 GameManager.instance.PlayerDied();
 
-                AudioManager.instance.StopBGM();
-                AudioManager.instance.PlaySFX(5);
-                AudioManager.instance.StopSFX(6);
+                AudioManagerMusicSFX.instance.StopBGM();
+                AudioManagerMusicSFX.instance.PlaySFX(5);
+                AudioManagerMusicSFX.instance.StopSFX(6);
             }
 
             invincCounter = invincibleLength;
@@ -70,7 +71,7 @@ public class PlayerHealthController : MonoBehaviour
     {
         currentHealth += healAmount;
 
-        if(currentHealth > maxHealth)
+        if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
         }

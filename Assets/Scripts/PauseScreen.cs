@@ -26,6 +26,7 @@ public class PauseScreen : MonoBehaviour
 
     public void MainMenu()
     {
+        Destroy(gameObject);
         SceneManager.LoadScene(mainMenuScene);
 
         Time.timeScale = 1f;

@@ -6,20 +6,42 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
-    public AudioSource bgm;
+    public AudioSource menuMusic;
 
-    public AudioSource[] soundEffects;
+    private GameObject[] other;
+     private bool NotFirst = false;
 
     public void Awake()
     {
-        instance = this;
-    }
+
+        other = GameObject.FindGameObjectsWithTag("Music");
+
+        foreach (GameObject oneOther in other)
+         {
+             if (oneOther.scene.buildIndex == -1)
+             {
+                 NotFirst = true;
+             }
+         }
+
+         if (NotFirst == true)
+         {
+             Destroy(gameObject);
+         }
+         DontDestroyOnLoad(transform.gameObject);
+         menuMusic = GetComponent<AudioSource>();
+
+         instance = this;
+     }
+ 
+        
+    
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+       
     }
 
     // Update is called once per frame
@@ -28,19 +50,15 @@ public class AudioManager : MonoBehaviour
 
     }
 
+     public void PlayMenuMusic()
+     {
+          if (menuMusic.isPlaying) return;
+         menuMusic.Play();
+     }
+
     public void StopBGM()
     {
-        bgm.Stop();
-    }
-
-    public void PlaySFX(int SFXNumber)
-    {
-        soundEffects[SFXNumber].Stop();
-        soundEffects[SFXNumber].Play();
-    }
-
-    public void StopSFX(int SFXNumber)
-    {
-        soundEffects[SFXNumber].Stop();
+        menuMusic.Stop();
+          Destroy(gameObject);
     }
 }
