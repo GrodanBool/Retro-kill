@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     public float waitAfterDying = 2f;
 
-    public bool escapedPressed = false;
+    [HideInInspector] public bool escapedPressed = false;
 
     private void Awake()
     {

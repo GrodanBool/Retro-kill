@@ -12,10 +12,10 @@ public class ScoreController : MonoBehaviour
     public int enemyKilledScore;
     public int totalMultiplier = 1;
 
-    public bool loseHealthMultiplier = false;
-    public bool noGunMultiplier = false;
-    public bool enemyRespawnRateMultiplier = false;
-    public bool lowerStartingHealthMultiplier = false;
+    [HideInInspector] public bool loseHealthMultiplier = false;
+    [HideInInspector] public bool noGunMultiplier = false;
+    [HideInInspector] public bool enemyRespawnRateMultiplier = false;
+    [HideInInspector] public bool lowerStartingHealthMultiplier = false;
 
     private void Awake()
     {
@@ -67,10 +67,11 @@ public class ScoreController : MonoBehaviour
     }
 
     IEnumerator AddPoints()
-      {
-         while(true) {
-          yield return new WaitForSeconds(60f);
-          totalMultiplier += 2;
-         }
-      }
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(60f);
+            totalMultiplier += 2;
+        }
+    }
 }
