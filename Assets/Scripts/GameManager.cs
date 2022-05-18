@@ -9,29 +9,43 @@ public class GameManager : MonoBehaviour
 
     public float waitAfterDying = 2f;
 
+    [HideInInspector] public bool escapedPressed = false;
+
     private void Awake()
     {
         instance = this;
     }
 
-       
+
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !escapedPressed)
         {
             PauseUnpause();
+            escapedPressed = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && escapedPressed)
+        {
+
         }
     }
 
     public void PlayerDied()
     {
+        // GameObject go = GameObject.Find("Audio Manager");
+        // if (go)
+        // {
+        //     Destroy(go.gameObject);
+        // }
         StartCoroutine(PlayerDiedCo());
 
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -46,18 +60,23 @@ public class GameManager : MonoBehaviour
 
     public void PauseUnpause()
     {
-        if(UIController.instance.pauseScreen.activeInHierarchy)
+        if (UIController.instance.pauseScreen.activeInHierarchy)
         {
             UIController.instance.pauseScreen.SetActive(false);
 
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
 
             Time.timeScale = 1f;
-        } else
+
+            escapedPressed = false;
+        }
+        else
         {
             UIController.instance.pauseScreen.SetActive(true);
 
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
 
             Time.timeScale = 0f;
         }

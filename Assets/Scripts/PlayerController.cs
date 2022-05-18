@@ -27,8 +27,13 @@ public class PlayerController : MonoBehaviour
     public Transform firePoint;
 
     public Gun activeGun;
-
+    public List<Gun> allGuns = new List<Gun>();
+    public List<Gun> unlockableGuns = new List<Gun>();
+    public int currentGun;
     
+    public float maxViewAngle = 60f;
+
+
 
     // Happens straight away in Unity (before start runs)
     private void Awake()
@@ -40,7 +45,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         string activeMod1 = PlayerPrefs.GetString("activemod");
- 
+
         UIController.instance.activeModifiers.text = "ACTIVE MODIFIERS: " + activeMod1;
         // UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
     }
@@ -95,7 +100,7 @@ public class PlayerController : MonoBehaviour
             else if (canDoubleJump == true)
             {
                 moveInput.y = jumpPower;
-                canDoubleJump = false;
+                canDoubleJump = false;   
             }
         }
 
@@ -107,7 +112,7 @@ public class PlayerController : MonoBehaviour
 
         if (invertX)
         {
-            mouseInput.x = -mouseInput.x; 
+            mouseInput.x = -mouseInput.x;
         }
         if (invertY)
         {
@@ -118,6 +123,13 @@ public class PlayerController : MonoBehaviour
 
         camTrans.rotation = Quaternion.Euler(camTrans.rotation.eulerAngles + new Vector3(-mouseInput.y, 0f, 0f));
 
+        if (camTrans.rotation.eulerAngles.x > maxViewAngle && camTrans.rotation.eulerAngles.x < 180f)
+        {
+            camTrans.rotation = Quaternion.Euler(maxViewAngle, camTrans.rotation.eulerAngles.y, camTrans.rotation.eulerAngles.z);
+        } else if(camTrans.rotation.eulerAngles.x > 180f && camTrans.rotation.eulerAngles.x < 360f - maxViewAngle)
+        {
+            camTrans.rotation = Quaternion.Euler(-maxViewAngle, camTrans.rotation.eulerAngles.y, camTrans.rotation.eulerAngles.z);
+        }
 
         // Handle shooting
         // Single shots
@@ -138,7 +150,6 @@ public class PlayerController : MonoBehaviour
             }
             // Create a copy of something
             //Instantiate(bullet, firePoint.position, firePoint.rotation);
-
             FireShot();
         }
 
@@ -166,6 +177,54 @@ public class PlayerController : MonoBehaviour
             activeGun.fireCounter = activeGun.fireRate;
 
             UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+        }
+    }
+
+    public void SwitchGun()
+    {
+        activeGun.gameObject.SetActive(false);
+
+        currentGun++;
+
+        if (currentGun >= allGuns.Count)
+        {
+            currentGun = 0;
+        }
+
+        activeGun = allGuns[currentGun];
+        activeGun.gameObject.SetActive(true);
+
+        UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+
+        firePoint.position = activeGun.firepoint.position;
+    }
+
+    public void AddGun(string gunToAdd)
+    {
+        bool gunUnlocked = false;
+
+        if (unlockableGuns.Count > 0)
+        {
+            for (int i = 0; i < unlockableGuns.Count; i++)
+            {
+                if (unlockableGuns[i].gunName == gunToAdd)
+                {
+                    gunUnlocked = true;
+
+                    allGuns.Add(unlockableGuns[i]);
+
+                    unlockableGuns.RemoveAt(i);
+
+                    i = unlockableGuns.Count;
+                }
+            }
+
+        }
+
+        if (gunUnlocked)
+        {
+            currentGun = allGuns.Count - 2;
+            SwitchGun();
         }
     }
 }

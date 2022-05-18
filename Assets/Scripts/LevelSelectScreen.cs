@@ -20,6 +20,7 @@ public class LevelSelectScreen : MonoBehaviour
     }
     public void Level1()
     {
+        AudioManager.instance.StopBGM();
         SceneManager.LoadScene(lvl1);
         PlayerPrefs.SetString("CurrentLevel", "");
     }
