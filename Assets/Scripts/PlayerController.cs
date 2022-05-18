@@ -30,8 +30,11 @@ public class PlayerController : MonoBehaviour
     public List<Gun> allGuns = new List<Gun>();
     public List<Gun> unlockableGuns = new List<Gun>();
     public int currentGun;
-    
+
     public float maxViewAngle = 60f;
+
+    public float bounceAmount;
+    private bool bounce;
 
 
 
@@ -100,8 +103,15 @@ public class PlayerController : MonoBehaviour
             else if (canDoubleJump == true)
             {
                 moveInput.y = jumpPower;
-                canDoubleJump = false;   
+                canDoubleJump = false;
             }
+        }
+
+        if (bounce)
+        {
+            bounce = false;
+            moveInput.y = bounceAmount;
+            canDoubleJump = true;
         }
 
         // Move the character
@@ -126,7 +136,8 @@ public class PlayerController : MonoBehaviour
         if (camTrans.rotation.eulerAngles.x > maxViewAngle && camTrans.rotation.eulerAngles.x < 180f)
         {
             camTrans.rotation = Quaternion.Euler(maxViewAngle, camTrans.rotation.eulerAngles.y, camTrans.rotation.eulerAngles.z);
-        } else if(camTrans.rotation.eulerAngles.x > 180f && camTrans.rotation.eulerAngles.x < 360f - maxViewAngle)
+        }
+        else if (camTrans.rotation.eulerAngles.x > 180f && camTrans.rotation.eulerAngles.x < 360f - maxViewAngle)
         {
             camTrans.rotation = Quaternion.Euler(-maxViewAngle, camTrans.rotation.eulerAngles.y, camTrans.rotation.eulerAngles.z);
         }
@@ -226,5 +237,11 @@ public class PlayerController : MonoBehaviour
             currentGun = allGuns.Count - 2;
             SwitchGun();
         }
+    }
+
+    public void Bounce(float bounceforce)
+    {
+        bounceAmount = bounceforce;
+        bounce = true;
     }
 }
