@@ -50,6 +50,9 @@ public class PlayerController : MonoBehaviour
         string activeMod1 = PlayerPrefs.GetString("activemod");
 
         UIController.instance.activeModifiers.text = "ACTIVE MODIFIERS: " + activeMod1;
+
+        currentGun--;
+        SwitchGun();
         // UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
     }
 
@@ -140,6 +143,12 @@ public class PlayerController : MonoBehaviour
         else if (camTrans.rotation.eulerAngles.x > 180f && camTrans.rotation.eulerAngles.x < 360f - maxViewAngle)
         {
             camTrans.rotation = Quaternion.Euler(-maxViewAngle, camTrans.rotation.eulerAngles.y, camTrans.rotation.eulerAngles.z);
+        }
+
+        // Handle switching gun
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            SwitchGun();
         }
 
         // Handle shooting
