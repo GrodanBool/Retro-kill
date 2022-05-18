@@ -9,6 +9,7 @@ public class Gun : MonoBehaviour
     public bool canAutoFire;
 
     public float fireRate;
+
     [HideInInspector]
     public float fireCounter;
 

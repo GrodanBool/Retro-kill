@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SelectLevelScreen.unity
     guid: a301cbe7a7509574ab8801552914c0dd
   - enabled: 1
+    path: Assets/Scenes/CreateLobbyScreen.unity
+    guid: 75f8a2e320ff15a459dbfac6162b1e25
+  - enabled: 1
     path: Assets/Scenes/Lobby.unity
     guid: 2c698e2caaa5b8a4498a4063da60b13d
   - enabled: 1
