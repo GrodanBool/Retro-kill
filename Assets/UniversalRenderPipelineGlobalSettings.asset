@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: UniversalRenderPipelineGlobalSettings
   m_EditorClassIdentifier: 
   k_AssetVersion: 2
-  lightLayerName0: Light Layer default
-  lightLayerName1: Light Layer 1
-  lightLayerName2: Light Layer 2
+  lightLayerName0: Blue
+  lightLayerName1: Red
+  lightLayerName2: Green
   lightLayerName3: Light Layer 3
   lightLayerName4: Light Layer 4
   lightLayerName5: Light Layer 5
   lightLayerName6: Light Layer 6
   lightLayerName7: Light Layer 7
-  m_StripDebugVariants: 1
+  m_StripDebugVariants: 0
   m_StripUnusedPostProcessingVariants: 0
-  m_StripUnusedVariants: 1
+  m_StripUnusedVariants: 0
   supportRuntimeDebugDisplay: 0
