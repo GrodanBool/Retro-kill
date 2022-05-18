@@ -32,7 +32,7 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        score.text = "SCORE: " +  ScoreController.instance.score.ToString();
+       UIController.instance.score.text = "SCORE: " +  ScoreController.instance.score.ToString();
        UIController.instance.multiplier.text =  ScoreController.instance.totalMultiplier.ToString() + "x";
         // if(damageEffect.color.a != 0)
         // {
