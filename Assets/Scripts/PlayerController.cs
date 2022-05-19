@@ -47,6 +47,15 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (PlayerPrefs.GetString("activemod").Contains("No Guns"))
+        {
+            foreach (var item in allGuns)
+            {
+                item.gameObject.SetActive(false);
+            }
+            allGuns.Clear();
+            unlockableGuns.Clear();
+        }
         string activeMod1 = PlayerPrefs.GetString("activemod");
 
         UIController.instance.activeModifiers.text = "ACTIVE MODIFIERS: " + activeMod1;
@@ -153,7 +162,7 @@ public class PlayerController : MonoBehaviour
 
         // Handle shooting
         // Single shots
-        if (Input.GetMouseButtonDown(0) && activeGun.fireCounter <= 0)
+        if (Input.GetMouseButtonDown(0) && activeGun.fireCounter <= 0 && allGuns.Count > 0)
         {
             RaycastHit hit;
 
@@ -174,7 +183,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Repeating shots
-        if (Input.GetMouseButton(0) && activeGun.canAutoFire)
+        if (Input.GetMouseButton(0) && activeGun.canAutoFire && allGuns.Count > 0)
         {
             if (activeGun.fireCounter <= 0)
             {
@@ -240,6 +249,8 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+
+
 
         if (gunUnlocked)
         {

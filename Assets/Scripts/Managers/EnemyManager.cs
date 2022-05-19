@@ -15,7 +15,7 @@ public class EnemyManager : MonoBehaviour
     private int nrOfSpawnPoints;
 
     private System.Random randomizer = new System.Random();
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +31,11 @@ public class EnemyManager : MonoBehaviour
         {
             spawnCounter -= Time.deltaTime;
         }
+        else if (spawnCounter <= 0 && PlayerPrefs.GetString("activemod").Contains("Enemy Spawn Rate"))
+        {
+            spawnCounter = spawnRate / 2;
+            SpawnNewEnemy();
+        }
         else if (spawnCounter <= 0)
         {
             SpawnNewEnemy();
@@ -40,8 +45,6 @@ public class EnemyManager : MonoBehaviour
 
     public void SpawnNewEnemy()
     {
-        //System.Random randomizer = new System.Random();
-        
         Instantiate(enemyPrefab, spawnPoints[Random.Range(-1, nrOfSpawnPoints)].transform.position, Quaternion.identity);
     }
 }

@@ -6,16 +6,19 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public string start, online, options, highscore;
+    private GameObject[] other;
 
     // Start is called before the first frame update
     void Start()
     {
+        other = GameObject.FindGameObjectsWithTag("Player");
+        Destroy(other[0]);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void Continue()
