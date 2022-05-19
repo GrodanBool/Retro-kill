@@ -8,15 +8,10 @@ using Newtonsoft.Json;
 
 public class ScoreManager : MonoBehaviour
 {
-    private ScoreData sd;
+    private ScoreData sd = new ScoreData();
     MongoClient client = new MongoClient("mongodb+srv://Retro-kill:IAmRetroKill@retro-kill-db.23cj7.mongodb.net/?retryWrites=true&w=majority");
     IMongoDatabase database;
     IMongoCollection<BsonDocument> collection;
-    void Awake()
-    {
-        var json = PlayerPrefs.GetString("scores", "{}");
-        sd = JsonUtility.FromJson<ScoreData>(json);
-    }
 
     void Start()
     {
@@ -24,8 +19,14 @@ public class ScoreManager : MonoBehaviour
         collection = database.GetCollection<BsonDocument>("playerscore");
     }
 
+    private void GetList()
+    {
+        GetScore();
+    }
+
     public IEnumerable<Score> GetHighScores()
     {
+        GetList();
         IEnumerable<Score> scores = new List<Score>();
         IEnumerable<Score> scoresTop5 = new List<Score>();
         scores = sd.scores.OrderByDescending(x => x.score);
@@ -39,27 +40,25 @@ public class ScoreManager : MonoBehaviour
         await collection.InsertOneAsync(document);
     }
 
-    public async Task<List<Score>> GetScore()
+    public void GetScore()
     {
-        var allScoresTask = collection.FindAsync(new BsonDocument());
-        var scoresAwaited = await allScoresTask; 
+        var allScoresTask = collection.Find(new BsonDocument());
+        var scoresAwaited = allScoresTask; 
         
         List<Score> scoresList = new List<Score>();
         foreach (var score in scoresAwaited.ToList())
         {
-            scoresList.Add(Deserialize(score.ToString()));
+            AddScore(Deserialize(score.ToString()));
         }
-
-        return scoresList;
     }
 
     private Score Deserialize(string rawJson)
     {
         var stringNoObjectId = rawJson.Substring(rawJson.IndexOf("),") + 2);
-        string testString = "{ " + stringNoObjectId;
+        string deserializableString = "{ " + stringNoObjectId;
 
-        var test = JsonConvert.DeserializeObject(testString).ToString();
-        var score = JsonUtility.FromJson<Score>(test);
+        var scoreString = JsonConvert.DeserializeObject(deserializableString).ToString();
+        var score = JsonUtility.FromJson<Score>(scoreString);
         return score;
     }
 
@@ -73,17 +72,6 @@ public class ScoreManager : MonoBehaviour
         {
             sd.scores.Where(s => s.id == score.id).Select(s => { s.score = score.score; return score; }).ToList();
         }
-    }
-
-    private void OnDestroy()
-    {
-        SaveScore();
-    }
-
-    public void SaveScore()
-    {
-        var json = JsonUtility.ToJson(sd);
-        PlayerPrefs.SetString("scores", json);
     }
 }
 

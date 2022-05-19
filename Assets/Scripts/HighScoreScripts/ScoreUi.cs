@@ -8,8 +8,11 @@ public class ScoreUi : MonoBehaviour
     public ScoreManager scoreManager;
     void Start()
     {
-        GetList();
+        ShowScores();
+    }
 
+    private void ShowScores()
+    {
         //gets highscores
         var scores = scoreManager.GetHighScores().ToArray();
 
@@ -20,15 +23,6 @@ public class ScoreUi : MonoBehaviour
             row.rank.text = (i + 1).ToString();
             row.playerName.text = scores[i].name;
             row.score.text = scores[i].score.ToString();
-        }
-    }
-
-    private async void GetList()
-    {
-        List<Score> scoreList = await scoreManager.GetScore();
-        foreach (Score score in scoreList)
-        {
-            scoreManager.AddScore(score);
         }
     }
 }
