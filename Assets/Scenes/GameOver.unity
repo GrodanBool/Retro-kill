@@ -651,7 +651,6 @@ GameObject:
   - component: {fileID: 1220144454}
   - component: {fileID: 1220144453}
   - component: {fileID: 1220144457}
-  - component: {fileID: 1220144458}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -758,32 +757,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb5aebb62aa20b468fada431115fcdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuScene: MainMenu
+  uploadHighscoreScreen: UploadHighScoreScreen
   timeBetweenShowing: 2
-  timeToMainMenu: 10
+  timeToupload: 10
   score: {fileID: 205895069}
   burdText: {fileID: 2008846915}
   blackScreen: {fileID: 1504736755}
   blackScreenFade: 2
---- !u!114 &1220144458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1220144452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9f98c13bbfd4e3479c080187d49061c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthSlider: {fileID: 0}
-  healthText: {fileID: 0}
-  ammoText: {fileID: 0}
-  score: {fileID: 205895071}
-  activeModifiers: {fileID: 0}
-  multiplier: {fileID: 0}
-  pauseScreen: {fileID: 0}
+  scoretext: {fileID: 205895071}
 --- !u!1 &1468326556
 GameObject:
   m_ObjectHideFlags: 0

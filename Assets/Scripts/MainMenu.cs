@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,7 +10,10 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         other = GameObject.FindGameObjectsWithTag("Player");
-        Destroy(other[0]);
+        if (other.Length > 0)
+        {
+            Destroy(other[0]);
+        }
     }
 
     // Update is called once per frame

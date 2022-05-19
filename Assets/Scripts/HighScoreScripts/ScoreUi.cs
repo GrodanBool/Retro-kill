@@ -1,28 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class ScoreUi : MonoBehaviour
 {
+    public event EventHandler CurrentChanged;
     public RowUi rowUi;
-    public ScoreManager scoreManager;
     void Start()
     {
-        ShowScores();
+        ScoreManager.instance.GetHighScores().ToArray();
     }
 
-    private void ShowScores()
+    void Update()
     {
-        //gets highscores
-        var scores = scoreManager.GetHighScores().ToArray();
-
-        //shows 5 highest scores
-        for (int i = 0; i < scores.Length; i++)
+        if (ScoreManager.instance.hasChanges)
         {
-            var row = Instantiate(rowUi, transform).GetComponent<RowUi>();
-            row.rank.text = (i + 1).ToString();
-            row.playerName.text = scores[i].name;
-            row.score.text = scores[i].score.ToString();
+            List<Score> scoresTop5 = new List<Score>();
+            scoresTop5 = ScoreManager.instance.sd.scores.OrderByDescending(x => x.score).Take(5).ToList();
+
+            foreach (Score score in scoresTop5)
+            {
+                var row = Instantiate(rowUi, transform).GetComponent<RowUi>();
+                row.rank.text = (scoresTop5.IndexOf(score) + 1).ToString();
+                row.playerName.text = score.name;
+                row.score.text = score.score.ToString();
+            }
+            ScoreManager.instance.hasChanges = false;
         }
     }
 }
