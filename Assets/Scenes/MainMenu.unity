@@ -1517,7 +1517,7 @@ GameObject:
   - component: {fileID: 1537262341}
   - component: {fileID: 1537262343}
   m_Layer: 0
-  m_Name: fsm-team-escp-light-rain
+  m_Name: bgm
   m_TagString: Music
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1647,6 +1647,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuMusic: {fileID: 1537262341}
+  gameObject1: {fileID: 1537262340}
+  isNotLoaded: 1
 --- !u!1 &1616201676
 GameObject:
   m_ObjectHideFlags: 0
