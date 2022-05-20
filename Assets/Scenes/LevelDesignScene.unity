@@ -30592,7 +30592,8 @@ MonoBehaviour:
   bullet: {fileID: 9080689670234104266, guid: 26350d6da9a61974ead5fd7aecd3b191, type: 3}
   firePoint: {fileID: 347898344}
   activeGun: {fileID: 0}
-  allGuns: []
+  allGuns:
+  - {fileID: 0}
   unlockableGuns: []
   currentGun: 0
   maxViewAngle: 60
