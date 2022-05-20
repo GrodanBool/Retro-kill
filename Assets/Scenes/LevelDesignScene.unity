@@ -42732,9 +42732,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1784988942}
     - target: {fileID: 7351682983648911320, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
+      propertyPath: field of view
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351682983648911320, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
+      propertyPath: far clip plane
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351682983648911320, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
       propertyPath: m_TargetTexture
       value: 
       objectReference: {fileID: 8400000, guid: 5b68c0c04a40cd546b60198651b9039e, type: 2}
+    - target: {fileID: 7351682983648911320, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
+      propertyPath: near clip plane
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7351682983648911323, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18
@@ -42757,12 +42769,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7351682983677272410, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 85
+      value: 84
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351682983677272411, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
+      propertyPath: field of view
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351682983677272411, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
+      propertyPath: far clip plane
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 7351682983677272411, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
       propertyPath: m_TargetTexture
       value: 
       objectReference: {fileID: 8400000, guid: edcd77e9746a7304db6f347eeb6f4fd3, type: 2}
+    - target: {fileID: 7351682983677272411, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
+      propertyPath: near clip plane
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7351682983677272415, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
       propertyPath: m_Name
       value: Camera_C
@@ -42773,7 +42797,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7351682984054037364, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 7351682984054037364, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
       propertyPath: m_LocalPosition.z
@@ -42833,7 +42857,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7351682984679649085, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
       propertyPath: m_Name
-      value: test 1
+      value: More Portals
       objectReference: {fileID: 0}
     - target: {fileID: 7351682985226420524, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
       propertyPath: m_LocalPosition.x
@@ -63096,7 +63120,7 @@ GameObject:
   - component: {fileID: 2125501794}
   - component: {fileID: 2125501793}
   m_Layer: 0
-  m_Name: GameManager (1)
+  m_Name: GameManager2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63463,12 +63487,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1784988942}
     - target: {fileID: 7351682983648911320, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
+      propertyPath: field of view
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351682983648911320, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
+      propertyPath: far clip plane
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351682983648911320, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
       propertyPath: m_TargetTexture
       value: 
       objectReference: {fileID: 8400000, guid: b841bc8297a41bb4a82c9d05b842547e, type: 2}
+    - target: {fileID: 7351682983648911320, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
+      propertyPath: near clip plane
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7351682983677272410, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
       propertyPath: m_LocalPosition.y
       value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351682983677272411, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
+      propertyPath: field of view
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351682983677272411, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
+      propertyPath: far clip plane
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351682983677272411, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
+      propertyPath: near clip plane
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7351682984679649084, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
       propertyPath: m_RootOrder
@@ -63516,7 +63564,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7351682984679649085, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
       propertyPath: m_Name
-      value: test
+      value: Portals
       objectReference: {fileID: 0}
     - target: {fileID: 7351682985226420524, guid: 1ca9d9c1bb1a3694789a84f27acc7751, type: 3}
       propertyPath: m_LocalPosition.y
