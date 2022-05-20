@@ -10,7 +10,9 @@ Material:
   m_Name: GunTwoBlue
   m_Shader: {fileID: 4800000, guid: ee7e4c9a5f6364b688a332c67fc32cca, type: 3}
   m_ValidKeywords:
+  - _CLEARCOATMAP
   - _EMISSION
+  - _METALLICSPECGLOSSMAP
   - _NORMALMAP
   m_InvalidKeywords: []
   m_LightmapFlags: 1
@@ -24,7 +26,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 64860141afa10c84780f3416e43c23e4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -32,7 +34,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ClearCoatMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 1cd8a58c1c3ab284b950c3a690742077, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -56,7 +58,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: a2c9f90052463784c81203a9224c59d9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -89,8 +91,8 @@ Material:
     - _Blend: 0
     - _BlendOp: 0
     - _BumpScale: 1
-    - _ClearCoat: 0
-    - _ClearCoatMask: 0
+    - _ClearCoat: 1
+    - _ClearCoatMask: 1
     - _ClearCoatSmoothness: 1
     - _Cull: 2
     - _Cutoff: 0.5
