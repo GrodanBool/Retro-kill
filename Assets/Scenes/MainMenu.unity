@@ -1647,8 +1647,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuMusic: {fileID: 1537262341}
-  gameObject1: {fileID: 1537262340}
-  isNotLoaded: 1
 --- !u!1 &1616201676
 GameObject:
   m_ObjectHideFlags: 0

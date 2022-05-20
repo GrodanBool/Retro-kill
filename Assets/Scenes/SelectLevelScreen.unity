@@ -636,11 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdcfd392a2d8ee54d82a6570bbbb4fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lvl1: TutorialLevel
-  lvl2: Level2
-  lvl3: 
-  lvl4: 
-  lvl5: 
+  lvl1: Level1
   returnTo: MainMenu
 --- !u!1 &957050295
 GameObject:
