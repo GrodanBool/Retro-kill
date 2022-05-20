@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Lava
   - Music
+  - Bullet
+  - Portal
   layers:
   - Default
   - TransparentFX

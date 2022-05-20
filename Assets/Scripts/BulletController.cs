@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
@@ -20,7 +18,7 @@ public class BulletController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -51,7 +49,14 @@ public class BulletController : MonoBehaviour
             other.gameObject.GetComponent<PlayerHealthController>().DamagePlayer(damage);
         }
 
-        Destroy(gameObject);
-        Instantiate(impactEffect, transform.position + (transform.forward * (-moveSpeed * Time.deltaTime) ), transform.rotation);
+        if (other.tag == "Portal")
+        {
+            
+        }
+        else
+        {
+            Destroy(gameObject);
+            Instantiate(impactEffect, transform.position + (transform.forward * (-moveSpeed * Time.deltaTime)), transform.rotation);
+        }
     }
 }
