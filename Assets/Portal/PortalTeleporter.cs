@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PortalTeleporter : MonoBehaviour
-{
+public class PortalTeleporter : MonoBehaviour {
 
 	public Transform player;
 	public Transform reciever;
@@ -11,8 +10,7 @@ public class PortalTeleporter : MonoBehaviour
 	private bool playerIsOverlapping = false;
 
 	// Update is called once per frame
-	void Update()
-	{
+	void Update () {
 		if (playerIsOverlapping)
 		{
 			Vector3 portalToPlayer = player.position - transform.position;
@@ -27,14 +25,14 @@ public class PortalTeleporter : MonoBehaviour
 				player.Rotate(Vector3.up, rotationDiff);
 
 				Vector3 positionOffset = Quaternion.Euler(0f, rotationDiff, 0f) * portalToPlayer;
-				player.transform.position = reciever.transform.position + positionOffset;
+				player.position = reciever.position + positionOffset;
 
 				playerIsOverlapping = false;
 			}
 		}
 	}
 
-	void OnTriggerEnter(Collider other)
+	void OnTriggerEnter (Collider other)
 	{
 		if (other.tag == "Player")
 		{
@@ -42,7 +40,7 @@ public class PortalTeleporter : MonoBehaviour
 		}
 	}
 
-	void OnTriggerExit(Collider other)
+	void OnTriggerExit (Collider other)
 	{
 		if (other.tag == "Player")
 		{
