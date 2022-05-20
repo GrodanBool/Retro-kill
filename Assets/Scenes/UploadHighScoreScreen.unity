@@ -619,6 +619,7 @@ MonoBehaviour:
   fail: {fileID: 1596560021}
   success: {fileID: 1739807552}
   uploading: {fileID: 685452567}
+  uploadButton: {fileID: 1347358677}
 --- !u!1 &1058826239
 GameObject:
   m_ObjectHideFlags: 0
