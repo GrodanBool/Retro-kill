@@ -9,7 +9,7 @@ public class ScoreUi : MonoBehaviour
     public RowUi rowUi;
     void Start()
     {
-        ScoreManager.instance.GetHighScores().ToArray();
+        ScoreManager.instance.GetHighScores();
     }
 
     void Update()
