@@ -371,9 +371,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: PlayGame
+      - m_Target: {fileID: 809229933}
+        m_TargetAssemblyTypeName: LevelSelectScreen, Assembly-CSharp
+        m_MethodName: Level2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -636,11 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdcfd392a2d8ee54d82a6570bbbb4fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lvl1: TutorialLevel
-  lvl2: 
-  lvl3: 
-  lvl4: 
-  lvl5: 
+  lvl1: Level1
   returnTo: MainMenu
 --- !u!1 &957050295
 GameObject:

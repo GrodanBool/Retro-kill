@@ -6,20 +6,22 @@ using UnityEngine.UI;
 
 public class GameOverScreen : MonoBehaviour
 {
-    public string mainMenuScene;
+    public string uploadHighscoreScreen;
 
-    public float timeBetweenShowing, timeToMainMenu = 5f;
+    public float timeBetweenShowing, timeToupload = 5f;
 
-    public GameObject textBox;
+    public GameObject score,burdText;
 
     public Image blackScreen;
     public float blackScreenFade = 2f;
+    public Text scoretext;
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(ShowObjectsCo());
         StartCoroutine(ShowObjectsCoCo());
+        scoretext.text = "SCORE: " +  ScoreController.instance.score.ToString();
 
         Cursor.lockState = CursorLockMode.None;
     }
@@ -30,22 +32,24 @@ public class GameOverScreen : MonoBehaviour
         blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, Mathf.MoveTowards(blackScreen.color.a, 0f, blackScreenFade * Time.deltaTime));
     }
 
-    public void MainMenu()
+    public void Upload()
     {
-        SceneManager.LoadScene(mainMenuScene);
+        SceneManager.LoadScene(uploadHighscoreScreen);
     }
 
     public IEnumerator ShowObjectsCo()
     {
         yield return new WaitForSeconds(timeBetweenShowing);
 
-        textBox.SetActive(true);
+        score.SetActive(true);
+        yield return new WaitForSeconds(timeBetweenShowing);
+        burdText.SetActive(true);
     }
 
     public IEnumerator ShowObjectsCoCo()
     {
-        yield return new WaitForSeconds(timeToMainMenu);
+        yield return new WaitForSeconds(timeToupload);
 
-        MainMenu();
+        Upload();
     }
 }

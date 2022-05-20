@@ -27,6 +27,16 @@ public class PlayerController : MonoBehaviour
     public Transform firePoint;
 
     public Gun activeGun;
+    public List<Gun> allGuns = new List<Gun>();
+    public List<Gun> unlockableGuns = new List<Gun>();
+    public int currentGun;
+
+    public float maxViewAngle = 60f;
+
+    public float bounceAmount;
+    private bool bounce;
+
+
 
     // Happens straight away in Unity (before start runs)
     private void Awake()
@@ -37,6 +47,21 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (PlayerPrefs.GetString("activemod").Contains("No Guns"))
+        {
+            foreach (var item in allGuns)
+            {
+                item.gameObject.SetActive(false);
+            }
+            allGuns.Clear();
+            unlockableGuns.Clear();
+        }
+        string activeMod1 = PlayerPrefs.GetString("activemod");
+
+        UIController.instance.activeModifiers.text = "ACTIVE MODIFIERS: " + activeMod1;
+
+        currentGun--;
+        SwitchGun();
         // UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
     }
 
@@ -94,6 +119,13 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (bounce)
+        {
+            bounce = false;
+            moveInput.y = bounceAmount;
+            canDoubleJump = true;
+        }
+
         // Move the character
         charCon.Move(moveInput * Time.deltaTime);
 
@@ -102,7 +134,7 @@ public class PlayerController : MonoBehaviour
 
         if (invertX)
         {
-            mouseInput.x = -mouseInput.x; 
+            mouseInput.x = -mouseInput.x;
         }
         if (invertY)
         {
@@ -113,9 +145,24 @@ public class PlayerController : MonoBehaviour
 
         camTrans.rotation = Quaternion.Euler(camTrans.rotation.eulerAngles + new Vector3(-mouseInput.y, 0f, 0f));
 
+        if (camTrans.rotation.eulerAngles.x > maxViewAngle && camTrans.rotation.eulerAngles.x < 180f)
+        {
+            camTrans.rotation = Quaternion.Euler(maxViewAngle, camTrans.rotation.eulerAngles.y, camTrans.rotation.eulerAngles.z);
+        }
+        else if (camTrans.rotation.eulerAngles.x > 180f && camTrans.rotation.eulerAngles.x < 360f - maxViewAngle)
+        {
+            camTrans.rotation = Quaternion.Euler(-maxViewAngle, camTrans.rotation.eulerAngles.y, camTrans.rotation.eulerAngles.z);
+        }
+
+        // Handle switching gun
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            SwitchGun();
+        }
 
         // Handle shooting
-        if (Input.GetMouseButtonDown(0))
+        // Single shots
+        if (Input.GetMouseButtonDown(0) && activeGun.fireCounter <= 0 && allGuns.Count > 0)
         {
             RaycastHit hit;
 
@@ -131,9 +178,18 @@ public class PlayerController : MonoBehaviour
                 firePoint.LookAt(camTrans.position + (camTrans.forward * 30f));
             }
             // Create a copy of something
-            Instantiate(bullet, firePoint.position, firePoint.rotation);
+            //Instantiate(bullet, firePoint.position, firePoint.rotation);
+            FireShot();
         }
 
+        // Repeating shots
+        if (Input.GetMouseButton(0) && activeGun.canAutoFire && allGuns.Count > 0)
+        {
+            if (activeGun.fireCounter <= 0)
+            {
+                FireShot();
+            }
+        }
 
         //anim.SetFloat("moveSpeed", moveInput.magnitude);
         //anim.SetBool("onGround", canJump);
@@ -143,7 +199,6 @@ public class PlayerController : MonoBehaviour
     {
         if (activeGun.currentAmmo > 0)
         {
-
             activeGun.currentAmmo--;
 
             Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation);
@@ -152,5 +207,61 @@ public class PlayerController : MonoBehaviour
 
             UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
         }
+    }
+
+    public void SwitchGun()
+    {
+        activeGun.gameObject.SetActive(false);
+
+        currentGun++;
+
+        if (currentGun >= allGuns.Count)
+        {
+            currentGun = 0;
+        }
+
+        activeGun = allGuns[currentGun];
+        activeGun.gameObject.SetActive(true);
+
+        UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+
+        firePoint.position = activeGun.firepoint.position;
+    }
+
+    public void AddGun(string gunToAdd)
+    {
+        bool gunUnlocked = false;
+
+        if (unlockableGuns.Count > 0)
+        {
+            for (int i = 0; i < unlockableGuns.Count; i++)
+            {
+                if (unlockableGuns[i].gunName == gunToAdd)
+                {
+                    gunUnlocked = true;
+
+                    allGuns.Add(unlockableGuns[i]);
+
+                    unlockableGuns.RemoveAt(i);
+
+                    i = unlockableGuns.Count;
+                }
+            }
+
+        }
+
+
+
+        if (gunUnlocked)
+        {
+            currentGun = allGuns.Count - 2;
+            SwitchGun();
+        }
+    }
+
+    public void Bounce(float bounceforce)
+    {
+        bounceAmount = bounceforce;
+        bounce = true;
     }
 }

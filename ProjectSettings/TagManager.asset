@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Lava
+  - Music
   layers:
   - Default
   - TransparentFX
@@ -17,9 +18,9 @@ TagManager:
   - Bullets
   - Player
   - Wall
-  - Lava
-  - LevelLight
-  - LavaLight
+  - 
+  - 
+  - 
   - 
   - 
   - 
