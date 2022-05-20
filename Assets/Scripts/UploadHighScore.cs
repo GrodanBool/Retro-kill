@@ -20,6 +20,25 @@ public class UploadHighScore : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
+    void Update()
+    {
+        if (iField.text.Length > 0)
+        {
+            uploadButton.GetComponent<Button>().interactable = true;
+            Color selected = uploadButton.GetComponentInChildren<Text>().color;
+            selected.a = 1f;
+            uploadButton.GetComponentInChildren<Text>().color = selected;
+
+        }
+        else
+        {
+            uploadButton.GetComponent<Button>().interactable = false;
+            Color selected = uploadButton.GetComponentInChildren<Text>().color;
+            selected.a = 0.5f;
+            uploadButton.GetComponentInChildren<Text>().color = selected;
+        }
+    }
+
     public void ReturnTo()
     {
         SceneManager.LoadScene(returnTo);

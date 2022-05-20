@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ScoreUi : MonoBehaviour
 {
-    public event EventHandler CurrentChanged;
+    
     public RowUi rowUi;
     void Start()
     {
