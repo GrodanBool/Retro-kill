@@ -34,6 +34,8 @@ public class EnemyController : MonoBehaviour
     private bool tryNewLocation;
     private bool tryPlayerTracing = true;
     private bool canShoot;
+    [HideInInspector] public bool enemyPortal;
+    [HideInInspector] public BoxCollider portal;
 
     // Start is called before the first frame update
     void Start()
@@ -90,22 +92,30 @@ public class EnemyController : MonoBehaviour
         }
         //Debug.Log(agent.path);
 
-        //follow player or try new location
-        if (tryPlayerTracing && !tryNewLocation/*&& !canShoot*/)
+        //follow player, try new location or go in portal
+        if (tryPlayerTracing && !tryNewLocation && !enemyPortal/*&& !canShoot*/)
         {
             firePoint.LookAt(PlayerController.instance.transform.position);
             agent.SetDestination(targetPoint);
         }
-        else if (!tryNewLocation && !tryPlayerTracing && !canShoot && agent.velocity.x == 0 && agent.velocity.z == 0)
+        else if (!tryNewLocation && !tryPlayerTracing && !canShoot && !enemyPortal && agent.velocity.x == 0 && agent.velocity.z == 0)
         {
             firePoint.LookAt(PlayerController.instance.transform.position);
             randomLocation = RandomNavmeshLocation(50);
             agent.SetDestination(randomLocation);
         }
+        else if (enemyPortal)
+        {
+            firePoint.LookAt(portal.transform.position);
+            agent.SetDestination(portal.transform.position);
+        }
+        //Debug.Log(enemyPortal);
+        //Debug.Log(portal.transform.position);
+        //Debug.Log(agent.destination);
 
         fireCount -= Time.deltaTime;
 
-        if (fireCount <= 0)
+        if (fireCount <= 0 && !enemyPortal)
         {
             fireCount = fireRate;
 
