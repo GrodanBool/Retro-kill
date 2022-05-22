@@ -24,17 +24,16 @@ public class EnemyController : MonoBehaviour
 
 
     //testing shit
-    private float angle;
-    private bool tryPlayerTracing = true;
-    private bool canShoot;
+    public GameObject head;
     private Vector3 randomLocation = new Vector3(0, 0, 0);
+    private float angle;
     private float searchTimeout = 5f;
     private float search = 5f;
+    private float attackDistance = 50f;
     private bool canSeePlayer;
-
-    //add distanceToPlayer for making enemy approach player if far apart (maybe)
-    //improve ai start shooting, sometimes moves to new position even though should be able to move
-    //make ai rotate when stopped, might be tied to above
+    private bool tryNewLocation;
+    private bool tryPlayerTracing = true;
+    private bool canShoot;
 
     // Start is called before the first frame update
     void Start()
@@ -47,9 +46,12 @@ public class EnemyController : MonoBehaviour
     {
         // Target the player instance position
         targetPoint = PlayerController.instance.transform.position;
+        targetPoint.y = transform.position.y;
+        transform.LookAt(targetPoint);
 
+        //can enemy see player
         RaycastHit hit;
-        var rayDirection = targetPoint - transform.position;
+        var rayDirection = PlayerController.instance.transform.position - transform.position;
         if (Physics.Raycast(transform.position, rayDirection, out hit))
         {
             if (hit.transform == PlayerController.instance.gameObject.GetComponent<CapsuleCollider>() || hit.transform == PlayerController.instance.gameObject.transform)
@@ -62,6 +64,7 @@ public class EnemyController : MonoBehaviour
             }
         }
 
+        //animation
         if (agent.velocity.x <= 0 && agent.velocity.z <= 0)
         {
             anim.SetBool("isMoving", false);
@@ -71,6 +74,7 @@ public class EnemyController : MonoBehaviour
             anim.SetBool("isMoving", true);
         }
 
+        //change position countdown
         if (agent.velocity.x <= 0 && agent.velocity.z <= 0 && !canShoot)
         {
             search -= Time.deltaTime;
@@ -84,13 +88,15 @@ public class EnemyController : MonoBehaviour
         {
             search = searchTimeout;
         }
+        //Debug.Log(agent.path);
 
-        if (tryPlayerTracing && !canShoot)
+        //follow player or try new location
+        if (tryPlayerTracing && !tryNewLocation/*&& !canShoot*/)
         {
             firePoint.LookAt(PlayerController.instance.transform.position);
             agent.SetDestination(targetPoint);
         }
-        else if (!tryPlayerTracing && !canShoot && agent.velocity.x == 0 && agent.velocity.z == 0)
+        else if (!tryNewLocation && !tryPlayerTracing && !canShoot && agent.velocity.x == 0 && agent.velocity.z == 0)
         {
             firePoint.LookAt(PlayerController.instance.transform.position);
             randomLocation = RandomNavmeshLocation(50);
@@ -104,36 +110,57 @@ public class EnemyController : MonoBehaviour
             fireCount = fireRate;
 
             // Keep agent facing player
-            firePoint.LookAt(targetPoint);
+            firePoint.LookAt(PlayerController.instance.transform.position);
 
             // Check the angle towards the player
             Vector3 targetDir = PlayerController.instance.transform.position - transform.position;
             angle = Vector3.SignedAngle(targetDir, transform.forward, Vector3.up);
 
-            if (Mathf.Abs(angle) < 30f)
+            if (Mathf.Abs(angle) < 60f)
             {
-                agent.isStopped = true;
+                if (Vector3.Distance(transform.position, agent.destination) > agent.stoppingDistance)
+                {
+                    agent.speed = 5;
+                }
+                else
+                {
+                    agent.speed = 0;
+                }
                 canShoot = true;
                 tryPlayerTracing = true;
-                if (canSeePlayer)
+                if (canSeePlayer && Vector3.Distance(transform.position, targetPoint) < attackDistance)
                 {
                     Instantiate(bullet, firePoint.position, firePoint.rotation);
                     anim.SetTrigger("fireShot");
+
+                    if (agent.destination == randomLocation)
+                    {
+                        tryNewLocation = true;
+                    }
                 }
                 else
                 {
                     canShoot = false;
-                    agent.isStopped = false;
+                    agent.speed = 5;
+                    if (agent.destination == randomLocation)
+                    {
+                        tryNewLocation = false;
+                    }
                 }
             }
             else
             {
-                agent.isStopped = false;
+                agent.speed = 5;
                 canShoot = false;
             }
 
             anim.SetBool("isMoving", false);
         }
+    }
+
+    void LateUpdate()
+    {
+        head.gameObject.transform.LookAt(PlayerController.instance.transform.position);
     }
 
     public Vector3 RandomNavmeshLocation(float radius)
