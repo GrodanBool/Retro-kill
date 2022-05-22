@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -23,11 +21,25 @@ public class EnemyController : MonoBehaviour
     private float fireCount = 2f;
 
     public Animator anim;
-    
+
+
+    //testing shit
+    private float angle;
+    private bool tryPlayerTracing = true;
+    private bool canShoot;
+    private Vector3 randomLocation = new Vector3(0, 0, 0);
+    private float searchTimeout = 5f;
+    private float search = 5f;
+    private bool canSeePlayer;
+
+    //add distanceToPlayer for making enemy approach player if far apart (maybe)
+    //improve ai start shooting, sometimes moves to new position even though should be able to move
+    //make ai rotate when stopped, might be tied to above
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim.fireEvents = false;
     }
 
     // Update is called once per frame
@@ -36,15 +48,19 @@ public class EnemyController : MonoBehaviour
         // Target the player instance position
         targetPoint = PlayerController.instance.transform.position;
 
-        // Enemy will now never look up or down, only side to side
-        //targetPoint.y = transform.position.y;
-
-        //Vector3 corrector = new Vector3(PlayerController.instance.transform.position.x, transform.position.y, PlayerController.instance.transform.position.z);
-
-        // Always face the player
-        transform.LookAt(PlayerController.instance.transform);
-
-        agent.SetDestination(targetPoint);
+        RaycastHit hit;
+        var rayDirection = targetPoint - transform.position;
+        if (Physics.Raycast(transform.position, rayDirection, out hit))
+        {
+            if (hit.transform == PlayerController.instance.gameObject.GetComponent<CapsuleCollider>() || hit.transform == PlayerController.instance.gameObject.transform)
+            {
+                canSeePlayer = true;
+            }
+            else
+            {
+                canSeePlayer = false;
+            }
+        }
 
         if (agent.velocity.x <= 0 && agent.velocity.z <= 0)
         {
@@ -55,27 +71,81 @@ public class EnemyController : MonoBehaviour
             anim.SetBool("isMoving", true);
         }
 
+        if (agent.velocity.x <= 0 && agent.velocity.z <= 0 && !canShoot)
+        {
+            search -= Time.deltaTime;
+
+            if (search <= 0)
+            {
+                tryPlayerTracing = false;
+            }
+        }
+        else
+        {
+            search = searchTimeout;
+        }
+
+        if (tryPlayerTracing && !canShoot)
+        {
+            firePoint.LookAt(PlayerController.instance.transform.position);
+            agent.SetDestination(targetPoint);
+        }
+        else if (!tryPlayerTracing && !canShoot && agent.velocity.x == 0 && agent.velocity.z == 0)
+        {
+            firePoint.LookAt(PlayerController.instance.transform.position);
+            randomLocation = RandomNavmeshLocation(50);
+            agent.SetDestination(randomLocation);
+        }
+
         fireCount -= Time.deltaTime;
 
-        
         if (fireCount <= 0)
         {
             fireCount = fireRate;
 
             // Keep agent facing player
-            firePoint.LookAt(PlayerController.instance.transform.position);
+            firePoint.LookAt(targetPoint);
 
             // Check the angle towards the player
             Vector3 targetDir = PlayerController.instance.transform.position - transform.position;
-            float angle = Vector3.SignedAngle(targetDir, transform.forward, Vector3.up);
+            angle = Vector3.SignedAngle(targetDir, transform.forward, Vector3.up);
 
             if (Mathf.Abs(angle) < 30f)
             {
-                Instantiate(bullet, firePoint.position, firePoint.rotation);
-                anim.SetTrigger("fireShot");
+                agent.isStopped = true;
+                canShoot = true;
+                tryPlayerTracing = true;
+                if (canSeePlayer)
+                {
+                    Instantiate(bullet, firePoint.position, firePoint.rotation);
+                    anim.SetTrigger("fireShot");
+                }
+                else
+                {
+                    canShoot = false;
+                    agent.isStopped = false;
+                }
+            }
+            else
+            {
+                agent.isStopped = false;
+                canShoot = false;
             }
 
             anim.SetBool("isMoving", false);
         }
+    }
+
+    public Vector3 RandomNavmeshLocation(float radius)
+    {
+        Vector3 randomDirection = Random.insideUnitSphere * radius;
+        randomDirection += transform.position;
+        NavMeshHit hit;
+        Vector3 finalPosition = Vector3.zero;
+        if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
+        {
+            finalPosition = hit.position;
+        }
+        return finalPosition;
     }
 }
