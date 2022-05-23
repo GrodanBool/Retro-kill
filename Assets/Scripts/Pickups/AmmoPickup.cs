@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class AmmoPickup : MonoBehaviour
 {
-    private bool collected;
+    public static AmmoPickup instance;
 
-    private void OnTriggerEnter(Collider other)
+    public GameObject ammoPickup;
+
+    private void Awake()
     {
-        if (other.tag == "Player" && !collected)
-        {
-            PlayerController.instance.activeGun.GetAmmo();
+        instance = this;
+    }
 
-            Destroy(gameObject);
-
-            collected = true;
-
-            AudioManagerMusicSFX.instance.PlaySFX(7);
-        }
+    public void RespawnAmmo(Transform pickUpSpawn)
+    {
+        Instantiate(ammoPickup, pickUpSpawn.position, pickUpSpawn.rotation);
     }
 }

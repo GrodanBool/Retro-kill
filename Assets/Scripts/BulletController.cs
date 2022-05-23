@@ -20,7 +20,7 @@ public class BulletController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -51,7 +51,13 @@ public class BulletController : MonoBehaviour
             other.gameObject.GetComponent<PlayerHealthController>().DamagePlayer(damage);
         }
 
-        Destroy(gameObject);
-        Instantiate(impactEffect, transform.position + (transform.forward * (-moveSpeed * Time.deltaTime) ), transform.rotation);
+        if (other.tag == "Health")
+        {
+        }
+        else
+        {
+            Destroy(gameObject);
+            Instantiate(impactEffect, transform.position + (transform.forward * (-moveSpeed * Time.deltaTime)), transform.rotation);
+        }
     }
 }

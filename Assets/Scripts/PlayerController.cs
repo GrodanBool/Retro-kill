@@ -269,4 +269,22 @@ public class PlayerController : MonoBehaviour
         bounceAmount = bounceforce;
         bounce = true;
     }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        
+        if (other.tag == "Health")
+        {
+            Debug.Log("health");
+            PlayerHealthController.instance.HealPlayer(5);
+
+            Destroy(other.gameObject);
+            ItemManager.instance.CalledRespawn();
+            // isCollected = true;
+            
+
+            // AudioManagerMusicSFX.instance.PlaySFX(2);
+            //StartCoroutine(RespawnHealth());
+        }
+    }
 }
