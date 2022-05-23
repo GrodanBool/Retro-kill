@@ -9,7 +9,7 @@ public class WeaponPickup : MonoBehaviour
 
     private bool collected;
 
-    private void onTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player" && !collected)
         {

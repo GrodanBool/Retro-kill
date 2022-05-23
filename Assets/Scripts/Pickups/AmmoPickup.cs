@@ -6,13 +6,15 @@ public class AmmoPickup : MonoBehaviour
 {
     private bool collected;
 
-    private void onTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player" && !collected)
         {
             PlayerController.instance.activeGun.GetAmmo();
 
             Destroy(gameObject);
+
+            collected = true;
 
             AudioManagerMusicSFX.instance.PlaySFX(7);
         }
