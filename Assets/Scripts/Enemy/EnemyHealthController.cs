@@ -25,6 +25,14 @@ public class EnemyHealthController : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            if (PlayerPrefs.GetString("activemod").Contains("Lose Health"))
+            { 
+                if (currentHealth < PlayerHealthController.instance.maxHealth)
+                {
+                    PlayerHealthController.instance.HealPlayer(1);
+                    Debug.Log("health + 1");
+                }
+            }
             ScoreController.instance.OnEnemyKilled();
             Destroy(gameObject);
         }

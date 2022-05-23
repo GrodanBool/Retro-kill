@@ -8,7 +8,7 @@ public class HealthPickup : MonoBehaviour
 
     private bool isCollected;
 
-     private void onTriggerEnter(Collider other)
+     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player" && !isCollected)
         {
