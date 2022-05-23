@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
     // rate of fire
     public float fireRate;
 
+    private bool canSeePlayer = false;
     // How much time to wait before firing again
     // This value is set to equal firerate in game
     // Meaning first shot will be fired after 2 secs
@@ -23,11 +24,11 @@ public class EnemyController : MonoBehaviour
     private float fireCount = 2f;
 
     public Animator anim;
-    
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -44,6 +45,21 @@ public class EnemyController : MonoBehaviour
         // Always face the player
         transform.LookAt(PlayerController.instance.transform);
 
+        RaycastHit hit;
+        var rayDirection = PlayerController.instance.transform.position - transform.position;
+        if (Physics.Raycast(transform.position, rayDirection, out hit))
+        {
+            if (hit.transform == PlayerController.instance.gameObject.GetComponent<CapsuleCollider>() ||
+                hit.transform == PlayerController.instance.gameObject.transform)
+            {
+                canSeePlayer = true;
+            }
+            else
+            {
+                canSeePlayer = false;
+            }
+        }
+
         agent.SetDestination(targetPoint);
 
         if (agent.velocity.x <= 0 && agent.velocity.z <= 0)
@@ -57,7 +73,7 @@ public class EnemyController : MonoBehaviour
 
         fireCount -= Time.deltaTime;
 
-        
+
         if (fireCount <= 0)
         {
             fireCount = fireRate;
@@ -69,10 +85,13 @@ public class EnemyController : MonoBehaviour
             Vector3 targetDir = PlayerController.instance.transform.position - transform.position;
             float angle = Vector3.SignedAngle(targetDir, transform.forward, Vector3.up);
 
-            if (Mathf.Abs(angle) < 30f)
+            if (Mathf.Abs(angle) < 60f)
             {
-                Instantiate(bullet, firePoint.position, firePoint.rotation);
-                anim.SetTrigger("fireShot");
+                if (canSeePlayer)
+                {
+                    Instantiate(bullet, firePoint.position, firePoint.rotation);
+                    anim.SetTrigger("fireShot");
+                }
             }
 
             anim.SetBool("isMoving", false);
