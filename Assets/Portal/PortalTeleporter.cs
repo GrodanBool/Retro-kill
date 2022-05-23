@@ -74,8 +74,11 @@ public class PortalTeleporter : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            enemyController.agent.stoppingDistance = 0f;
-            enemyController.enemyPortal = true;
+            if (enemyController)
+            {
+                enemyController.agent.stoppingDistance = 0f;
+                enemyController.enemyPortal = true;
+            }
             playerIsOverlapping = true;
             enemyController.portal = reciever.GetComponent<BoxCollider>();
         }

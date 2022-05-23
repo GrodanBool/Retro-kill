@@ -109,9 +109,6 @@ public class EnemyController : MonoBehaviour
             firePoint.LookAt(portal.transform.position);
             agent.SetDestination(portal.transform.position);
         }
-        //Debug.Log(enemyPortal);
-        //Debug.Log(portal.transform.position);
-        //Debug.Log(agent.destination);
 
         fireCount -= Time.deltaTime;
 
