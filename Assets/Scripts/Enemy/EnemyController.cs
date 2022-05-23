@@ -56,7 +56,8 @@ public class EnemyController : MonoBehaviour
         var rayDirection = PlayerController.instance.transform.position - transform.position;
         if (Physics.Raycast(transform.position, rayDirection, out hit))
         {
-            if (hit.transform == PlayerController.instance.gameObject.GetComponent<CapsuleCollider>() || hit.transform == PlayerController.instance.gameObject.transform)
+            if (hit.transform == PlayerController.instance.gameObject.GetComponent<CapsuleCollider>() || 
+                hit.transform == PlayerController.instance.gameObject.transform)
             {
                 canSeePlayer = true;
             }
@@ -90,7 +91,6 @@ public class EnemyController : MonoBehaviour
         {
             search = searchTimeout;
         }
-        //Debug.Log(agent.path);
 
         //follow player, try new location or go in portal
         if (tryPlayerTracing && !tryNewLocation && !enemyPortal/*&& !canShoot*/)

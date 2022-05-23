@@ -62,7 +62,6 @@ public class PortalTeleporter : MonoBehaviour
 
             Vector3 positionOffset = Quaternion.Euler(0f, rotationDiff, 0f) * portalToPlayer;
             enemy.position = reciever.position + positionOffset;
-            Debug.Log(reciever.position);
 
             enemyIsOverlapping = false;
             enemyController.enemyPortal = false;
