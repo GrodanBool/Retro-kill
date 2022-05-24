@@ -9,6 +9,8 @@ public class ItemManager : MonoBehaviour
 
     public List<SpawnPoints> spawnPoints = new List<SpawnPoints>();
 
+    //public GameObject health, ammo;   
+
     public Transform[] spawnPointLocations;
 
     public float spawnTimeout = 15f;
@@ -23,10 +25,10 @@ public class ItemManager : MonoBehaviour
         CreateSpawnPoints();
         spawnPoints[0].occupied = true;
         spawnPoints[1].occupied = true;
-        // spawnPoints[2].occupied = true;
+        spawnPoints[2].occupied = true;
         HealthPickup.instance.RespawnHealth(spawnPoints[0].spawnPoint);
         AmmoPickup.instance.RespawnAmmo(spawnPoints[1].spawnPoint);
-        // WeaponPickup.instance.RespawnWeapon(spawnPoints[2].spawnPoint);
+        WeaponPickup.instance.RespawnWeapon(spawnPoints[2].spawnPoint);
     }
 
     // Update is called once per frame
@@ -38,7 +40,7 @@ public class ItemManager : MonoBehaviour
         {
             bool checkOccupiedSpawnPoint = false;
             int randomSpawnPoints = Random.Range(0, spawnPoints.Count);
-            Debug.Log("hej");
+
             while (!checkOccupiedSpawnPoint)
             {
                 if (!spawnPoints[randomSpawnPoints].occupied)
@@ -58,7 +60,7 @@ public class ItemManager : MonoBehaviour
                 }
             }
 
-            int randomItem = Random.Range(1, 3);
+            int randomItem = Random.Range(1, 4);
             if (!spawnPoints[randomSpawnPoints].occupied)
             {
                 switch (randomItem)
@@ -93,5 +95,10 @@ public class ItemManager : MonoBehaviour
         {
            this.spawnPoints.Add(new SpawnPoints { spawnPoint = item, occupied = false });
         }
+    }
+
+    public void SpawnNewItem(Vector3 location, GameObject go)
+    {
+        Instantiate(go, location, Quaternion.identity);
     }
 }

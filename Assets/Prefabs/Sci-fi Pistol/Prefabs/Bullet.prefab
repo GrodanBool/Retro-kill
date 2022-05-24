@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1062201801116349753}
   - component: {fileID: 2979489185758511603}
   - component: {fileID: 7504353903883225825}
+  - component: {fileID: 7999599634450669601}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Ammo
@@ -104,3 +105,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &7999599634450669601
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3628135281450721318}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.05808537
+  m_Height: 0.031500027
+  m_Direction: 1
+  m_Center: {x: 9.313225e-10, y: -0.00000008195639, z: 0.005579486}

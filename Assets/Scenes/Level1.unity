@@ -4036,10 +4036,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 989726720}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba6261b8e57d315489058b5d6477b786, type: 3}
+  m_Script: {fileID: 11500000, guid: 981cfa94772651c458eb806e4dff4d9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoPickup: {fileID: 3628135281450721318, guid: cf957b4ed1cbe124abac918820f3a5ed, type: 3}
+  weaponPickUp: {fileID: 4043241439066821443, guid: d698ae40d4159bc419beb319c0b33ca1, type: 3}
 --- !u!1 &994080534
 GameObject:
   m_ObjectHideFlags: 0
@@ -4159,6 +4159,7 @@ MonoBehaviour:
   spawnPointLocations:
   - {fileID: 819444546}
   - {fileID: 671466517}
+  - {fileID: 1712256654}
   spawnTimeout: 5
 --- !u!114 &1005117812
 MonoBehaviour:
@@ -5083,7 +5084,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.4
-  m_Center: {x: 0, y: 0.3, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1177279414
 MonoBehaviour:
   m_ObjectHideFlags: 0

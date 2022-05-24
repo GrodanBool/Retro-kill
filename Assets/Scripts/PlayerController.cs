@@ -273,10 +273,29 @@ public class PlayerController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-
         if (other.tag == "Health")
         {
             PlayerHealthController.instance.HealPlayer(5);
+
+            ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == other.GetComponentInChildren<Transform>().transform.position)
+                                            .Select(s => { s.occupied = false; return s; })
+                                            .ToList();
+            Destroy(other.gameObject);
+        }
+
+        if (other.tag == "Ammo")
+        {
+            this.activeGun.GetAmmo();
+
+            ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == other.GetComponentInChildren<Transform>().transform.position)
+                                            .Select(s => { s.occupied = false; return s; })
+                                            .ToList();
+            Destroy(other.gameObject);
+        }
+
+        if (other.tag == "Weapon")
+        {
+            Debug.Log("PickupGun");
 
             ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == other.GetComponentInChildren<Transform>().transform.position)
                                             .Select(s => { s.occupied = false; return s; })
