@@ -17,11 +17,11 @@ public class UploadHighScore : MonoBehaviour
     void Start()
     {
         score.text = "SCORE  " + ScoreController.instance.score.ToString();
-        Cursor.lockState = CursorLockMode.None;
     }
 
     void Update()
     {
+        Cursor.lockState = CursorLockMode.None;
         if (iField.text.Length > 0)
         {
             uploadButton.GetComponent<Button>().interactable = true;

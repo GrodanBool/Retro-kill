@@ -17,6 +17,8 @@ public class BulletController : MonoBehaviour
 
     public Action onHitEnemy;
 
+    public bool isRocketLauncherBullet;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,5 +69,24 @@ public class BulletController : MonoBehaviour
             Destroy(gameObject);
             Instantiate(impactEffect, transform.position + (transform.forward * (-moveSpeed * Time.deltaTime)), transform.rotation);
         }
+
+        if (isRocketLauncherBullet)
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 10f);
+
+            foreach (Collider col in colliders)
+            {
+                var enemy = col.GetComponent<EnemyHealthController>();
+
+                if (enemy != null)
+                {
+                    enemy.DamageEnemy(damage);
+                }
+            }
+        }
+
+        Destroy(gameObject);
+
+        Instantiate(impactEffect, transform.position + (transform.forward * (-moveSpeed * Time.deltaTime)), transform.rotation);
     }
 }
