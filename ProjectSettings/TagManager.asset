@@ -8,6 +8,8 @@ TagManager:
   - Lava
   - Music
   - Health
+  - Weapon
+  - Ammo
   layers:
   - Default
   - TransparentFX

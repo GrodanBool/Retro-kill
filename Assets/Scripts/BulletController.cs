@@ -54,6 +54,14 @@ public class BulletController : MonoBehaviour
         if (other.tag == "Health")
         {
         }
+        if (other.tag == "Ammo")
+        {
+            
+        }
+        if (other.tag == "Weapon")
+        {
+            
+        }
         else
         {
             Destroy(gameObject);
