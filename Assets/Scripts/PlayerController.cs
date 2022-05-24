@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -37,6 +36,9 @@ public class PlayerController : MonoBehaviour
     public float bounceAmount;
     private bool bounce;
 
+    public float pickupTimeout = 5f;
+    private float pickupCounter;
+
 
 
     // Happens straight away in Unity (before start runs)
@@ -48,6 +50,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pickupCounter = pickupTimeout;
+
         if (PlayerPrefs.GetString("activemod").Contains("No Guns"))
         {
             foreach (var item in allGuns)
@@ -71,7 +75,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!UIController.instance.pauseScreen.activeInHierarchy)
         {
-
+            pickupCounter -= Time.deltaTime;
 
             //moveInput.x = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
             //moveInput.z = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
@@ -294,34 +298,39 @@ public class PlayerController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Health")
+        if (pickupCounter <= 0)
         {
-            PlayerHealthController.instance.HealPlayer(5);
+            if (other.tag == "Health")
+            {
+                PlayerHealthController.instance.HealPlayer(5);
 
-            ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == other.GetComponentInChildren<Transform>().transform.position)
-                                            .Select(s => { s.occupied = false; return s; })
-                                            .ToList();
-            Destroy(other.gameObject);
-        }
+                ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == other.GetComponentInChildren<Transform>().transform.position)
+                                                .Select(s => { s.occupied = false; return s; })
+                                                .ToList();
+                Destroy(other.gameObject);
+                pickupCounter = pickupTimeout;
+            }
 
-        if (other.tag == "Ammo")
-        {
-            this.activeGun.GetAmmo();
+            if (other.tag == "Ammo")
+            {
+                this.activeGun.GetAmmo();
 
-            ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == other.GetComponentInChildren<Transform>().transform.position)
-                                            .Select(s => { s.occupied = false; return s; })
-                                            .ToList();
-            Destroy(other.gameObject);
-        }
+                ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == other.GetComponentInChildren<Transform>().transform.position)
+                                                .Select(s => { s.occupied = false; return s; })
+                                                .ToList();
+                Destroy(other.gameObject);
+                pickupCounter = pickupTimeout;
+            }
 
-        if (other.tag == "Weapon")
-        {
-            Debug.Log("PickupGun");
+            if (other.tag == "Weapon")
+            {
 
-            ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == other.GetComponentInChildren<Transform>().transform.position)
-                                            .Select(s => { s.occupied = false; return s; })
-                                            .ToList();
-            Destroy(other.gameObject);
+                ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == other.GetComponentInChildren<Transform>().transform.position)
+                                                .Select(s => { s.occupied = false; return s; })
+                                                .ToList();
+                Destroy(other.gameObject);
+                pickupCounter = pickupTimeout;
+            }
         }
     }
 }
