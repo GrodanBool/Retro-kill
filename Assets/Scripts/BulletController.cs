@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System;
 
 public class BulletController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class BulletController : MonoBehaviour
     public bool damagePlayer, damageEnemy;
 
     public Action onHitEnemy;
+    public bool isRocketLauncherBullet;
 
     // Start is called before the first frame update
     void Start()
@@ -49,14 +51,33 @@ public class BulletController : MonoBehaviour
             other.gameObject.GetComponent<PlayerHealthController>().DamagePlayer(damage);
         }
 
-        if (other.tag == "Portal")
+        if (other.tag == "Weapon" || other.tag == "Portal" || other.tag == "Health" || other.tag == "Ammo")
         {
-            
+
         }
         else
         {
             Destroy(gameObject);
             Instantiate(impactEffect, transform.position + (transform.forward * (-moveSpeed * Time.deltaTime)), transform.rotation);
         }
+
+        if (isRocketLauncherBullet)
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 10f);
+
+            foreach (Collider col in colliders)
+            {
+                var enemy = col.GetComponent<EnemyHealthController>();
+
+                if (enemy != null)
+                {
+                    enemy.DamageEnemy(damage);
+                }
+            }
+        }
+
+        //add back if functionality broken
+        //Destroy(gameObject);
+        //Instantiate(impactEffect, transform.position + (transform.forward * (-moveSpeed * Time.deltaTime)), transform.rotation);
     }
 }

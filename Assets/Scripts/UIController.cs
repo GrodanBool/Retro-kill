@@ -12,6 +12,7 @@ public class UIController : MonoBehaviour
     // public float damageAlpha = .25f, damageFadeSpeed = 2f;
 
     public GameObject pauseScreen;
+    public Image fadeIn;
 
     
     // public float fadeSpeed = 1.5f;
@@ -30,6 +31,8 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       fadeIn.color = new Color(fadeIn.color.r, fadeIn.color.g, fadeIn.color.b, Mathf.MoveTowards(fadeIn.color.a, 0, 1 * Time.deltaTime));
+
        UIController.instance.score.text = "SCORE: " +  ScoreController.instance.score.ToString();
        UIController.instance.multiplier.text =  ScoreController.instance.totalMultiplier.ToString() + "x";
         // if(damageEffect.color.a != 0)

@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class HealthPickup : MonoBehaviour
 {
-    public int healAmount;
+    public static HealthPickup instance;
 
-    private bool isCollected;
+    public GameObject healthPickup;
 
-     private void onTriggerEnter(Collider other)
+    private void Awake()
     {
-        if (other.tag == "Player" && !isCollected)
-        {
-            PlayerHealthController.instance.HealPlayer(healAmount);
+        instance = this;
+    }
 
-            Destroy(gameObject);
-
-            AudioManagerMusicSFX.instance.PlaySFX(2);
-        }
+    public void RespawnHealth(Transform pickUpSpawn)
+    {
+        Instantiate(healthPickup, pickUpSpawn.position, pickUpSpawn.rotation);
     }
 }

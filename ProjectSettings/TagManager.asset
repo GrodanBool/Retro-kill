@@ -7,8 +7,9 @@ TagManager:
   - Enemy
   - Lava
   - Music
-  - Bullet
-  - Portal
+  - Health
+  - Weapon
+  - Ammo
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Bullets
   - Player
   - Wall
-  - 
+  - Trigger Zone
   - 
   - 
   - 

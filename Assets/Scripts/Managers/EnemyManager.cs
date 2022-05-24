@@ -21,7 +21,15 @@ public class EnemyManager : MonoBehaviour
     {
         nrOfSpawnPoints = spawnPoints.Length;
         SpawnNewEnemy();
-        spawnCounter = spawnRate;
+
+        if (PlayerPrefs.GetString("activemod").Contains("Enemy Spawn Rate"))
+        {
+            spawnRate /= 2;
+        }
+        else
+        {
+            spawnCounter = spawnRate;
+        }
     }
 
     // Update is called once per frame
@@ -30,11 +38,6 @@ public class EnemyManager : MonoBehaviour
         if (spawnCounter > 0)
         {
             spawnCounter -= Time.deltaTime;
-        }
-        else if (spawnCounter <= 0 && PlayerPrefs.GetString("activemod").Contains("Enemy Spawn Rate"))
-        {
-            spawnCounter = spawnRate / 2;
-            SpawnNewEnemy();
         }
         else if (spawnCounter <= 0)
         {
@@ -45,6 +48,6 @@ public class EnemyManager : MonoBehaviour
 
     public void SpawnNewEnemy()
     {
-        Instantiate(enemyPrefab, spawnPoints[Random.Range(-1, nrOfSpawnPoints)].transform.position, Quaternion.identity);
+        Instantiate(enemyPrefab, spawnPoints[Random.Range(0, nrOfSpawnPoints)].transform.position, Quaternion.identity);
     }
 }
