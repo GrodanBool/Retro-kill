@@ -277,18 +277,11 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Health")
         {
             PlayerHealthController.instance.HealPlayer(5);
-            other.GetComponentInParent<ItemManager>();
-            Transform spawnTranform = other.GetComponentInChildren<Transform>();
-            ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == spawnTranform.transform.position).Select(s => { s.occupied = false; return s.occupied; });
-            Debug.Log(spawnTranform.transform.position);
+
+            ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == other.GetComponentInChildren<Transform>().transform.position)
+                                            .Select(s => { s.occupied = false; return s; })
+                                            .ToList();
             Destroy(other.gameObject);
-             Debug.Log(ItemManager.instance.spawnPoints[0].spawnPoint.transform.position);
-            // ItemManager.instance.CalledRespawn();
-            // isCollected = true;
-
-
-            // AudioManagerMusicSFX.instance.PlaySFX(2);
-            //StartCoroutine(RespawnHealth());
         }
     }
 }
