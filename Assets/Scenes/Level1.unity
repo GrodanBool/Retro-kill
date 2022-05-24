@@ -6626,8 +6626,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beafb51e21d9cd042b8bd47660d6b147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 5
-  damge: 5
+  time: 2
+  damge: 10
   takeDamage: 1
 --- !u!114 &1662618650
 MonoBehaviour:
