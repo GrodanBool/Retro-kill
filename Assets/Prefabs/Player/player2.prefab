@@ -259,7 +259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 428079521153771369, guid: 0de1ad90d67328645856294a3323206a, type: 3}
       propertyPath: m_Name
-      value: Player (1)
+      value: player2
       objectReference: {fileID: 0}
     - target: {fileID: 428079521153771376, guid: 0de1ad90d67328645856294a3323206a, type: 3}
       propertyPath: maxHealth
@@ -284,6 +284,10 @@ PrefabInstance:
     - target: {fileID: 428079521153771382, guid: 0de1ad90d67328645856294a3323206a, type: 3}
       propertyPath: sceneId
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428079521153771382, guid: 0de1ad90d67328645856294a3323206a, type: 3}
+      propertyPath: m_AssetId
+      value: 58fa0c3c8bfcc654196dbc48762c1ee5
       objectReference: {fileID: 0}
     - target: {fileID: 428079521153771388, guid: 0de1ad90d67328645856294a3323206a, type: 3}
       propertyPath: m_RootOrder
