@@ -40,8 +40,6 @@ public class PlayerController : MonoBehaviour
     public float pickupTimeout = 5f;
     private float pickupCounter;
 
-    public GameObject musszleFlash;
-
 
 
     // Happens straight away in Unity (before start runs)
@@ -247,9 +245,9 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator MuzzleFlash()
     {
-        musszleFlash.SetActive(true);
+        activeGun.muzzelFlash.SetActive(true);
         yield return new WaitForSeconds(0.09f);
-        musszleFlash.SetActive(false);
+        activeGun.muzzelFlash.SetActive(false);
     }
 
     public void SwitchGun()
