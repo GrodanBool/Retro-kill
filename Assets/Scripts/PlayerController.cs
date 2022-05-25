@@ -320,6 +320,7 @@ public class PlayerController : MonoBehaviour
                                                 .Select(s => { s.occupied = false; return s; })
                                                 .ToList();
                 Destroy(other.gameObject);
+                AudioManagerMusicSFX.instance.PlaySFX(2);
                 pickupCounter = pickupTimeout;
             }
 
@@ -331,6 +332,7 @@ public class PlayerController : MonoBehaviour
                                                 .Select(s => { s.occupied = false; return s; })
                                                 .ToList();
                 Destroy(other.gameObject);
+                AudioManagerMusicSFX.instance.PlaySFX(7);
                 pickupCounter = pickupTimeout;
             }
 
@@ -341,6 +343,7 @@ public class PlayerController : MonoBehaviour
                                                 .Select(s => { s.occupied = false; return s; })
                                                 .ToList();
                 Destroy(other.gameObject);
+                AudioManagerMusicSFX.instance.PlaySFX(0);
                 pickupCounter = pickupTimeout;
             }
         }
