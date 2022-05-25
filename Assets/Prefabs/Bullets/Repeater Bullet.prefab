@@ -113,13 +113,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14879d6e484e65e43ad69d4bdf14b4ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
+  moveSpeed: 20
   lifeTime: 5
   theRB: {fileID: 9080689670234104263}
   impactEffect: {fileID: 4815918439985957532, guid: bfc0634144253ad4c9f6b1ce270fd277, type: 3}
-  damage: 2
+  damage: 1
   damagePlayer: 0
   damageEnemy: 1
+  isRocketLauncherBullet: 0
 --- !u!54 &9080689670234104263
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -199,9 +199,6 @@ public class PlayerController : MonoBehaviour
                     FireShot();
                 }
             }
-
-            //anim.SetFloat("moveSpeed", moveInput.magnitude);
-            //anim.SetBool("onGround", canJump);
         }
     }
 
@@ -278,10 +275,7 @@ public class PlayerController : MonoBehaviour
                     i = unlockableGuns.Count;
                 }
             }
-
         }
-
-
 
         if (gunUnlocked)
         {
@@ -324,10 +318,12 @@ public class PlayerController : MonoBehaviour
 
             if (other.tag == "Weapon")
             {
-
+                AddGun(other.gameObject.GetComponent<Gun>().gunName);
+                
                 ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == other.GetComponentInChildren<Transform>().transform.position)
                                                 .Select(s => { s.occupied = false; return s; })
                                                 .ToList();
+
                 Destroy(other.gameObject);
                 pickupCounter = pickupTimeout;
             }
