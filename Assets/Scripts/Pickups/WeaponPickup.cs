@@ -6,7 +6,8 @@ public class WeaponPickup : MonoBehaviour
 {
     public static WeaponPickup instance;
 
-    public GameObject weaponPickUp;
+    public List<GameObject> weaponPickUp = new List<GameObject>();
+
 
     private void Awake()
     {
@@ -15,6 +16,8 @@ public class WeaponPickup : MonoBehaviour
 
     public void RespawnWeapon(Transform pickUpSpawn)
     {
-        Instantiate(weaponPickUp, pickUpSpawn.position, pickUpSpawn.rotation);
+        int randomGun = Random.Range(0, 3);
+        
+        Instantiate(weaponPickUp[randomGun], pickUpSpawn.position, pickUpSpawn.rotation);
     }
 }
