@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         pickupCounter = pickupTimeout;
-
         if (PlayerPrefs.GetString("activemod").Contains("No Guns"))
         {
             foreach (var item in allGuns)
