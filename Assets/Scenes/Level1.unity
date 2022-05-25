@@ -4937,7 +4937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba6261b8e57d315489058b5d6477b786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoPickup: {fileID: 3628135281450721318, guid: cf957b4ed1cbe124abac918820f3a5ed, type: 3}
+  ammoPickup: {fileID: 3628135281450721318, guid: ed5b4dd13d5fa63449c52c36df785184, type: 3}
 --- !u!1 &1187517907
 GameObject:
   m_ObjectHideFlags: 0

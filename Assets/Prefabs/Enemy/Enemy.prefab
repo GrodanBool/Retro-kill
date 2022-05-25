@@ -145,6 +145,9 @@ MonoBehaviour:
   firePoint: {fileID: 4871296960213112716}
   fireRate: 0.7
   anim: {fileID: 1364809968006616150}
+  head: {fileID: 0}
+  enemyPortal: 0
+  portal: {fileID: 0}
 --- !u!195 &4871296960221994685
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -379,15 +382,15 @@ PrefabInstance:
     - target: {fileID: 4885301371922852569, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6c2f1b7eba8926f409102773391e94d0, type: 2}
+      objectReference: {fileID: 2100000, guid: dc5da840cd2be534a88486ccfa4080d7, type: 2}
     - target: {fileID: 4885301371922852569, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 6c2f1b7eba8926f409102773391e94d0, type: 2}
+      objectReference: {fileID: 2100000, guid: dc5da840cd2be534a88486ccfa4080d7, type: 2}
     - target: {fileID: 4885301371922852569, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: 6c2f1b7eba8926f409102773391e94d0, type: 2}
+      objectReference: {fileID: 2100000, guid: dc5da840cd2be534a88486ccfa4080d7, type: 2}
     - target: {fileID: 4947536876666625124, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.7607522
