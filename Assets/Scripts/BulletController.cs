@@ -51,7 +51,7 @@ public class BulletController : MonoBehaviour
             other.gameObject.GetComponent<PlayerHealthController>().DamagePlayer(damage);
         }
 
-        if (other.tag == "Weapon" || other.tag == "Portal" || other.tag == "Health" || other.tag == "Ammo")
+        if (other.tag == "Weapon" || other.tag == "Portal" || other.tag == "Health" || other.tag == "Ammo" || other.tag == "Player" && !damagePlayer)
         {
 
         }

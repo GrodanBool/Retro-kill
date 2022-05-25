@@ -49,7 +49,6 @@ public class LevelSelectScreen : MonoBehaviour
             {
                 storyText.color = new Color(storyText.color.r, storyText.color.g, storyText.color.b, Mathf.MoveTowards(storyText.color.a, 0, 1 * Time.deltaTime));
                 countdownText.color = new Color(countdownText.color.r, countdownText.color.g, countdownText.color.b, Mathf.MoveTowards(countdownText.color.a, 0, 1 * Time.deltaTime));
-                AudioManager.instance.StopBGM();
             }
 
         }

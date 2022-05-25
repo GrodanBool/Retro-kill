@@ -34,8 +34,8 @@ public class EnemyController : MonoBehaviour
     private bool tryNewLocation;
     private bool tryPlayerTracing = true;
     private bool canShoot;
-    [HideInInspector] public bool enemyPortal;
-    [HideInInspector] public BoxCollider portal;
+    [HideInInspector] public bool enemyPortal = false;
+    [HideInInspector] public BoxCollider portal = null;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +46,10 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (portal == null/* && PlayerPrefs.GetString("CurrentLevel") == "Level1"*/)
+        {
+            enemyPortal = false;
+        }
         // Target the player instance position
         targetPoint = PlayerController.instance.transform.position;
         targetPoint.y = transform.position.y;
@@ -56,7 +60,7 @@ public class EnemyController : MonoBehaviour
         var rayDirection = PlayerController.instance.transform.position - transform.position;
         if (Physics.Raycast(transform.position, rayDirection, out hit))
         {
-            if (hit.transform == PlayerController.instance.gameObject.GetComponent<CapsuleCollider>() || 
+            if (hit.transform == PlayerController.instance.gameObject.GetComponent<CapsuleCollider>() ||
                 hit.transform == PlayerController.instance.gameObject.transform)
             {
                 canSeePlayer = true;
@@ -67,6 +71,7 @@ public class EnemyController : MonoBehaviour
             }
         }
 
+        Debug.Log(enemyPortal);
         //animation
         if (agent.velocity.x <= 0 && agent.velocity.z <= 0)
         {

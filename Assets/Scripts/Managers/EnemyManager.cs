@@ -1,6 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -16,11 +19,13 @@ public class EnemyManager : MonoBehaviour
 
     private System.Random randomizer = new System.Random();
 
+    private bool spawnComplete = false;
+    private bool useSpawnPoints = false;
+
     // Start is called before the first frame update
     void Start()
     {
         nrOfSpawnPoints = spawnPoints.Length;
-        SpawnNewEnemy();
 
         if (PlayerPrefs.GetString("activemod").Contains("Enemy Spawn Rate"))
         {
@@ -29,6 +34,17 @@ public class EnemyManager : MonoBehaviour
         else
         {
             spawnCounter = spawnRate;
+        }
+
+        if (SceneManager.GetActiveScene().name == "Level1")
+        {
+            useSpawnPoints = true;
+            SpawnNewEnemy();
+        }
+        else
+        {
+            useSpawnPoints = false;
+            SpawnNewEnemy();
         }
     }
 
@@ -46,8 +62,67 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    public void SpawnNewEnemy()
+    public void SpawnNewEnemyFromSpawnPoint()
     {
         Instantiate(enemyPrefab, spawnPoints[Random.Range(0, nrOfSpawnPoints)].transform.position, Quaternion.identity);
     }
+
+    public async void SpawnNewEnemy()
+    {
+        if (!useSpawnPoints)
+        {
+            if (!spawnComplete)
+            {
+                await InstantiateNewEnemy();
+            }
+        }
+        else
+        {
+            SpawnNewEnemyFromSpawnPoint();
+        }
+    }
+
+    public Task<bool> InstantiateNewEnemy()
+    {
+        Instantiate(enemyPrefab, RandomNavmeshSpawnLocation(PlayerController.instance.transform.position, 25), Quaternion.identity);
+        return Task.FromResult(true);
+    }
+
+    public Vector3 RandomNavmeshSpawnLocation(Vector3 playerPostition, int maxRadius)
+    {
+        List<ColliderPositions> colliderPositions = new List<ColliderPositions>();
+        Vector3 finalPosition = Vector3.zero;
+        bool positionFound = false;
+        NavMeshHit hit;
+
+        var test = Physics.OverlapSphere(playerPostition, maxRadius);
+
+        Physics.OverlapSphere(playerPostition, maxRadius).ToList()
+                                                         .ForEach(a => colliderPositions
+                                                         .Add(new ColliderPositions() { Position = a, Tried = false }));
+
+
+        while (!positionFound && colliderPositions.Any(a => a.Tried == false))
+        {
+            Vector3 randomNavmeshSpawn = colliderPositions.Where(a => a.Tried == false).ToList()
+                                         [Random.Range(0, colliderPositions.Count)].Position.transform.position;
+
+            colliderPositions.Where(a => a.Position.transform.position == randomNavmeshSpawn)
+                             .Select(a => { a.Tried = true; return a; })
+                             .ToList();
+
+            if (NavMesh.SamplePosition(randomNavmeshSpawn, out hit, maxRadius, 1))
+            {
+                finalPosition = hit.position;
+                positionFound = true;
+            }
+        }
+        return finalPosition;
+    }
+}
+
+public class ColliderPositions
+{
+    public Collider Position;
+    public bool Tried = false;
 }
