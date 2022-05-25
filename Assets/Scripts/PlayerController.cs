@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -38,6 +39,8 @@ public class PlayerController : MonoBehaviour
 
     public float pickupTimeout = 5f;
     private float pickupCounter;
+
+    public GameObject musszleFlash;
 
 
 
@@ -228,6 +231,7 @@ public class PlayerController : MonoBehaviour
 
                 activeGun.fireCounter = activeGun.fireRate;
                 UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+                StartCoroutine(MuzzleFlash());
             }
 
             else
@@ -236,8 +240,16 @@ public class PlayerController : MonoBehaviour
                 Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation);
                 activeGun.fireCounter = activeGun.fireRate;
                 UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+                StartCoroutine(MuzzleFlash());
             }
         }
+    }
+
+    public IEnumerator MuzzleFlash()
+    {
+        musszleFlash.SetActive(true);
+        yield return new WaitForSeconds(0.09f);
+        musszleFlash.SetActive(false);
     }
 
     public void SwitchGun()
