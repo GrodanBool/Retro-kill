@@ -117,9 +117,10 @@ MonoBehaviour:
   lifeTime: 5
   theRB: {fileID: 9080689670234104263}
   impactEffect: {fileID: 4815918439985957532, guid: a1d195cd1a41f7445a1d3872ad17364e, type: 3}
-  damage: 1
+  damage: 2
   damagePlayer: 0
   damageEnemy: 1
+  isRocketLauncherBullet: 0
 --- !u!54 &9080689670234104263
 Rigidbody:
   m_ObjectHideFlags: 0

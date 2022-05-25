@@ -27,15 +27,6 @@ public class EnemyManager : MonoBehaviour
     {
         nrOfSpawnPoints = spawnPoints.Length;
 
-        if (PlayerPrefs.GetString("activemod").Contains("Enemy Spawn Rate"))
-        {
-            spawnRate /= 2;
-        }
-        else
-        {
-            spawnCounter = spawnRate;
-        }
-
         if (SceneManager.GetActiveScene().name == "Level1")
         {
             useSpawnPoints = true;

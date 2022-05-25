@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -200,9 +200,6 @@ public class PlayerController : MonoBehaviour
                     FireShot();
                 }
             }
-
-            //anim.SetFloat("moveSpeed", moveInput.magnitude);
-            //anim.SetBool("onGround", canJump);
         }
     }
 
@@ -288,11 +285,8 @@ public class PlayerController : MonoBehaviour
                     i = unlockableGuns.Count;
                 }
             }
-
         }
-
-
-
+        }
         if (gunUnlocked)
         {
             currentGun = allGuns.Count - 2;
@@ -336,7 +330,8 @@ public class PlayerController : MonoBehaviour
 
             if (other.tag == "Weapon")
             {
-
+                AddGun(other.gameObject.GetComponent<Gun>().gunName);
+                
                 ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == other.GetComponentInChildren<Transform>().transform.position)
                                                 .Select(s => { s.occupied = false; return s; })
                                                 .ToList();

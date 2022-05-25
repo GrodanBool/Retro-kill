@@ -55,7 +55,7 @@ public class EnemyController : MonoBehaviour
         // Enemy will now never look up or down, only side to side
         targetPoint.y = transform.position.y;
         transform.LookAt(targetPoint);
-        //Vector3 corrector = new Vector3(PlayerController.instance.transform.position.x, transform.position.y, PlayerController.instance.transform.position.z);
+        //Vector3 corrector = new Vector3(PlayerController.instance.transform.position.x, transform.position.y, PlayerController.instance.transform.position.z)
 
         // Always face the player
         transform.LookAt(PlayerController.instance.transform);
@@ -117,6 +117,15 @@ public class EnemyController : MonoBehaviour
         {
             firePoint.LookAt(portal.transform.position);
             agent.SetDestination(portal.transform.position);
+        }
+
+        if (agent.velocity.x <= 0 && agent.velocity.z <= 0)
+        {
+            anim.SetBool("isMoving", false);
+        }
+        else
+        {
+            anim.SetBool("isMoving", true);
         }
 
         if (agent.velocity.x <= 0 && agent.velocity.z <= 0)
