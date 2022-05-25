@@ -58,7 +58,7 @@ public class EnemyController : MonoBehaviour
         //Vector3 corrector = new Vector3(PlayerController.instance.transform.position.x, transform.position.y, PlayerController.instance.transform.position.z)
 
         // Always face the player
-        transform.LookAt(PlayerController.instance.transform);
+        head.transform.LookAt(PlayerController.instance.transform);
 
         RaycastHit hit;
         var rayDirection = PlayerController.instance.transform.position - transform.position;
