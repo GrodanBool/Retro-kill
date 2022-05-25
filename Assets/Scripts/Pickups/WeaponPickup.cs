@@ -14,7 +14,6 @@ public class WeaponPickup : MonoBehaviour
 
     public void RespawnWeapon(Transform pickUpSpawn)
     {
-        Instantiate(weaponPickUp, pickUpSpawn.position, pickUpSpawn.rotation);
         int randomGun = Random.Range(0, 3);
         Instantiate(weaponPickUp[randomGun], pickUpSpawn.position, pickUpSpawn.rotation);
     }

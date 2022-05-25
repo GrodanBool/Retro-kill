@@ -286,7 +286,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        }
+        
         if (gunUnlocked)
         {
             currentGun = allGuns.Count - 2;

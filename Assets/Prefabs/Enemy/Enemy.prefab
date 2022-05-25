@@ -145,7 +145,7 @@ MonoBehaviour:
   firePoint: {fileID: 4871296960213112716}
   fireRate: 0.7
   anim: {fileID: 1364809968006616150}
-  head: {fileID: 0}
+  head: {fileID: 5106995135591179440}
   enemyPortal: 0
   portal: {fileID: 0}
 --- !u!195 &4871296960221994685
@@ -490,6 +490,11 @@ Transform:
 --- !u!4 &4904679186180836908 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
+  m_PrefabInstance: {fileID: 4871296960183855559}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5106995135591179440 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 379960166579015031, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
   m_PrefabInstance: {fileID: 4871296960183855559}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4871296961493907692
