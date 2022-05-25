@@ -43,6 +43,5 @@ public class PauseScreen : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
-        Debug.Log("Quitting Game");
     }
 }

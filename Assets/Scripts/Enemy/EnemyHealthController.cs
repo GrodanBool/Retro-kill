@@ -30,7 +30,6 @@ public class EnemyHealthController : MonoBehaviour
                 if (currentHealth < PlayerHealthController.instance.maxHealth)
                 {
                     PlayerHealthController.instance.HealPlayer(1);
-                    Debug.Log("health + 1");
                 }
             }
             ScoreController.instance.OnEnemyKilled();

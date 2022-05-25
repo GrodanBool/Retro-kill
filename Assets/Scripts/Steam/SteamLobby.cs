@@ -35,14 +35,12 @@ public class SteamLobby : MonoBehaviour
     private void OnLobbyCreated(LobbyCreated_t callback)
     {
         if (callback.m_eResult != EResult.k_EResultOK) { return; }
-        Debug.Log("Lobby Created!");
         manager.StartHost();
         SteamMatchmaking.SetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), hostAddressKey, SteamUser.GetSteamID().ToString());
         SteamMatchmaking.SetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), "name", SteamFriends.GetPersonaName().ToString() + "'s lobby");
     }
     private void OnJoinRequest(GameLobbyJoinRequested_t callback)
     {
-        Debug.Log("Join request!");
         SteamMatchmaking.JoinLobby(callback.m_steamIDLobby);
     }
 

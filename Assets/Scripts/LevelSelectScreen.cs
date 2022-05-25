@@ -34,7 +34,6 @@ public class LevelSelectScreen : MonoBehaviour
                     if (storyText.color.a >= 1 && countdownText.color.a >= 1)
                     {
                         fadeInComplete = true;
-                        Debug.Log(fadeInComplete);
                     }
                 }
             }
