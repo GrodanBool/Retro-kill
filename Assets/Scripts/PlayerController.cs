@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -228,6 +229,7 @@ public class PlayerController : MonoBehaviour
 
                 activeGun.fireCounter = activeGun.fireRate;
                 UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+                StartCoroutine(MuzzleFlash());
             }
 
             else
@@ -236,8 +238,16 @@ public class PlayerController : MonoBehaviour
                 Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation);
                 activeGun.fireCounter = activeGun.fireRate;
                 UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+                StartCoroutine(MuzzleFlash());
             }
         }
+    }
+
+    public IEnumerator MuzzleFlash()
+    {
+        activeGun.muzzelFlash.SetActive(true);
+        yield return new WaitForSeconds(0.09f);
+        activeGun.muzzelFlash.SetActive(false);
     }
 
     public void SwitchGun()
@@ -308,6 +318,7 @@ public class PlayerController : MonoBehaviour
                                                 .Select(s => { s.occupied = false; return s; })
                                                 .ToList();
                 Destroy(other.gameObject);
+                AudioManagerMusicSFX.instance.PlaySFX(2);
                 pickupCounter = pickupTimeout;
             }
 
@@ -319,6 +330,7 @@ public class PlayerController : MonoBehaviour
                                                 .Select(s => { s.occupied = false; return s; })
                                                 .ToList();
                 Destroy(other.gameObject);
+                AudioManagerMusicSFX.instance.PlaySFX(7);
                 pickupCounter = pickupTimeout;
             }
 
@@ -329,6 +341,7 @@ public class PlayerController : MonoBehaviour
                                                 .Select(s => { s.occupied = false; return s; })
                                                 .ToList();
                 Destroy(other.gameObject);
+                AudioManagerMusicSFX.instance.PlaySFX(0);
                 pickupCounter = pickupTimeout;
             }
         }

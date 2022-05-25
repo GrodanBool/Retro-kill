@@ -21,6 +21,9 @@ public class Gun : MonoBehaviour
 
     public string gunName;
 
+    public GameObject muzzelFlash;
+
+
     // Start is called before the first frame update
     void Start()
     {

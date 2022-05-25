@@ -15,6 +15,7 @@ public class BulletController : MonoBehaviour
     public bool damagePlayer, damageEnemy;
 
     public Action onHitEnemy;
+
     public bool isRocketLauncherBullet;
 
     // Start is called before the first frame update
@@ -75,9 +76,5 @@ public class BulletController : MonoBehaviour
                 }
             }
         }
-
-        //add back if functionality broken
-        //Destroy(gameObject);
-        //Instantiate(impactEffect, transform.position + (transform.forward * (-moveSpeed * Time.deltaTime)), transform.rotation);
     }
 }

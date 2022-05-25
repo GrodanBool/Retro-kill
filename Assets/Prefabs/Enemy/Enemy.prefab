@@ -109,12 +109,12 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4871296960221994687}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.5719662
+  m_Height: 2.5277534
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0.19990683, y: 0.26387668, z: 0}
 --- !u!114 &4871296960221994683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,9 +145,6 @@ MonoBehaviour:
   firePoint: {fileID: 4871296960213112716}
   fireRate: 0.7
   anim: {fileID: 1364809968006616150}
-  head: {fileID: 5106995135591179440}
-  enemyPortal: 1
-  portal: {fileID: 0}
 --- !u!195 &4871296960221994685
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -162,13 +159,13 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 250
-  m_StoppingDistance: 0
+  m_StoppingDistance: 5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
-  m_AutoRepath: 1
+  m_AutoRepath: 0
   m_Height: 1
   m_BaseOffset: 1
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!114 &4871296960221994686
 MonoBehaviour:
@@ -382,15 +379,15 @@ PrefabInstance:
     - target: {fileID: 4885301371922852569, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: dc5da840cd2be534a88486ccfa4080d7, type: 2}
+      objectReference: {fileID: 2100000, guid: 6c2f1b7eba8926f409102773391e94d0, type: 2}
     - target: {fileID: 4885301371922852569, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: dc5da840cd2be534a88486ccfa4080d7, type: 2}
+      objectReference: {fileID: 2100000, guid: 6c2f1b7eba8926f409102773391e94d0, type: 2}
     - target: {fileID: 4885301371922852569, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: dc5da840cd2be534a88486ccfa4080d7, type: 2}
+      objectReference: {fileID: 2100000, guid: 6c2f1b7eba8926f409102773391e94d0, type: 2}
     - target: {fileID: 4947536876666625124, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.7607522
@@ -490,11 +487,6 @@ Transform:
 --- !u!4 &4904679186180836908 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
-  m_PrefabInstance: {fileID: 4871296960183855559}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5106995135591179440 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 379960166579015031, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
   m_PrefabInstance: {fileID: 4871296960183855559}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4871296961493907692

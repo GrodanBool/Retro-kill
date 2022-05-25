@@ -22,7 +22,6 @@ public class EnemyController : MonoBehaviour
 
     public Animator anim;
 
-
     //testing shit
     public GameObject head;
     private Vector3 randomLocation = new Vector3(0, 0, 0);
@@ -52,10 +51,15 @@ public class EnemyController : MonoBehaviour
         }
         // Target the player instance position
         targetPoint = PlayerController.instance.transform.position;
+
+        // Enemy will now never look up or down, only side to side
         targetPoint.y = transform.position.y;
         transform.LookAt(targetPoint);
+        //Vector3 corrector = new Vector3(PlayerController.instance.transform.position.x, transform.position.y, PlayerController.instance.transform.position.z);
 
-        //can enemy see player
+        // Always face the player
+        transform.LookAt(PlayerController.instance.transform);
+
         RaycastHit hit;
         var rayDirection = PlayerController.instance.transform.position - transform.position;
         if (Physics.Raycast(transform.position, rayDirection, out hit))
@@ -113,6 +117,15 @@ public class EnemyController : MonoBehaviour
         {
             firePoint.LookAt(portal.transform.position);
             agent.SetDestination(portal.transform.position);
+        }
+
+        if (agent.velocity.x <= 0 && agent.velocity.z <= 0)
+        {
+            anim.SetBool("isMoving", false);
+        }
+        else
+        {
+            anim.SetBool("isMoving", true);
         }
 
         fireCount -= Time.deltaTime;
