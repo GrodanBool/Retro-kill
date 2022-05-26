@@ -27,22 +27,26 @@ public class Gun : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(fireCounter > 0)
+        if (fireCounter > 0)
         {
             fireCounter -= Time.deltaTime;
         }
     }
 
-    public void GetAmmo()
+    public void GetAmmo(bool updateUI)
     {
         currentAmmo += pickupAmount;
 
-        UIController.instance.ammoText.text = "AMMO: " + currentAmmo;
+
+        if (updateUI)
+        { 
+            UIController.instance.ammoText.text = "AMMO: " + currentAmmo;
+        }
     }
 }

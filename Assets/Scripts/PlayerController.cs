@@ -285,7 +285,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        
+
         if (gunUnlocked)
         {
             currentGun = allGuns.Count - 2;
@@ -317,7 +317,7 @@ public class PlayerController : MonoBehaviour
 
             if (other.tag == "Ammo")
             {
-                this.activeGun.GetAmmo();
+                this.activeGun.GetAmmo(true);
 
                 ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == other.GetComponentInChildren<Transform>().transform.position)
                                                 .Select(s => { s.occupied = false; return s; })
@@ -329,11 +329,26 @@ public class PlayerController : MonoBehaviour
 
             if (other.tag == "Weapon")
             {
-                AddGun(other.gameObject.GetComponent<Gun>().gunName);
-                
+                if (allGuns.Any(g => g.gunName == other.gameObject.GetComponent<Gun>().gunName))
+                {
+                    foreach (var gun in allGuns)
+                    {
+                        if (gun.gunName == other.gameObject.GetComponent<Gun>().gunName)
+                        {
+                            gun.GetAmmo(false);
+                        }
+                    }
+                }
+
+                else
+                {
+                    AddGun(other.gameObject.GetComponent<Gun>().gunName);
+                }
+
                 ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == other.GetComponentInChildren<Transform>().transform.position)
                                                 .Select(s => { s.occupied = false; return s; })
                                                 .ToList();
+
                 Destroy(other.gameObject);
                 AudioManagerMusicSFX.instance.PlaySFX(0);
                 pickupCounter = pickupTimeout;
