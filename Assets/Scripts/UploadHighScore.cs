@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,17 +12,24 @@ public class UploadHighScore : MonoBehaviour
     public GameObject success;
     public GameObject uploading;
     public GameObject uploadButton;
+    private bool uploadSuccess;
 
     void Start()
     {
         score.text = "SCORE  " + ScoreController.instance.score.ToString();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     void Update()
     {
-        Cursor.lockState = CursorLockMode.None;
+        if (!Cursor.visible)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
 
-        if (iField.text.Length > 0)
+        if (iField.text.Length > 0 && !uploadSuccess)
         {
             uploadButton.GetComponent<Button>().interactable = true;
             Color selected = uploadButton.GetComponentInChildren<Text>().color;
@@ -67,6 +73,7 @@ public class UploadHighScore : MonoBehaviour
 
             uploading.SetActive(false);
             success.SetActive(true);
+            uploadSuccess = true;
             Invoke("HideSuccess", timeBeforeClosing);
         }
         else
