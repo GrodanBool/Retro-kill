@@ -65,7 +65,7 @@ public class PlayerController : NetworkBehaviour
                 item.gameObject.SetActive(false);
             }
             allGuns.Clear();
-            unlockableGuns.Clear();
+            UIController.instance.ammoText.text = "AMMO: " + "";
         }
         string activeMod1 = PlayerPrefs.GetString("activemod");
 
