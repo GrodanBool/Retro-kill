@@ -27,9 +27,6 @@ EditorBuildSettings:
     path: Assets/Scenes/HighScoreScreen.unity
     guid: ea7cbf34c39476945be55c441fae7897
   - enabled: 1
-    path: Assets/Scenes/OnlineLevel.unity
-    guid: cf3f6fd81ff43b443a6ab39d477eebb8
-  - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: fa29ac5978f8353458a09ff3cf30ef70
   - enabled: 1
