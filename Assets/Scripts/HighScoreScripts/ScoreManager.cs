@@ -13,7 +13,7 @@ public class ScoreManager : MonoBehaviour
     [HideInInspector] public ScoreData sd = new ScoreData();
     [HideInInspector] public bool hasChanges = false;
     [HideInInspector] public bool uploadSuccess = false;
-    MongoClient client = new MongoClient("mongodb+srv://Retro-kill:IAmRetroKill@retro-kill-db.23cj7.mongodb.net/?retryWrites=true&w=majority");
+    MongoClient client = new MongoClient("mongodb+srv://Retro-kill:" + Pass.mongoPass + "@retro-kill-db.23cj7.mongodb.net/?retryWrites=true&w=majority");
     IMongoDatabase database;
     IMongoCollection<BsonDocument> collection;
 
