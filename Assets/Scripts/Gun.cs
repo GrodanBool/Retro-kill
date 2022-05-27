@@ -43,7 +43,6 @@ public class Gun : MonoBehaviour
     {
         currentAmmo += pickupAmount;
 
-
         if (updateUI)
         { 
             UIController.instance.ammoText.text = "AMMO: " + currentAmmo;

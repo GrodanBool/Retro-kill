@@ -357,7 +357,14 @@ public class PlayerController : NetworkBehaviour
                     {
                         if (gun.gunName == other.gameObject.GetComponent<Gun>().gunName)
                         {
-                            gun.GetAmmo(false);
+                            if (activeGun.gunName == other.gameObject.GetComponent<Gun>().gunName)
+                            {
+                                gun.GetAmmo(true);
+                            }
+                            else
+                            { 
+                                gun.GetAmmo(false);
+                            }
                         }
                     }
                 }
