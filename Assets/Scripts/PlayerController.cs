@@ -1,9 +1,11 @@
-using System.Collections.Generic;
+using Mirror;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     public static PlayerController instance;
 
@@ -41,6 +43,10 @@ public class PlayerController : MonoBehaviour
     private float pickupCounter;
 
 
+    //online variables
+    public GameObject cameraMountPoint;
+    public GameObject PlayerModel;
+
 
     // Happens straight away in Unity (before start runs)
     private void Awake()
@@ -75,6 +81,22 @@ public class PlayerController : MonoBehaviour
     {
         if (!UIController.instance.pauseScreen.activeInHierarchy)
         {
+            if (SceneManager.GetActiveScene().name == "OnlineLevel")
+            {
+                if (!PlayerModel.activeSelf)
+                {
+                    PlayerModel.SetActive(true);
+                }
+
+                if (isLocalPlayer)
+                {
+                    Transform cameraTransform = Camera.main.gameObject.transform;  //Find main camera which is part of the scene instead of the prefab
+                    cameraTransform.SetParent(cameraMountPoint.transform);  //Make the camera a child of the mount point
+                    cameraTransform.position = cameraMountPoint.transform.position;  //Set position/rotation same as the mount point
+                    cameraTransform.rotation = cameraMountPoint.transform.rotation;
+                }
+
+            }
             pickupCounter -= Time.deltaTime;
 
             //moveInput.x = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
