@@ -1,3 +1,4 @@
+using Mirror;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,7 +8,11 @@ using UnityEngine.SceneManagement;
 
 public class EnemyManager : MonoBehaviour
 {
+    public static EnemyManager instance;
+
     public GameObject enemyPrefab;
+    public GameObject onlineEnemyPrefab;
+
     public Transform[] spawnPoints;
 
     [Header("Spawn after x seconds")]
@@ -17,17 +22,20 @@ public class EnemyManager : MonoBehaviour
 
     private int nrOfSpawnPoints;
 
-    private System.Random randomizer = new System.Random();
-
     private bool spawnComplete = false;
     private bool useSpawnPoints = false;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         nrOfSpawnPoints = spawnPoints.Length;
 
-        if (SceneManager.GetActiveScene().name == "Level1")
+        if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "OnlineLevel")
         {
             useSpawnPoints = true;
             SpawnNewEnemy();
@@ -58,6 +66,12 @@ public class EnemyManager : MonoBehaviour
         Instantiate(enemyPrefab, spawnPoints[Random.Range(0, nrOfSpawnPoints)].transform.position, Quaternion.identity);
     }
 
+    [Server]
+    public void SpawnOnlineNewEnemyFromSpawnPoint()
+    {
+        NetworkServer.Spawn(Instantiate(onlineEnemyPrefab, spawnPoints[Random.Range(0, nrOfSpawnPoints)].transform.position, Quaternion.identity));
+    }
+
     public async void SpawnNewEnemy()
     {
         if (!useSpawnPoints)
@@ -69,13 +83,27 @@ public class EnemyManager : MonoBehaviour
         }
         else
         {
-            SpawnNewEnemyFromSpawnPoint();
+            if (SceneManager.GetActiveScene().name == "OnlineLevel")
+            {
+                SpawnOnlineNewEnemyFromSpawnPoint();
+            }
+            else
+            {
+                SpawnNewEnemyFromSpawnPoint();
+            }
         }
     }
 
     public Task<bool> InstantiateNewEnemy()
     {
-        Instantiate(enemyPrefab, RandomNavmeshSpawnLocation(PlayerController.instance.transform.position, 25), Quaternion.identity);
+        if (SceneManager.GetActiveScene().name == "OnlineLevel")
+        {
+            Instantiate(onlineEnemyPrefab, RandomNavmeshSpawnLocation(PlayerOnlineController.instance.transform.position, 25), Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(enemyPrefab, RandomNavmeshSpawnLocation(PlayerController.instance.transform.position, 25), Quaternion.identity);
+        }
         return Task.FromResult(true);
     }
 
