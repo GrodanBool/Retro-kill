@@ -274,9 +274,21 @@ public class PlayerOnlineController : NetworkBehaviour
     [Command]
     public void CmdToggleMuzzleFlash(bool toggle)
     {
-        activeGun.muzzelFlash.SetActive(toggle);
+        ToggleMuzzleFlash(toggle);
     }
 
+    [ClientRpc]
+    public void ToggleMuzzleFlash(bool toggle)
+    {
+        activeGun.muzzelFlash.SetActive(toggle);
+    }
+    [Command]
+    public void CmdSwitchGun()
+    {
+        SwitchGun();
+    }
+
+    [ClientRpc]
     public void SwitchGun()
     {
         activeGun.gameObject.SetActive(false);
