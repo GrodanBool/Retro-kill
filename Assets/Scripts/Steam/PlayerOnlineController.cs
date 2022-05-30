@@ -14,7 +14,7 @@ public class PlayerOnlineController : NetworkBehaviour
 
     private Vector3 moveInput;
 
-    [SyncVar] public Transform camTrans;
+    public Transform camTrans;
 
     public float mouseSensitivity;
     public bool invertX;

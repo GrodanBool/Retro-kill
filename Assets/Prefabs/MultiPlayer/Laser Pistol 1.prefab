@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1058379299099141186}
   - component: {fileID: 3713120806045899372}
+  - component: {fileID: 6280863369943710679}
   m_Layer: 8
   m_Name: Laser Pistol 1
   m_TagString: Untagged
@@ -87,6 +88,23 @@ MonoBehaviour:
   zoomAmount: 0
   gunName: pistol
   muzzelFlash: {fileID: 5738020268861553824, guid: 014c2852c9effca4a9a1afb135bf0620, type: 3}
+--- !u!114 &6280863369943710679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8527213621044787622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  visible: 0
+  m_AssetId: 751132bde4d3d82479906c0ac2a3ffef
+  hasSpawned: 0
 --- !u!1001 &8791130866588605314
 PrefabInstance:
   m_ObjectHideFlags: 0

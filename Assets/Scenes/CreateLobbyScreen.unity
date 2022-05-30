@@ -1056,6 +1056,21 @@ MonoBehaviour:
   playerSpawnMethod: 0
   spawnPrefabs:
   - {fileID: 5549108675679526585, guid: 8cc3a943739949e44bc5ac1078a0d5f4, type: 3}
+  - {fileID: 4871296960221994687, guid: a20346fd784bc924c8c83ad26a5edb69, type: 3}
+  - {fileID: 9080689670234104266, guid: d31d6014821d52b42b6480cea7591fa6, type: 3}
+  - {fileID: 4815918439985957532, guid: 1604b6de93b72974bb744e40e4d2c9f8, type: 3}
+  - {fileID: 5738020268861553824, guid: d5d0eb6e56ff2474985e5342ed71c8ea, type: 3}
+  - {fileID: 4953732740389667566, guid: 1998472f818fa954aba5a53b90993932, type: 3}
+  - {fileID: 9080689670234104266, guid: ff8cdb3a7fa60b24e810cf5a34c32228, type: 3}
+  - {fileID: 4815918439985957532, guid: 7f410ea0b7943764891371d78aacae43, type: 3}
+  - {fileID: 9080689670234104266, guid: 8835bc7e05119b2459338b3c5571970f, type: 3}
+  - {fileID: 9080689670234104266, guid: f7230d8a40fadc54cb9da4bfd897de6c, type: 3}
+  - {fileID: 9080689670234104266, guid: 45b962be7ca2742488dbcbc22ad850a8, type: 3}
+  - {fileID: 4815918439985957532, guid: 621d5dfcf7a2f7e4cad9372bb2f3ae5f, type: 3}
+  - {fileID: 8527213621044787622, guid: 751132bde4d3d82479906c0ac2a3ffef, type: 3}
+  - {fileID: 5232142869001594731, guid: b07f459cc6144ab4c9d0821f4ab74913, type: 3}
+  - {fileID: 6898472960717998312, guid: 5b85dbc8d632beb4da587524bfcd3b65, type: 3}
+  - {fileID: 8976233145995822958, guid: 893eceff4d2bb4b4ba43d84de9daa10d, type: 3}
   GamePlayerPrefab: {fileID: 2830537456025404563, guid: 8cc3a943739949e44bc5ac1078a0d5f4, type: 3}
 --- !u!4 &1288379131
 Transform:

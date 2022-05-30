@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4595244336486647123}
   - component: {fileID: 6115480745746099411}
   - component: {fileID: -7637042439030092593}
-  - component: {fileID: 6293956810145420344}
+  - component: {fileID: 5253508752948668233}
   m_Layer: 7
   m_Name: Pistol Bullet 1
   m_TagString: Untagged
@@ -360,7 +360,7 @@ MonoBehaviour:
   visible: 0
   m_AssetId: ff8cdb3a7fa60b24e810cf5a34c32228
   hasSpawned: 0
---- !u!114 &6293956810145420344
+--- !u!114 &5253508752948668233
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -374,7 +374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 1
+  clientAuthority: 0
   sendInterval: 0.05
   syncPosition: 1
   syncRotation: 1
