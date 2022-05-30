@@ -258,14 +258,7 @@ public class PlayerOnlineController : NetworkBehaviour
     [Command]
     public void cmdInstantiateBullet()
     {
-        //InstantiateBullet();
         NetworkServer.Spawn(Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation));
-    }
-
-    [ClientRpc]
-    public void InstantiateBullet()
-    {
-        Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation);
     }
 
     public IEnumerator MuzzleFlash()
@@ -280,12 +273,6 @@ public class PlayerOnlineController : NetworkBehaviour
 
     [Command]
     public void CmdToggleMuzzleFlash(bool toggle)
-    {
-        ToggleMuzzleFlash(toggle);
-    }
-
-    [ClientRpc]
-    public void ToggleMuzzleFlash(bool toggle)
     {
         activeGun.muzzelFlash.SetActive(toggle);
     }
