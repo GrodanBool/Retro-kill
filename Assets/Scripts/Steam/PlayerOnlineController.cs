@@ -307,6 +307,13 @@ public class PlayerOnlineController : NetworkBehaviour
         firePoint.position = activeGun.firepoint.position;
     }
 
+    [Command]
+    public void CmdAddGun(string gunToAdd)
+    {
+        AddGun(gunToAdd);
+    }
+
+        [ClientRpc]
     public void AddGun(string gunToAdd)
     {
         bool gunUnlocked = false;
@@ -383,7 +390,7 @@ public class PlayerOnlineController : NetworkBehaviour
                 }
                 else
                 {
-                    AddGun(other.gameObject.GetComponent<Gun>().gunName);
+                    CmdAddGun(other.gameObject.GetComponent<Gun>().gunName);
                 }
 
                 ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == other.GetComponentInChildren<Transform>().transform.position)
