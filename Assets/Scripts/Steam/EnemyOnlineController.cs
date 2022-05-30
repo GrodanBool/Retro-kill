@@ -49,8 +49,6 @@ public class EnemyOnlineController : MonoBehaviour
         {
             enemyPortal = false;
         }
-        // Target the player instance position
-        targetPoint = PlayerOnlineController.instance.transform.position;
 
         // Enemy will now never look up or down, only side to side
         targetPoint.y = transform.position.y;
@@ -64,6 +62,9 @@ public class EnemyOnlineController : MonoBehaviour
                 hit.transform == PlayerOnlineController.instance.gameObject.transform)
             {
                 canSeePlayer = true;
+                targetPoint = PlayerOnlineController.instance.transform.position;
+                targetPoint.y = transform.position.y;
+                transform.LookAt(targetPoint);
             }
             else
             {
