@@ -357,7 +357,10 @@ public class PlayerOnlineController : NetworkBehaviour
     [ClientRpc]
     void Health(GameObject gameObject, Transform transform)
     {
-        PlayerHealthController.instance.HealPlayer(5);
+        if (hasAuthority)
+        {
+            PlayerHealthController.instance.HealPlayer(5);
+        }
 
         ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == transform.position)
                                         .Select(s => { s.occupied = false; return s; })
@@ -376,7 +379,10 @@ public class PlayerOnlineController : NetworkBehaviour
     [ClientRpc]
     void Ammo(GameObject gameObject, Transform transform)
     {
-        this.activeGun.GetAmmo(true);
+        if (hasAuthority)
+        {
+            this.activeGun.GetAmmo(true);
+        }
 
         ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == transform.position)
                                         .Select(s => { s.occupied = false; return s; })
@@ -395,19 +401,22 @@ public class PlayerOnlineController : NetworkBehaviour
     [ClientRpc]
     void Weapon(GameObject gameObject, Transform transform)
     {
-        if (allGuns.Any(g => g.gunName == gameObject.GetComponent<Gun>().gunName))
+        if (hasAuthority)
         {
-            foreach (var gun in allGuns)
+            if (allGuns.Any(g => g.gunName == gameObject.GetComponent<Gun>().gunName))
             {
-                if (gun.gunName == gameObject.GetComponent<Gun>().gunName)
+                foreach (var gun in allGuns)
                 {
-                    gun.GetAmmo(false);
+                    if (gun.gunName == gameObject.GetComponent<Gun>().gunName)
+                    {
+                        gun.GetAmmo(false);
+                    }
                 }
             }
-        }
-        else
-        {
-            CmdAddGun(gameObject.GetComponent<Gun>().gunName);
+            else
+            {
+                CmdAddGun(gameObject.GetComponent<Gun>().gunName);
+            }
         }
 
         ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == transform.position)
