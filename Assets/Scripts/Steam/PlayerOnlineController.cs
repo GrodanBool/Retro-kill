@@ -267,7 +267,6 @@ public class PlayerOnlineController : NetworkBehaviour
         CmdToggleMuzzleFlash(true);
         yield return new WaitForSeconds(0.09f);
         activeGun.muzzelFlash.SetActive(false);
-        Debug.Log("flasher");
         CmdToggleMuzzleFlash(false);
     }
 
