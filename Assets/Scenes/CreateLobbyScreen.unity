@@ -1071,6 +1071,8 @@ MonoBehaviour:
   - {fileID: 5232142869001594731, guid: b07f459cc6144ab4c9d0821f4ab74913, type: 3}
   - {fileID: 6898472960717998312, guid: 5b85dbc8d632beb4da587524bfcd3b65, type: 3}
   - {fileID: 8976233145995822958, guid: 893eceff4d2bb4b4ba43d84de9daa10d, type: 3}
+  - {fileID: 1279140426991430450, guid: 40847f57f7f27d44c861c54b5cd257cd, type: 3}
+  - {fileID: 3628135281450721318, guid: 57ba4175acfaae84eaba064c4fe05df2, type: 3}
   GamePlayerPrefab: {fileID: 2830537456025404563, guid: 8cc3a943739949e44bc5ac1078a0d5f4, type: 3}
 --- !u!4 &1288379131
 Transform:

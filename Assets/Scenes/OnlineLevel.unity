@@ -3417,7 +3417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8006a0bd6473a714d976434eeccebc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPickup: {fileID: 1279140426991430450, guid: 360690a7c06559a4f927c76899139848, type: 3}
+  healthPickup: {fileID: 1279140426991430450, guid: 40847f57f7f27d44c861c54b5cd257cd, type: 3}
 --- !u!1 &819444545
 GameObject:
   m_ObjectHideFlags: 0
@@ -4069,9 +4069,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponPickUp:
-  - {fileID: 6898472960717998312, guid: a4aeea47afe11e34881678ea7d669fb9, type: 3}
-  - {fileID: 5232142869001594731, guid: 6e863a9707ac3464a8d6e92b1a8e11a6, type: 3}
-  - {fileID: 8976233145995822958, guid: b33a10b6864283946b4c7c083aa81d33, type: 3}
+  - {fileID: 6898472960717998312, guid: 5b85dbc8d632beb4da587524bfcd3b65, type: 3}
+  - {fileID: 5232142869001594731, guid: b07f459cc6144ab4c9d0821f4ab74913, type: 3}
+  - {fileID: 8976233145995822958, guid: 893eceff4d2bb4b4ba43d84de9daa10d, type: 3}
 --- !u!1 &994080534
 GameObject:
   m_ObjectHideFlags: 0
@@ -5051,7 +5051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba6261b8e57d315489058b5d6477b786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoPickup: {fileID: 3628135281450721318, guid: cf957b4ed1cbe124abac918820f3a5ed, type: 3}
+  ammoPickup: {fileID: 3628135281450721318, guid: 57ba4175acfaae84eaba064c4fe05df2, type: 3}
 --- !u!1 &1187517907
 GameObject:
   m_ObjectHideFlags: 0

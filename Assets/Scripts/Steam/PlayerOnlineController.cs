@@ -179,7 +179,7 @@ public class PlayerOnlineController : NetworkBehaviour
                     // Handle switching gun
                     if (Input.GetKeyDown(KeyCode.Tab))
                     {
-                        SwitchGun();
+                        CmdSwitchGun();
                     }
 
                     // Handle shooting
@@ -313,7 +313,7 @@ public class PlayerOnlineController : NetworkBehaviour
         AddGun(gunToAdd);
     }
 
-        [ClientRpc]
+    [ClientRpc]
     public void AddGun(string gunToAdd)
     {
         bool gunUnlocked = false;
@@ -338,7 +338,7 @@ public class PlayerOnlineController : NetworkBehaviour
         if (gunUnlocked)
         {
             currentGun = allGuns.Count - 2;
-            SwitchGun();
+            CmdSwitchGun();
         }
     }
 

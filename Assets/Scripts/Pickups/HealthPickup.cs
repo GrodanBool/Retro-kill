@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
 public class HealthPickup : MonoBehaviour
@@ -16,5 +15,11 @@ public class HealthPickup : MonoBehaviour
     public void RespawnHealth(Transform pickUpSpawn)
     {
         Instantiate(healthPickup, pickUpSpawn.position, pickUpSpawn.rotation);
+    }
+
+    [Server]
+    public void RespawnOnlineHealth(Transform pickUpSpawn)
+    {
+        NetworkServer.Spawn(Instantiate(healthPickup, pickUpSpawn.position, pickUpSpawn.rotation));
     }
 }
