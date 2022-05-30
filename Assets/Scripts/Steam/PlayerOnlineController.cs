@@ -349,70 +349,94 @@ public class PlayerOnlineController : NetworkBehaviour
     }
 
     [Command]
-    void CmdServerPickups(Collider other)
+    void CmdHealth(GameObject gameObject, Transform transform)
     {
-        ServerPickups(other);
+        Health(gameObject, transform);
     }
 
     [ClientRpc]
-    void ServerPickups(Collider other)
+    void Health(GameObject gameObject, Transform transform)
     {
-        if (other.tag == "Health")
+        PlayerHealthController.instance.HealPlayer(5);
+
+        ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == transform.position)
+                                        .Select(s => { s.occupied = false; return s; })
+                                        .ToList();
+        Destroy(gameObject);
+        AudioManagerMusicSFX.instance.PlaySFX(2);
+        pickupCounter = pickupTimeout;
+    }
+
+    [Command]
+    void CmdAmmo(GameObject gameObject, Transform transform)
+    {
+        Ammo(gameObject, transform);
+    }
+
+    [ClientRpc]
+    void Ammo(GameObject gameObject, Transform transform)
+    {
+        this.activeGun.GetAmmo(true);
+
+        ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == transform.position)
+                                        .Select(s => { s.occupied = false; return s; })
+                                        .ToList();
+        Destroy(gameObject);
+        AudioManagerMusicSFX.instance.PlaySFX(7);
+        pickupCounter = pickupTimeout;
+    }
+
+    [Command]
+    void CmdWeapon(GameObject gameObject, Transform transform)
+    {
+        Weapon(gameObject, transform);
+    }
+
+    [ClientRpc]
+    void Weapon(GameObject gameObject, Transform transform)
+    {
+        if (allGuns.Any(g => g.gunName == gameObject.GetComponent<Gun>().gunName))
         {
-            PlayerHealthController.instance.HealPlayer(5);
-
-            ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == other.GetComponentInChildren<Transform>().transform.position)
-                                            .Select(s => { s.occupied = false; return s; })
-                                            .ToList();
-            Destroy(other.gameObject);
-            AudioManagerMusicSFX.instance.PlaySFX(2);
-            pickupCounter = pickupTimeout;
-        }
-
-        if (other.tag == "Ammo")
-        {
-            this.activeGun.GetAmmo(true);
-
-            ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == other.GetComponentInChildren<Transform>().transform.position)
-                                            .Select(s => { s.occupied = false; return s; })
-                                            .ToList();
-            Destroy(other.gameObject);
-            AudioManagerMusicSFX.instance.PlaySFX(7);
-            pickupCounter = pickupTimeout;
-        }
-
-        if (other.tag == "Weapon")
-        {
-            if (allGuns.Any(g => g.gunName == other.gameObject.GetComponent<Gun>().gunName))
+            foreach (var gun in allGuns)
             {
-                foreach (var gun in allGuns)
+                if (gun.gunName == gameObject.GetComponent<Gun>().gunName)
                 {
-                    if (gun.gunName == other.gameObject.GetComponent<Gun>().gunName)
-                    {
-                        gun.GetAmmo(false);
-                    }
+                    gun.GetAmmo(false);
                 }
             }
-            else
-            {
-                CmdAddGun(other.gameObject.GetComponent<Gun>().gunName);
-            }
-
-            ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == other.GetComponentInChildren<Transform>().transform.position)
-                                            .Select(s => { s.occupied = false; return s; })
-                                            .ToList();
-
-            Destroy(other.gameObject);
-            AudioManagerMusicSFX.instance.PlaySFX(0);
-            pickupCounter = pickupTimeout;
         }
+        else
+        {
+            CmdAddGun(gameObject.GetComponent<Gun>().gunName);
+        }
+
+        ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == transform.position)
+                                        .Select(s => { s.occupied = false; return s; })
+                                        .ToList();
+
+        Destroy(gameObject);
+        AudioManagerMusicSFX.instance.PlaySFX(0);
+        pickupCounter = pickupTimeout;
     }
 
     public void OnTriggerEnter(Collider other)
     {
         if (pickupCounter <= 0)
         {
-            CmdServerPickups(other);
+            if (other.tag == "Health")
+            {
+                CmdHealth(other.gameObject, other.GetComponentInChildren<Transform>().transform);
+            }
+
+            if (other.tag == "Ammo")
+            {
+                CmdAmmo(other.gameObject, other.GetComponentInChildren<Transform>().transform);
+            }
+
+            if (other.tag == "Weapon")
+            {
+                CmdWeapon(other.gameObject, other.GetComponentInChildren<Transform>().transform);
+            }
         }
     }
 }
