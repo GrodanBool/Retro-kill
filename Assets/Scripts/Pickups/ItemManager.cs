@@ -174,21 +174,11 @@ public class ItemManager : MonoBehaviour
         WeaponPickup.instance.RespawnWeapon(spawnPoints[2].spawnPoint);
     }
 
-    public void CalledRespawn()
-    {
-        Invoke("RespawnHealth", 5f);
-    }
-
     private void CreateSpawnPoints()
     {
         foreach (var item in spawnPointLocations)
         {
             this.spawnPoints.Add(new SpawnPoints { spawnPoint = item, occupied = false });
         }
-    }
-
-    public void SpawnNewItem(Vector3 location, GameObject go)
-    {
-        Instantiate(go, location, Quaternion.identity);
     }
 }
