@@ -292,21 +292,23 @@ public class PlayerOnlineController : NetworkBehaviour
     [ClientRpc]
     public void SwitchGun()
     {
-        activeGun.gameObject.SetActive(false);
-
-        currentGun++;
-
-        if (currentGun >= allGuns.Count)
+        if (hasAuthority)
         {
-            currentGun = 0;
+            activeGun.gameObject.SetActive(false);
+
+            currentGun++;
+
+            if (currentGun >= allGuns.Count)
+            {
+                currentGun = 0;
+            }
+
+            activeGun = allGuns[currentGun];
+            activeGun.gameObject.SetActive(true);
+
+            OnlineUIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+            firePoint.position = activeGun.firepoint.position;
         }
-
-        activeGun = allGuns[currentGun];
-        activeGun.gameObject.SetActive(true);
-
-        OnlineUIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
-
-        firePoint.position = activeGun.firepoint.position;
     }
 
     [Command]
@@ -318,29 +320,32 @@ public class PlayerOnlineController : NetworkBehaviour
     [ClientRpc]
     public void AddGun(string gunToAdd)
     {
-        bool gunUnlocked = false;
-
-        if (unlockableGuns.Count > 0)
+        if (hasAuthority)
         {
-            for (int i = 0; i < unlockableGuns.Count; i++)
+            bool gunUnlocked = false;
+
+            if (unlockableGuns.Count > 0)
             {
-                if (unlockableGuns[i].gunName == gunToAdd)
+                for (int i = 0; i < unlockableGuns.Count; i++)
                 {
-                    gunUnlocked = true;
+                    if (unlockableGuns[i].gunName == gunToAdd)
+                    {
+                        gunUnlocked = true;
 
-                    allGuns.Add(unlockableGuns[i]);
+                        allGuns.Add(unlockableGuns[i]);
 
-                    unlockableGuns.RemoveAt(i);
+                        unlockableGuns.RemoveAt(i);
 
-                    i = unlockableGuns.Count;
+                        i = unlockableGuns.Count;
+                    }
                 }
             }
-        }
 
-        if (gunUnlocked)
-        {
-            currentGun = allGuns.Count - 2;
-            CmdSwitchGun();
+            if (gunUnlocked)
+            {
+                currentGun = allGuns.Count - 2;
+                CmdSwitchGun();
+            }
         }
     }
 
