@@ -67,7 +67,7 @@ public class EnemyOnlineController : MonoBehaviour
                                                                        .Select(a => a.GetComponent<PlayerOnlineController>())
                                                                        .ToList();
 
-            this.localPlayerOnlineController = onlineControllers[Random.Range(0, onlineControllers.Count - 1)];
+            this.localPlayerOnlineController = onlineControllers[Random.Range(0, onlineControllers.Count)];
         }
 
         // Enemy will now never look up or down, only side to side
