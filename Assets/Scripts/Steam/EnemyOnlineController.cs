@@ -196,7 +196,10 @@ public class EnemyOnlineController : MonoBehaviour
 
     void LateUpdate()
     {
-        head.gameObject.transform.LookAt(localPlayerOnlineController.transform.position);
+        if (localPlayerOnlineController != null)
+        {
+            head.gameObject.transform.LookAt(localPlayerOnlineController.transform.position);
+        }
     }
 
     public Vector3 RandomNavmeshLocation(float radius)
