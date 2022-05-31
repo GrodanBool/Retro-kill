@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : NetworkBehaviour
 {
     public static EnemyManager instance;
 
@@ -43,7 +43,7 @@ public class EnemyManager : MonoBehaviour
         else if (SceneManager.GetActiveScene().name == "OnlineLevel")
         {
             useSpawnPoints = true;
-            SpawnNewOnlineEnemy();
+            SpawnOnlineNewEnemyFromSpawnPoint();
         }
     }
 
@@ -61,7 +61,7 @@ public class EnemyManager : MonoBehaviour
         }
         else if (spawnCounter <= 0 && SceneManager.GetActiveScene().name == "OnlineLevel")
         {
-            SpawnNewOnlineEnemy();
+            SpawnOnlineNewEnemyFromSpawnPoint();
             spawnCounter = spawnRate;
         }
     }
@@ -77,10 +77,10 @@ public class EnemyManager : MonoBehaviour
         SpawnOnlineNewEnemyFromSpawnPoint();
     }
 
-    [ClientRpc]
+    [Server]
     public void SpawnOnlineNewEnemyFromSpawnPoint()
     {
-        Instantiate(onlineEnemyPrefab, spawnPoints[Random.Range(0, nrOfSpawnPoints)].transform.position, Quaternion.identity);
+        NetworkServer.Spawn(Instantiate(onlineEnemyPrefab, spawnPoints[Random.Range(0, nrOfSpawnPoints)].transform.position, Quaternion.identity));
     }
 
     public async void SpawnNewEnemy()
