@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Gun : MonoBehaviour
 {
@@ -43,9 +42,13 @@ public class Gun : MonoBehaviour
     {
         currentAmmo += pickupAmount;
 
-        if (updateUI)
+        if (updateUI && SceneManager.GetActiveScene().name != "OnlineLevel")
         { 
             UIController.instance.ammoText.text = "AMMO: " + currentAmmo;
+        }
+        else if (updateUI && SceneManager.GetActiveScene().name == "OnlineLevel")
+        {
+            OnlineUIController.instance.ammoText.text = "AMMO: " + currentAmmo;
         }
     }
 }

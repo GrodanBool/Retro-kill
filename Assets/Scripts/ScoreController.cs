@@ -1,7 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreController : MonoBehaviour
 {
@@ -25,8 +25,19 @@ public class ScoreController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ScoreMultiplier();
-        StartCoroutine("AddPoints");
+        if (SceneManager.GetActiveScene().name != "OnlineLevel")
+        {
+            ScoreMultiplier();
+            StartCoroutine("AddPoints");
+        }
+        else
+        {
+            totalMultiplier = GameObject.FindGameObjectsWithTag("Player")
+                                        .Where(a => a.GetComponent<PlayerOnlineController>() != null)
+                                        .Select(a => a.GetComponent<PlayerOnlineController>())
+                                        .ToList()
+                                        .Count + 3;
+        }
     }
 
     // Update is called once per frame

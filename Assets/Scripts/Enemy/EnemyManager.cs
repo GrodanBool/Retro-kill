@@ -7,7 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class EnemyManager : MonoBehaviour
 {
+    public static EnemyManager instance;
+
     public GameObject enemyPrefab;
+
     public Transform[] spawnPoints;
 
     [Header("Spawn after x seconds")]
@@ -17,10 +20,13 @@ public class EnemyManager : MonoBehaviour
 
     private int nrOfSpawnPoints;
 
-    private System.Random randomizer = new System.Random();
-
     private bool spawnComplete = false;
     private bool useSpawnPoints = false;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -46,8 +52,15 @@ public class EnemyManager : MonoBehaviour
         {
             spawnCounter -= Time.deltaTime;
         }
+        if (spawnCounter <= 0 && SceneManager.GetActiveScene().name == "Level1")
+        {
+            useSpawnPoints = true;
+            SpawnNewEnemy();
+            spawnCounter = spawnRate;
+        }
         else if (spawnCounter <= 0)
         {
+            useSpawnPoints = false;
             SpawnNewEnemy();
             spawnCounter = spawnRate;
         }

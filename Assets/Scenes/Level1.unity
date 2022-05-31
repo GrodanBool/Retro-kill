@@ -371,7 +371,8 @@ PrefabInstance:
       propertyPath: muzzelFlash
       value: 
       objectReference: {fileID: 1042292339}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6898038153926527710, guid: 58fa0c3c8bfcc654196dbc48762c1ee5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 58fa0c3c8bfcc654196dbc48762c1ee5, type: 3}
 --- !u!114 &37174765 stripped
 MonoBehaviour:
@@ -411,7 +412,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5881296702326777823, guid: 58fa0c3c8bfcc654196dbc48762c1ee5, type: 3}
   m_PrefabInstance: {fileID: 37174764}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &37174779
+--- !u!114 &37174769
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

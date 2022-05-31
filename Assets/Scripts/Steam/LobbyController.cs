@@ -77,7 +77,7 @@ public class LobbyController : MonoBehaviour
             }
         }
 
-        if (allReady)
+        if (allReady && LocalPlayerController != null)
         {
             if (LocalPlayerController.PlayerIDNumber == 1)
             {

@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealthController : MonoBehaviour
 {
@@ -12,6 +12,7 @@ public class PlayerHealthController : MonoBehaviour
 
     public float invincibleLength = 1f;
     private float invincCounter;
+    private bool set = false;
 
     private void Awake()
     {
@@ -32,21 +33,23 @@ public class PlayerHealthController : MonoBehaviour
         {
             currentHealth = maxHealth / 2;
         }
-
-        UIController.instance.healthSlider.maxValue = maxHealth;
-        UIController.instance.healthSlider.value = currentHealth;
-        UIController.instance.healthText.text = "HEALTH: " + currentHealth + "/" + maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (SceneManager.GetActiveScene().name == "CreateLobbyScreen" && set)
+        {
+            UIController.instance.healthSlider.maxValue = maxHealth;
+            UIController.instance.healthSlider.value = currentHealth;
+            UIController.instance.healthText.text = "HEALTH: " + currentHealth + "/" + maxHealth;
+            set = true;
+        }
+
         if (invincCounter > 0)
         {
             invincCounter -= Time.deltaTime;
         }
-
-
     }
 
     public void DamagePlayer(float damageAmount)
