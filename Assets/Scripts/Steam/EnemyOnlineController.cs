@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.AI;
+using System.Linq;
 
 public class EnemyOnlineController : MonoBehaviour
 {
@@ -35,7 +37,7 @@ public class EnemyOnlineController : MonoBehaviour
     private bool canShoot;
     [HideInInspector] public bool enemyPortal = false;
     [HideInInspector] public BoxCollider portal = null;
-    PlayerOnlineController localPlayerOnlineController;
+    PlayerOnlineController localPlayerOnlineController = null;
 
     // Start is called before the first frame update
     void Start()
@@ -53,7 +55,12 @@ public class EnemyOnlineController : MonoBehaviour
 
         if (localPlayerOnlineController == null)
         {
-            localPlayerOnlineController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerOnlineController>();
+            List<PlayerOnlineController> onlineControllers = GameObject.FindGameObjectsWithTag("Player")
+                                                                       .Where(a => a.GetComponent<PlayerOnlineController>() != null)
+                                                                       .Select(a => a.GetComponent<PlayerOnlineController>())
+                                                                       .ToList();
+
+            localPlayerOnlineController = onlineControllers[Random.Range(0, onlineControllers.Count - 1)];
         }
 
         // Enemy will now never look up or down, only side to side
