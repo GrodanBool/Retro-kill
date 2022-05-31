@@ -5,6 +5,8 @@ using System.Linq;
 
 public class EnemyOnlineController : MonoBehaviour
 {
+    public static EnemyOnlineController Instance { get; private set; }
+
     // The point that the enemy should move towards
     private Vector3 targetPoint;
 
@@ -39,6 +41,11 @@ public class EnemyOnlineController : MonoBehaviour
     [HideInInspector] public BoxCollider portal = null;
     PlayerOnlineController localPlayerOnlineController = null;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,14 +60,14 @@ public class EnemyOnlineController : MonoBehaviour
             enemyPortal = false;
         }
 
-        if (localPlayerOnlineController == null)
+        if (this.localPlayerOnlineController == null)
         {
             List<PlayerOnlineController> onlineControllers = GameObject.FindGameObjectsWithTag("Player")
                                                                        .Where(a => a.GetComponent<PlayerOnlineController>() != null)
                                                                        .Select(a => a.GetComponent<PlayerOnlineController>())
                                                                        .ToList();
 
-            localPlayerOnlineController = onlineControllers[Random.Range(0, onlineControllers.Count - 1)];
+            this.localPlayerOnlineController = onlineControllers[Random.Range(0, onlineControllers.Count - 1)];
         }
 
         // Enemy will now never look up or down, only side to side
