@@ -1,10 +1,18 @@
+﻿using Mirror;
 using UnityEngine;
 
-public class EnemyHealthController : MonoBehaviour
+public class EnemyOnlineHealthController : NetworkBehaviour
 {
     public int currentHealth = 5;
 
+    [Command]
     public void DamageEnemy(int damageAmount)
+    {
+        RpcDamageEnemy(damageAmount);
+    }
+
+    [ClientRpc]
+    public void RpcDamageEnemy(int damageAmount)
     {
         // When called, damage enemy by one
         currentHealth -= damageAmount;
@@ -12,12 +20,13 @@ public class EnemyHealthController : MonoBehaviour
         if (currentHealth <= 0)
         {
             if (PlayerPrefs.GetString("activemod").Contains("Lose Health"))
-            { 
-                if (currentHealth < PlayerHealthController.instance.maxHealth)
+            {
+                if (currentHealth < PlayerOnlineHealthController.instance.maxHealth)
                 {
-                    PlayerHealthController.instance.HealPlayer(1);
+                    PlayerOnlineHealthController.instance.HealPlayer(1);
                 }
             }
+
             ScoreController.instance.OnEnemyKilled();
             Destroy(gameObject);
         }
