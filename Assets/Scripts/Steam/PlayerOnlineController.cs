@@ -219,21 +219,8 @@ public class PlayerOnlineController : NetworkBehaviour
         {
             if (activeGun.gunName == "shotgun")
             {
-                Vector3 shotgunPosition1 = new Vector3(0.1f, 0.2f, 0.05f);
-                Vector3 shotgunPosition2 = new Vector3(0.13f, 0.07f, 0.2f);
-                Vector3 shotgunPosition3 = new Vector3(0.11f, 0.03f, 0.15f);
-                Vector3 shotgunPosition4 = new Vector3(0.14f, 0.014f, 0.19f);
-                Vector3 shotgunPosition5 = new Vector3(0.04f, 0.015f, 0.16f);
-
-                Instantiate(activeGun.bullet, firePoint.position + shotgunPosition1, firePoint.rotation);
-                Instantiate(activeGun.bullet, firePoint.position + shotgunPosition2, firePoint.rotation);
-                Instantiate(activeGun.bullet, firePoint.position + shotgunPosition3, firePoint.rotation);
-                Instantiate(activeGun.bullet, firePoint.position + shotgunPosition4, firePoint.rotation);
-                Instantiate(activeGun.bullet, firePoint.position + shotgunPosition5, firePoint.rotation);
-                Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation);
-
                 activeGun.currentAmmo -= 6;
-
+                cmdInstantiateShotgunBullet();
                 activeGun.fireCounter = activeGun.fireRate;
                 OnlineUIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
                 StartCoroutine(MuzzleFlash());
@@ -260,6 +247,30 @@ public class PlayerOnlineController : NetworkBehaviour
     [ClientRpc]
     public void InstantiateBullet()
     {
+        Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation);
+
+    }
+
+    [Command]
+    public void cmdInstantiateShotgunBullet()
+    {
+        InstantiateShotgunBullet();
+    }
+
+    [ClientRpc]
+    public void InstantiateShotgunBullet()
+    {
+        Vector3 shotgunPosition1 = new Vector3(0.1f, 0.2f, 0.05f);
+        Vector3 shotgunPosition2 = new Vector3(0.13f, 0.07f, 0.2f);
+        Vector3 shotgunPosition3 = new Vector3(0.11f, 0.03f, 0.15f);
+        Vector3 shotgunPosition4 = new Vector3(0.14f, 0.014f, 0.19f);
+        Vector3 shotgunPosition5 = new Vector3(0.04f, 0.015f, 0.16f);
+
+        Instantiate(activeGun.bullet, firePoint.position + shotgunPosition1, firePoint.rotation);
+        Instantiate(activeGun.bullet, firePoint.position + shotgunPosition2, firePoint.rotation);
+        Instantiate(activeGun.bullet, firePoint.position + shotgunPosition3, firePoint.rotation);
+        Instantiate(activeGun.bullet, firePoint.position + shotgunPosition4, firePoint.rotation);
+        Instantiate(activeGun.bullet, firePoint.position + shotgunPosition5, firePoint.rotation);
         Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation);
     }
 
