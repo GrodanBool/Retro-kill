@@ -292,20 +292,20 @@ public class PlayerOnlineController : NetworkBehaviour
     [ClientRpc]
     public void SwitchGun()
     {
+        activeGun.gameObject.SetActive(false);
+
+        currentGun++;
+
+        if (currentGun >= allGuns.Count)
+        {
+            currentGun = 0;
+        }
+
+        activeGun = allGuns[currentGun];
+        activeGun.gameObject.SetActive(true);
+
         if (hasAuthority)
         {
-            activeGun.gameObject.SetActive(false);
-
-            currentGun++;
-
-            if (currentGun >= allGuns.Count)
-            {
-                currentGun = 0;
-            }
-
-            activeGun = allGuns[currentGun];
-            activeGun.gameObject.SetActive(true);
-
             OnlineUIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
             firePoint.position = activeGun.firepoint.position;
         }
