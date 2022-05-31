@@ -71,16 +71,19 @@ public class EnemyManager : NetworkBehaviour
         Instantiate(enemyPrefab, spawnPoints[Random.Range(0, nrOfSpawnPoints)].transform.position, Quaternion.identity);
     }
 
-    [Command]
-    public void SpawnNewOnlineEnemy()
-    {
-        SpawnOnlineNewEnemyFromSpawnPoint();
-    }
-
     [Server]
     public void SpawnOnlineNewEnemyFromSpawnPoint()
     {
-        NetworkServer.Spawn(Instantiate(onlineEnemyPrefab, spawnPoints[Random.Range(0, nrOfSpawnPoints)].transform.position, Quaternion.identity));
+        List<PlayerOnlineController> onlineControllers = GameObject.FindGameObjectsWithTag("Player")
+                                                                   .Where(a => a.GetComponent<PlayerOnlineController>() != null)
+                                                                   .Select(a => a.GetComponent<PlayerOnlineController>())
+                                                                   .ToList();
+
+        PlayerOnlineController newLocalPlayerOnlineController = onlineControllers[Random.Range(0, onlineControllers.Count)];
+        //.GetComponent<EnemyOnlineController>().localPlayerOnlineController = newLocalPlayerOnlineController
+        GameObject newEnemy = Instantiate(onlineEnemyPrefab, spawnPoints[Random.Range(0, nrOfSpawnPoints)].transform.position, Quaternion.identity);
+        newEnemy.GetComponent<EnemyOnlineController>().localPlayerOnlineController = newLocalPlayerOnlineController;
+        NetworkServer.Spawn(newEnemy);
     }
 
     public async void SpawnNewEnemy()

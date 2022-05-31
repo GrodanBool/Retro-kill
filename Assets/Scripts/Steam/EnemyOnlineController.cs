@@ -39,7 +39,7 @@ public class EnemyOnlineController : MonoBehaviour
     private bool canShoot;
     [HideInInspector] public bool enemyPortal = false;
     [HideInInspector] public BoxCollider portal = null;
-    PlayerOnlineController localPlayerOnlineController = null;
+    public PlayerOnlineController localPlayerOnlineController = null;
 
     private void Awake()
     {
