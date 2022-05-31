@@ -35,7 +35,7 @@ public class EnemyManager : MonoBehaviour
     {
         nrOfSpawnPoints = spawnPoints.Length;
 
-        if (SceneManager.GetActiveScene().name == "Level1")
+        if (SceneManager.GetActiveScene().name != "OnlineLevel")
         {
             useSpawnPoints = true;
             SpawnNewEnemy();
@@ -44,11 +44,6 @@ public class EnemyManager : MonoBehaviour
         {
             useSpawnPoints = true;
             SpawnNewOnlineEnemy();
-        }
-        else
-        {
-            useSpawnPoints = false;
-            SpawnNewEnemy();
         }
     }
 
@@ -59,9 +54,14 @@ public class EnemyManager : MonoBehaviour
         {
             spawnCounter -= Time.deltaTime;
         }
-        else if (spawnCounter <= 0)
+        else if (spawnCounter <= 0 && SceneManager.GetActiveScene().name != "OnlineLevel")
         {
             SpawnNewEnemy();
+            spawnCounter = spawnRate;
+        }
+        else if (spawnCounter <= 0 && SceneManager.GetActiveScene().name == "OnlineLevel")
+        {
+            SpawnNewOnlineEnemy();
             spawnCounter = spawnRate;
         }
     }
@@ -94,27 +94,13 @@ public class EnemyManager : MonoBehaviour
         }
         else
         {
-            if (SceneManager.GetActiveScene().name == "OnlineLevel")
-            {
-                SpawnOnlineNewEnemyFromSpawnPoint();
-            }
-            else
-            {
-                SpawnNewEnemyFromSpawnPoint();
-            }
+            SpawnNewEnemyFromSpawnPoint();
         }
     }
 
     public Task<bool> InstantiateNewEnemy()
     {
-        if (SceneManager.GetActiveScene().name == "OnlineLevel")
-        {
-            NetworkServer.Spawn(Instantiate(onlineEnemyPrefab, RandomNavmeshSpawnLocation(PlayerOnlineController.instance.transform.position, 25), Quaternion.identity));
-        }
-        else
-        {
-            Instantiate(enemyPrefab, RandomNavmeshSpawnLocation(PlayerController.instance.transform.position, 25), Quaternion.identity);
-        }
+        Instantiate(enemyPrefab, RandomNavmeshSpawnLocation(PlayerController.instance.transform.position, 25), Quaternion.identity);
         return Task.FromResult(true);
     }
 
