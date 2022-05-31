@@ -59,10 +59,6 @@ public class PlayerOnlineController : NetworkBehaviour
     {
         PlayerModel.SetActive(false);
         pickupCounter = pickupTimeout;
-
-        //currentGun--;
-        //SwitchGun();
-        // UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
     }
 
     // Update is called once per frame
@@ -70,7 +66,7 @@ public class PlayerOnlineController : NetworkBehaviour
     {
         if (SceneManager.GetActiveScene().name == "OnlineLevel")
         {
-            if (!UIController.instance.pauseScreen.activeInHierarchy)
+            if (!OnlineUIController.instance.pauseScreen.activeInHierarchy)
             {
 
                 if (!PlayerModel.activeSelf)
@@ -239,7 +235,7 @@ public class PlayerOnlineController : NetworkBehaviour
                 activeGun.currentAmmo -= 6;
 
                 activeGun.fireCounter = activeGun.fireRate;
-                UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+                OnlineUIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
                 StartCoroutine(MuzzleFlash());
             }
 
@@ -249,7 +245,7 @@ public class PlayerOnlineController : NetworkBehaviour
                 Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation);
                 cmdInstantiateBullet();
                 activeGun.fireCounter = activeGun.fireRate;
-                UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+                OnlineUIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
                 StartCoroutine(MuzzleFlash());
             }
         }
@@ -302,7 +298,7 @@ public class PlayerOnlineController : NetworkBehaviour
         activeGun = allGuns[currentGun];
         activeGun.gameObject.SetActive(true);
 
-        UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+        OnlineUIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
 
         firePoint.position = activeGun.firepoint.position;
     }
