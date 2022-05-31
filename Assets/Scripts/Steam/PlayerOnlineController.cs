@@ -320,32 +320,29 @@ public class PlayerOnlineController : NetworkBehaviour
     [ClientRpc]
     public void AddGun(string gunToAdd)
     {
-        if (hasAuthority)
+        bool gunUnlocked = false;
+
+        if (unlockableGuns.Count > 0)
         {
-            bool gunUnlocked = false;
-
-            if (unlockableGuns.Count > 0)
+            for (int i = 0; i < unlockableGuns.Count; i++)
             {
-                for (int i = 0; i < unlockableGuns.Count; i++)
+                if (unlockableGuns[i].gunName == gunToAdd)
                 {
-                    if (unlockableGuns[i].gunName == gunToAdd)
-                    {
-                        gunUnlocked = true;
+                    gunUnlocked = true;
 
-                        allGuns.Add(unlockableGuns[i]);
+                    allGuns.Add(unlockableGuns[i]);
 
-                        unlockableGuns.RemoveAt(i);
+                    unlockableGuns.RemoveAt(i);
 
-                        i = unlockableGuns.Count;
-                    }
+                    i = unlockableGuns.Count;
                 }
             }
+        }
 
-            if (gunUnlocked)
-            {
-                currentGun = allGuns.Count - 2;
-                CmdSwitchGun();
-            }
+        if (gunUnlocked)
+        {
+            currentGun = allGuns.Count - 2;
+            CmdSwitchGun();
         }
     }
 
