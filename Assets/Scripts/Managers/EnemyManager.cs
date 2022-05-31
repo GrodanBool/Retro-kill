@@ -35,10 +35,15 @@ public class EnemyManager : MonoBehaviour
     {
         nrOfSpawnPoints = spawnPoints.Length;
 
-        if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "OnlineLevel")
+        if (SceneManager.GetActiveScene().name == "Level1")
         {
             useSpawnPoints = true;
             SpawnNewEnemy();
+        }
+        else if (SceneManager.GetActiveScene().name == "OnlineLevel")
+        {
+            useSpawnPoints = true;
+            SpawnNewOnlineEnemy();
         }
         else
         {
@@ -64,6 +69,12 @@ public class EnemyManager : MonoBehaviour
     public void SpawnNewEnemyFromSpawnPoint()
     {
         Instantiate(enemyPrefab, spawnPoints[Random.Range(0, nrOfSpawnPoints)].transform.position, Quaternion.identity);
+    }
+
+    [Server]
+    public void SpawnNewOnlineEnemy()
+    {
+        SpawnOnlineNewEnemyFromSpawnPoint();
     }
 
     [Server]
@@ -98,7 +109,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "OnlineLevel")
         {
-            Instantiate(onlineEnemyPrefab, RandomNavmeshSpawnLocation(PlayerOnlineController.instance.transform.position, 25), Quaternion.identity);
+            NetworkServer.Spawn(Instantiate(onlineEnemyPrefab, RandomNavmeshSpawnLocation(PlayerOnlineController.instance.transform.position, 25), Quaternion.identity));
         }
         else
         {

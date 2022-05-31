@@ -35,6 +35,7 @@ public class EnemyOnlineController : MonoBehaviour
     private bool canShoot;
     [HideInInspector] public bool enemyPortal = false;
     [HideInInspector] public BoxCollider portal = null;
+    PlayerOnlineController localPlayerOnlineController;
 
     // Start is called before the first frame update
     void Start()
@@ -50,19 +51,24 @@ public class EnemyOnlineController : MonoBehaviour
             enemyPortal = false;
         }
 
+        if (localPlayerOnlineController == null)
+        {
+            localPlayerOnlineController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerOnlineController>();
+        }
+
         // Enemy will now never look up or down, only side to side
         targetPoint.y = transform.position.y;
         transform.LookAt(targetPoint);
 
         RaycastHit hit;
-        var rayDirection = PlayerOnlineController.instance.transform.position - transform.position;
+        var rayDirection = localPlayerOnlineController.transform.position - transform.position;
         if (Physics.Raycast(transform.position, rayDirection, out hit))
         {
-            if (hit.transform == PlayerOnlineController.instance.gameObject.GetComponent<CapsuleCollider>() ||
-                hit.transform == PlayerOnlineController.instance.gameObject.transform)
+            if (hit.transform == localPlayerOnlineController.gameObject.GetComponent<CapsuleCollider>() ||
+                hit.transform == localPlayerOnlineController.gameObject.transform)
             {
                 canSeePlayer = true;
-                targetPoint = PlayerOnlineController.instance.transform.position;
+                targetPoint = localPlayerOnlineController.transform.position;
                 targetPoint.y = transform.position.y;
                 transform.LookAt(targetPoint);
             }
@@ -100,12 +106,12 @@ public class EnemyOnlineController : MonoBehaviour
         //follow player, try new location or go in portal
         if (tryPlayerTracing && !tryNewLocation && !enemyPortal/*&& !canShoot*/)
         {
-            firePoint.LookAt(PlayerOnlineController.instance.transform.position);
+            firePoint.LookAt(localPlayerOnlineController.transform.position);
             agent.SetDestination(targetPoint);
         }
         else if (!tryNewLocation && !tryPlayerTracing && !canShoot && !enemyPortal && agent.velocity.x == 0 && agent.velocity.z == 0)
         {
-            firePoint.LookAt(PlayerOnlineController.instance.transform.position);
+            firePoint.LookAt(localPlayerOnlineController.transform.position);
             randomLocation = RandomNavmeshLocation(50);
             agent.SetDestination(randomLocation);
         }
@@ -140,10 +146,10 @@ public class EnemyOnlineController : MonoBehaviour
             fireCount = fireRate;
 
             // Keep agent facing player
-            firePoint.LookAt(PlayerOnlineController.instance.transform.position);
+            firePoint.LookAt(localPlayerOnlineController.transform.position);
 
             // Check the angle towards the player
-            Vector3 targetDir = PlayerOnlineController.instance.transform.position - transform.position;
+            Vector3 targetDir = localPlayerOnlineController.transform.position - transform.position;
             angle = Vector3.SignedAngle(targetDir, transform.forward, Vector3.up);
 
             if (Mathf.Abs(angle) < 60f)
@@ -190,7 +196,7 @@ public class EnemyOnlineController : MonoBehaviour
 
     void LateUpdate()
     {
-        head.gameObject.transform.LookAt(PlayerOnlineController.instance.transform.position);
+        head.gameObject.transform.LookAt(localPlayerOnlineController.transform.position);
     }
 
     public Vector3 RandomNavmeshLocation(float radius)

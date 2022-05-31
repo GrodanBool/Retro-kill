@@ -60,25 +60,51 @@ public class GameManager : MonoBehaviour
 
     public void PauseUnpause()
     {
-        if (UIController.instance.pauseScreen.activeInHierarchy)
+        if (SceneManager.GetActiveScene().name != "OnlineLevel")
         {
-            UIController.instance.pauseScreen.SetActive(false);
+            if (UIController.instance.pauseScreen.activeInHierarchy)
+            {
+                UIController.instance.pauseScreen.SetActive(false);
 
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
 
-            Time.timeScale = 1f;
+                Time.timeScale = 1f;
 
-            escapedPressed = false;
+                escapedPressed = false;
+            }
+            else
+            {
+                UIController.instance.pauseScreen.SetActive(true);
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+
+                Time.timeScale = 0f;
+            }
         }
-        else
+        else if (SceneManager.GetActiveScene().name == "OnlineLevel")
         {
-            UIController.instance.pauseScreen.SetActive(true);
+            if (OnlineUIController.instance.pauseScreen.activeInHierarchy)
+            {
+                OnlineUIController.instance.pauseScreen.SetActive(false);
 
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
 
-            Time.timeScale = 0f;
+                Time.timeScale = 1f;
+
+                escapedPressed = false;
+            }
+            else
+            {
+                OnlineUIController.instance.pauseScreen.SetActive(true);
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+
+                Time.timeScale = 0f;
+            }
         }
     }
 }

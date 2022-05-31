@@ -18,12 +18,6 @@ public class BulletController : MonoBehaviour
 
     public bool isRocketLauncherBullet;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
