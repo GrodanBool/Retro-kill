@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 725541313254516878}
   - component: {fileID: 2996185345065309981}
   - component: {fileID: 7746439513522954183}
+  - component: {fileID: 3899587677020897552}
   m_Layer: 0
   m_Name: OnlineEnemy
   m_TagString: Enemy
@@ -269,6 +270,22 @@ MonoBehaviour:
   head: {fileID: 5106995135591179440}
   enemyPortal: 0
   portal: {fileID: 0}
+--- !u!114 &3899587677020897552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4871296960221994687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 0
+  animator: {fileID: 1364809968006616150}
 --- !u!1001 &4871296960183855559
 PrefabInstance:
   m_ObjectHideFlags: 0
