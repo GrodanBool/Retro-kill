@@ -260,10 +260,7 @@ public class PlayerOnlineController : NetworkBehaviour
     [ClientRpc]
     public void InstantiateBullet()
     {
-        if (hasAuthority)
-        {
-            Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation);
-        }
+        Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation);
     }
 
     public IEnumerator MuzzleFlash()
