@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1844889261470303939}
   - component: {fileID: 2227606688720319770}
   - component: {fileID: 5116069751574047487}
-  - component: {fileID: 7577987485164128823}
   - component: {fileID: 2531527253524074366}
   - component: {fileID: 7894405964559457540}
   - component: {fileID: 2332971084855028900}
@@ -144,23 +143,6 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
---- !u!114 &7577987485164128823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5549108675679526585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eada7b8a226d5ce4c9f5cd6748ebd037, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 10
-  takeDamage: 0
-  time: 5
-  invincibleLength: 1
 --- !u!95 &2531527253524074366
 Animator:
   serializedVersion: 4
