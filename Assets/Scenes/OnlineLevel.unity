@@ -6960,7 +6960,6 @@ GameObject:
   - component: {fileID: 1734502517}
   - component: {fileID: 1734502515}
   - component: {fileID: 1734502523}
-  - component: {fileID: 1734502522}
   - component: {fileID: 1734502521}
   m_Layer: 5
   m_Name: UI Canvas
@@ -7105,27 +7104,6 @@ MonoBehaviour:
   multiplier: {fileID: 1078062005}
   pauseScreen: {fileID: 38356508}
   fadeIn: {fileID: 882758480}
---- !u!114 &1734502522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1734502514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9f98c13bbfd4e3479c080187d49061c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthSlider: {fileID: 424289369}
-  healthText: {fileID: 161176310}
-  ammoText: {fileID: 1187517908}
-  score: {fileID: 2122861136}
-  activeModifiers: {fileID: 461189706}
-  multiplier: {fileID: 1078062005}
-  pauseScreen: {fileID: 38356508}
-  fadeIn: {fileID: 882758480}
-  player: {fileID: 5549108675679526585, guid: 8cc3a943739949e44bc5ac1078a0d5f4, type: 3}
 --- !u!114 &1734502523
 MonoBehaviour:
   m_ObjectHideFlags: 0

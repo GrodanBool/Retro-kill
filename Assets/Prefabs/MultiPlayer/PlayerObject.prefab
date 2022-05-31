@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2531527253524074366}
   - component: {fileID: 7894405964559457540}
   - component: {fileID: 2332971084855028900}
+  - component: {fileID: 8872008251388061295}
   m_Layer: 8
   m_Name: PlayerObject
   m_TagString: Player
@@ -258,6 +259,25 @@ MonoBehaviour:
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   target: {fileID: 3287308741127353885}
+--- !u!114 &8872008251388061295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5549108675679526585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a031ab06adc20d149b34ee41748e4953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  maxHealth: 100
+  currentHealth: 100
+  takeDamage: 0
+  time: 5
+  invincibleLength: 0.5
 --- !u!1001 &9017325357469503485
 PrefabInstance:
   m_ObjectHideFlags: 0
