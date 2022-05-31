@@ -144,15 +144,6 @@ public class EnemyOnlineController : MonoBehaviour
             anim.SetBool("isMoving", true);
         }
 
-        if (agent.velocity.x <= 0 && agent.velocity.z <= 0)
-        {
-            anim.SetBool("isMoving", false);
-        }
-        else
-        {
-            anim.SetBool("isMoving", true);
-        }
-
         fireCount -= Time.deltaTime;
 
         if (fireCount <= 0 && !enemyPortal)
