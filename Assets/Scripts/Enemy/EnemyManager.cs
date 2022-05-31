@@ -71,16 +71,16 @@ public class EnemyManager : MonoBehaviour
         Instantiate(enemyPrefab, spawnPoints[Random.Range(0, nrOfSpawnPoints)].transform.position, Quaternion.identity);
     }
 
-    [Server]
+    [Command]
     public void SpawnNewOnlineEnemy()
     {
         SpawnOnlineNewEnemyFromSpawnPoint();
     }
 
-    [Server]
+    [ClientRpc]
     public void SpawnOnlineNewEnemyFromSpawnPoint()
     {
-        NetworkServer.Spawn(Instantiate(onlineEnemyPrefab, spawnPoints[Random.Range(0, nrOfSpawnPoints)].transform.position, Quaternion.identity));
+        Instantiate(onlineEnemyPrefab, spawnPoints[Random.Range(0, nrOfSpawnPoints)].transform.position, Quaternion.identity);
     }
 
     public async void SpawnNewEnemy()
