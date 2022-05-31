@@ -1,7 +1,6 @@
-﻿using UnityEngine;
+﻿using Mirror;
+using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using Mirror;
 
 public class OnlineUIController : NetworkBehaviour
 {
@@ -19,12 +18,9 @@ public class OnlineUIController : NetworkBehaviour
 
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == "OnlineLevel" && hasAuthority)
-        {
-            fadeIn.color = new Color(fadeIn.color.r, fadeIn.color.g, fadeIn.color.b, Mathf.MoveTowards(fadeIn.color.a, 0, 1 * Time.deltaTime));
+        fadeIn.color = new Color(fadeIn.color.r, fadeIn.color.g, fadeIn.color.b, Mathf.MoveTowards(fadeIn.color.a, 0, 1 * Time.deltaTime));
 
-            OnlineUIController.instance.score.text = "SCORE: " + ScoreController.instance.score.ToString();
-            OnlineUIController.instance.multiplier.text = ScoreController.instance.totalMultiplier.ToString() + "x";
-        }
+        //OnlineUIController.instance.score.text = "SCORE: " + ScoreController.instance.score.ToString();
+        //OnlineUIController.instance.multiplier.text = ScoreController.instance.totalMultiplier.ToString() + "x";
     }
 }

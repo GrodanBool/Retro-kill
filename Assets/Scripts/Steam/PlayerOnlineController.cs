@@ -86,8 +86,8 @@ public class PlayerOnlineController : NetworkBehaviour
                 {
                     pickupCounter -= Time.deltaTime;
 
-                    //moveInput.x = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
-                    //moveInput.z = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
+                    OnlineUIController.instance.score.text = "SCORE: " + ScoreController.instance.score.ToString();
+                    OnlineUIController.instance.multiplier.text = ScoreController.instance.totalMultiplier.ToString() + "x";
 
                     // store y velocity
                     float yStore = moveInput.y;
@@ -363,7 +363,7 @@ public class PlayerOnlineController : NetworkBehaviour
     {
         if (hasAuthority)
         {
-            PlayerHealthController.instance.HealPlayer(5);
+            PlayerOnlineHealthController.instance.HealPlayer(5);
         }
 
         ItemManager.instance.spawnPoints.Where(s => s.spawnPoint.transform.position == transform.position)
