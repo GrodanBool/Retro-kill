@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Bouncepad : MonoBehaviour
 {   
@@ -8,10 +7,15 @@ public class Bouncepad : MonoBehaviour
 
    void OnTriggerEnter(Collider other)
    {
-       if (other.tag == "Player")
+       if (other.tag == "Player" && SceneManager.GetActiveScene().name != "OnlineLevel")
        {
            PlayerController.instance.Bounce(bounceforce);
            AudioManagerMusicSFX.instance.PlaySFX(6);
        }
+       else if (other.tag == "Player" && SceneManager.GetActiveScene().name == "OnlineLevel")
+        {
+            PlayerOnlineController.instance.Bounce(bounceforce);
+            AudioManagerMusicSFX.instance.PlaySFX(6);
+        }
    }
 }

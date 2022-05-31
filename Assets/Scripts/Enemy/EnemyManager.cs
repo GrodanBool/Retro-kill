@@ -1,4 +1,3 @@
-using Mirror;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,12 +5,11 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
-public class EnemyManager : NetworkBehaviour
+public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager instance;
 
     public GameObject enemyPrefab;
-    public GameObject onlineEnemyPrefab;
 
     public Transform[] spawnPoints;
 
@@ -35,15 +33,15 @@ public class EnemyManager : NetworkBehaviour
     {
         nrOfSpawnPoints = spawnPoints.Length;
 
-        if (SceneManager.GetActiveScene().name != "OnlineLevel")
+        if (SceneManager.GetActiveScene().name == "Level1")
         {
             useSpawnPoints = true;
             SpawnNewEnemy();
         }
-        else if (SceneManager.GetActiveScene().name == "OnlineLevel")
+        else
         {
-            useSpawnPoints = true;
-            SpawnOnlineNewEnemyFromSpawnPoint();
+            useSpawnPoints = false;
+            SpawnNewEnemy();
         }
     }
 
@@ -54,14 +52,16 @@ public class EnemyManager : NetworkBehaviour
         {
             spawnCounter -= Time.deltaTime;
         }
-        else if (spawnCounter <= 0 && SceneManager.GetActiveScene().name != "OnlineLevel")
+        if (spawnCounter <= 0 && SceneManager.GetActiveScene().name == "Level1")
         {
+            useSpawnPoints = true;
             SpawnNewEnemy();
             spawnCounter = spawnRate;
         }
-        else if (spawnCounter <= 0 && SceneManager.GetActiveScene().name == "OnlineLevel")
+        else if (spawnCounter <= 0)
         {
-            SpawnOnlineNewEnemyFromSpawnPoint();
+            useSpawnPoints = false;
+            SpawnNewEnemy();
             spawnCounter = spawnRate;
         }
     }
@@ -69,21 +69,6 @@ public class EnemyManager : NetworkBehaviour
     public void SpawnNewEnemyFromSpawnPoint()
     {
         Instantiate(enemyPrefab, spawnPoints[Random.Range(0, nrOfSpawnPoints)].transform.position, Quaternion.identity);
-    }
-
-    [Server]
-    public void SpawnOnlineNewEnemyFromSpawnPoint()
-    {
-        List<PlayerOnlineController> onlineControllers = GameObject.FindGameObjectsWithTag("Player")
-                                                                   .Where(a => a.GetComponent<PlayerOnlineController>() != null)
-                                                                   .Select(a => a.GetComponent<PlayerOnlineController>())
-                                                                   .ToList();
-
-        PlayerOnlineController newLocalPlayerOnlineController = onlineControllers[Random.Range(0, onlineControllers.Count)];
-        //.GetComponent<EnemyOnlineController>().localPlayerOnlineController = newLocalPlayerOnlineController
-        GameObject newEnemy = Instantiate(onlineEnemyPrefab, spawnPoints[Random.Range(0, nrOfSpawnPoints)].transform.position, Quaternion.identity);
-        newEnemy.GetComponent<EnemyOnlineController>().localPlayerOnlineController = newLocalPlayerOnlineController;
-        NetworkServer.Spawn(newEnemy);
     }
 
     public async void SpawnNewEnemy()
