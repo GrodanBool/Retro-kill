@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BulletController : MonoBehaviour
 {
@@ -40,15 +41,25 @@ public class BulletController : MonoBehaviour
     // Checks if this script is connected to an object and does something
     private void OnTriggerEnter(Collider other)
     {
+        if (SceneManager.GetActiveScene().name != "OnlineLevel")
+        {
+            if (other.tag == "Player" && damagePlayer)
+            {
+                other.gameObject.GetComponent<PlayerHealthController>().DamagePlayer(damage);
+            }
+        }
+        else if (SceneManager.GetActiveScene().name == "OnlineLevel")
+        {
+            if (other.tag == "Player" && damagePlayer)
+            {
+                other.gameObject.GetComponent<PlayerOnlineHealthController>().DamagePlayer(damage);
+            }
+        }
+
         if (other.tag == "Enemy" && damageEnemy)
         {
             // If it's an enemy, fetch the class and run the correct function
             other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy(damage);
-        }
-
-        if (other.tag == "Player" && damagePlayer)
-        {
-            other.gameObject.GetComponent<PlayerHealthController>().DamagePlayer(damage);
         }
 
         if (other.tag == "Weapon" || other.tag == "Portal" || other.tag == "Health" || other.tag == "Ammo" || other.tag == "Player" && !damagePlayer)
