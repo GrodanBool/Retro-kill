@@ -242,7 +242,7 @@ public class PlayerOnlineController : NetworkBehaviour
             else
             {
                 activeGun.currentAmmo--;
-                Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation);
+                //Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation);
                 cmdInstantiateBullet();
                 activeGun.fireCounter = activeGun.fireRate;
                 OnlineUIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
@@ -254,7 +254,16 @@ public class PlayerOnlineController : NetworkBehaviour
     [Command]
     public void cmdInstantiateBullet()
     {
-        NetworkServer.Spawn(Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation));
+        InstantiateBullet();
+    }
+
+    [ClientRpc]
+    public void InstantiateBullet()
+    {
+        if (hasAuthority)
+        {
+            Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation);
+        }
     }
 
     public IEnumerator MuzzleFlash()
