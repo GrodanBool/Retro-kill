@@ -97,7 +97,7 @@ public class EnemyController : MonoBehaviour
         }
 
         //follow player, try new location or go in portal
-        if (tryPlayerTracing && !tryNewLocation /*&& !enemyPortal*/ && !canShoot)
+        if (tryPlayerTracing && !tryNewLocation /*&& !enemyPortal*/ /*&& !canShoot*/)
         {
             firePoint.LookAt(PlayerController.instance.transform.position);
             agent.SetDestination(targetPoint);
