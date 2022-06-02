@@ -2,6 +2,7 @@ using Mirror;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 public class ItemManager : MonoBehaviour
@@ -27,9 +28,13 @@ public class ItemManager : MonoBehaviour
         {
             ServerSpawns();
         }
-        else
+        else if (SceneManager.GetActiveScene().name == "Level1")
         {
             NormalSpawns();
+        }
+        else
+        {
+            //RandomSpawn();
         }
     }
 
@@ -40,9 +45,49 @@ public class ItemManager : MonoBehaviour
         {
             ServerContinuousSpawn();
         }
-        else
+        else if (SceneManager.GetActiveScene().name == "Level1")
         {
             NormalContinuousSpawn();
+        }
+        else
+        {
+            RandomContinuousSpawn();
+        }
+    }
+
+    void RandomSpawn()
+    {
+        //Maybe
+    }
+    void RandomContinuousSpawn()
+    {
+        spawnTimeout -= Time.deltaTime;
+
+        if (spawnTimeout <= 0)
+        {
+            int randomItem = Random.Range(1, 4);
+            Vector3 spawnPoint = RandomNavmeshSpawnLocation(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().transform.position, 50);
+            spawnPoint.y += 1;
+            Transform transform = gameObject.transform;
+            transform.position = spawnPoint;
+            transform.rotation = Quaternion.identity;
+            switch (randomItem)
+            {
+                case 1:
+                    HealthPickup.instance.RespawnHealth(transform);
+                    spawnTimeout = 15f;
+                    break;
+                case 2:
+                    AmmoPickup.instance.RespawnAmmo(transform);
+                    spawnTimeout = 15f;
+                    break;
+                case 3:
+                    WeaponPickup.instance.RespawnWeapon(transform);
+                    spawnTimeout = 15f;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -180,5 +225,37 @@ public class ItemManager : MonoBehaviour
         {
             this.spawnPoints.Add(new SpawnPoints { spawnPoint = item, occupied = false });
         }
+    }
+
+    public Vector3 RandomNavmeshSpawnLocation(Vector3 playerPostition, int maxRadius)
+    {
+        List<ColliderPositions> colliderPositions = new List<ColliderPositions>();
+        Vector3 finalPosition = Vector3.zero;
+        bool positionFound = false;
+        NavMeshHit hit;
+
+        var test = Physics.OverlapSphere(playerPostition, maxRadius);
+
+        Physics.OverlapSphere(playerPostition, maxRadius).ToList()
+                                                         .ForEach(a => colliderPositions
+                                                         .Add(new ColliderPositions() { Position = a, Tried = false }));
+
+
+        while (!positionFound && colliderPositions.Any(a => a.Tried == false))
+        {
+            Vector3 randomNavmeshSpawn = colliderPositions.Where(a => a.Tried == false).ToList()
+                                         [Random.Range(0, colliderPositions.Count)].Position.transform.position;
+
+            colliderPositions.Where(a => a.Position.transform.position == randomNavmeshSpawn)
+                             .Select(a => { a.Tried = true; return a; })
+                             .ToList();
+
+            if (NavMesh.SamplePosition(randomNavmeshSpawn, out hit, maxRadius, 1))
+            {
+                finalPosition = hit.position;
+                positionFound = true;
+            }
+        }
+        return finalPosition;
     }
 }

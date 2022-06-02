@@ -33,8 +33,8 @@ public class EnemyController : MonoBehaviour
     private bool tryNewLocation;
     private bool tryPlayerTracing = true;
     private bool canShoot;
-    [HideInInspector] public bool enemyPortal = false;
-    [HideInInspector] public BoxCollider portal = null;
+    //[HideInInspector] public bool enemyPortal = false;
+    //[HideInInspector] public BoxCollider portal = null;
 
     // Start is called before the first frame update
     void Start()
@@ -45,10 +45,10 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (portal == null/* && PlayerPrefs.GetString("CurrentLevel") == "Level1"*/)
-        {
-            enemyPortal = false;
-        }
+        //if (portal == null/* && PlayerPrefs.GetString("CurrentLevel") == "Level1"*/)
+        //{
+        //    enemyPortal = false;
+        //}
         // Target the player instance position
         targetPoint = PlayerController.instance.transform.position;
 
@@ -97,22 +97,22 @@ public class EnemyController : MonoBehaviour
         }
 
         //follow player, try new location or go in portal
-        if (tryPlayerTracing && !tryNewLocation && !enemyPortal/*&& !canShoot*/)
+        if (tryPlayerTracing && !tryNewLocation /*&& !enemyPortal*/ && !canShoot)
         {
             firePoint.LookAt(PlayerController.instance.transform.position);
             agent.SetDestination(targetPoint);
         }
-        else if (!tryNewLocation && !tryPlayerTracing && !canShoot && !enemyPortal && agent.velocity.x == 0 && agent.velocity.z == 0)
+        else if (!tryNewLocation && !tryPlayerTracing && !canShoot /*&& !enemyPortal*/ && agent.velocity.x == 0 && agent.velocity.z == 0)
         {
             firePoint.LookAt(PlayerController.instance.transform.position);
             randomLocation = RandomNavmeshLocation(50);
             agent.SetDestination(randomLocation);
         }
-        else if (enemyPortal)
-        {
-            firePoint.LookAt(portal.transform.position);
-            agent.SetDestination(portal.transform.position);
-        }
+        //else if (enemyPortal)
+        //{
+        //    firePoint.LookAt(portal.transform.position);
+        //    agent.SetDestination(portal.transform.position);
+        //}
 
         if (agent.velocity.x <= 0 && agent.velocity.z <= 0)
         {
@@ -134,7 +134,7 @@ public class EnemyController : MonoBehaviour
 
         fireCount -= Time.deltaTime;
 
-        if (fireCount <= 0 && !enemyPortal)
+        if (fireCount <= 0 /*&& !enemyPortal*/)
         {
             fireCount = fireRate;
 

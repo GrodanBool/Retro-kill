@@ -6,7 +6,7 @@ public class PortalTeleporter : MonoBehaviour
 
     public Transform player;
     public Transform bullet;
-    public Transform enemy;
+    //public Transform enemy;
     public Transform reciever;
 
     private bool playerIsOverlapping = false;
@@ -52,34 +52,34 @@ public class PortalTeleporter : MonoBehaviour
             bulletIsOverlapping = false;
         }
 
-        if (enemyIsOverlapping)
-        {
-            Vector3 portalToPlayer = enemy.position - transform.position;
+        //if (enemyIsOverlapping)
+        //{
+        //    Vector3 portalToPlayer = enemy.position - transform.position;
 
-            float rotationDiff = -Quaternion.Angle(transform.rotation, reciever.rotation);
-            rotationDiff += 180;
-            enemy.Rotate(Vector3.up, rotationDiff);
+        //    float rotationDiff = -Quaternion.Angle(transform.rotation, reciever.rotation);
+        //    rotationDiff += 180;
+        //    enemy.Rotate(Vector3.up, rotationDiff);
 
-            Vector3 positionOffset = Quaternion.Euler(0f, rotationDiff, 0f) * portalToPlayer;
-            enemy.position = reciever.position + positionOffset;
+        //    Vector3 positionOffset = Quaternion.Euler(0f, rotationDiff, 0f) * portalToPlayer;
+        //    enemy.position = reciever.position + positionOffset;
 
-            enemyIsOverlapping = false;
-            enemyController.enemyPortal = false;
-            enemyController.agent.enabled = true;
-        }
+        //    enemyIsOverlapping = false;
+        //    enemyController.enemyPortal = false;
+        //    enemyController.agent.enabled = true;
+        //}
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            if (enemyController)
-            {
-                enemyController.agent.stoppingDistance = 0f;
-                enemyController.enemyPortal = true;
-            }
+            //if (enemyController)
+            //{
+            //    enemyController.agent.stoppingDistance = 0f;
+            //    enemyController.enemyPortal = true;
+            //}
             playerIsOverlapping = true;
-            enemyController.portal = reciever.GetComponent<BoxCollider>();
+            //enemyController.portal = reciever.GetComponent<BoxCollider>();
         }
 
         if (other.tag == "Bullet")
@@ -89,12 +89,12 @@ public class PortalTeleporter : MonoBehaviour
             bullet = other.gameObject.transform;
         }
 
-        if (other.tag == "Enemy" && enemyController.enemyPortal)
-        {
-            enemyController.agent.enabled = false;
-            enemyIsOverlapping = true;
-            enemy = other.gameObject.transform;
-        }
+        //if (other.tag == "Enemy" && enemyController.enemyPortal)
+        //{
+        //    enemyController.agent.enabled = false;
+        //    enemyIsOverlapping = true;
+        //    enemy = other.gameObject.transform;
+        //}
     }
 
     void OnTriggerExit(Collider other)
@@ -110,12 +110,12 @@ public class PortalTeleporter : MonoBehaviour
             StartCoroutine(StartEmitting(other));
         }
 
-        if (other.tag == "Enemy" && enemyController.enemyPortal)
-        {
-            enemyIsOverlapping = false;
-            enemyController.enemyPortal = false;
-            enemyController.agent.enabled = true;
-        }
+        //if (other.tag == "Enemy" && enemyController.enemyPortal)
+        //{
+        //    enemyIsOverlapping = false;
+        //    enemyController.enemyPortal = false;
+        //    enemyController.agent.enabled = true;
+        //}
     }
 
     IEnumerator StartEmitting(Collider other)
