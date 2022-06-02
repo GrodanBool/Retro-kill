@@ -177,7 +177,7 @@ public class PlayerController : MonoBehaviour
 
             // Handle shooting
             // Single shots
-            if (Input.GetMouseButtonDown(0) && activeGun.fireCounter <= 0 && allGuns.Count > 0)
+            if (Input.GetMouseButtonDown(0) && activeGun.fireCounter <= 0 && allGuns.Count > 0 || Input.GetButton("Fire 1") && activeGun.canAutoFire && allGuns.Count > 0)
             {
                 RaycastHit hit;
 
@@ -198,7 +198,7 @@ public class PlayerController : MonoBehaviour
             }
 
             // Repeating shots
-            if (Input.GetMouseButton(0) && activeGun.canAutoFire && allGuns.Count > 0)
+            if (Input.GetMouseButton(0) && activeGun.canAutoFire && allGuns.Count > 0 || Input.GetButton("Fire 1") && activeGun.canAutoFire && allGuns.Count > 0)
             {
                 if (activeGun.fireCounter <= 0)
                 {
