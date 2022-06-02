@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
             // Handle jumping
             // If the SPACE key is pressed, and canJump is true, change the move input for the y axis to the jump power
             // public variable value
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButton("Jump"))
             {
                 if (canJump)
                 {
