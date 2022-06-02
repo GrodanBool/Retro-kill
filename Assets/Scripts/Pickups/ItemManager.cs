@@ -52,7 +52,6 @@ public class ItemManager : MonoBehaviour
         else
         {
             RandomContinuousSpawn();
-            spawnTimeout = 15f;
         }
     }
 
@@ -76,12 +75,15 @@ public class ItemManager : MonoBehaviour
             {
                 case 1:
                     HealthPickup.instance.RespawnHealth(transform);
+                    spawnTimeout = 15f;
                     break;
                 case 2:
                     AmmoPickup.instance.RespawnAmmo(transform);
+                    spawnTimeout = 15f;
                     break;
                 case 3:
                     WeaponPickup.instance.RespawnWeapon(transform);
+                    spawnTimeout = 15f;
                     break;
                 default:
                     break;
