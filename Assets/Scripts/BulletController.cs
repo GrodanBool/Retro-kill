@@ -22,7 +22,7 @@ public class BulletController : MonoBehaviour
     void Update()
     {
         // Time.deltaTime not needed here
-        theRB.velocity = transform.forward * moveSpeed;
+        theRB.linearVelocity = transform.forward * moveSpeed;
 
         lifeTime -= Time.deltaTime;
 
