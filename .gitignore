@@ -70,3 +70,11 @@ EnvData/
 webtest/
 test1_Data/
 test1.x86_64
+
+#vsc
+.vscode/
+
+#misc
+UnityPlayer.so
+libdecor-0.so.0
+libdecor-cairo.so
