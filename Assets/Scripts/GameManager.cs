@@ -83,28 +83,5 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 0f;
             }
         }
-        else if (SceneManager.GetActiveScene().name == "OnlineLevel")
-        {
-            if (OnlineUIController.instance.pauseScreen.activeInHierarchy)
-            {
-                OnlineUIController.instance.pauseScreen.SetActive(false);
-
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-
-                Time.timeScale = 1f;
-
-                escapedPressed = false;
-            }
-            else
-            {
-                OnlineUIController.instance.pauseScreen.SetActive(true);
-
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-
-                //Time.timeScale = 0f;
-            }
-        }
     }
 }

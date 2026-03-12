@@ -46,9 +46,5 @@ public class Gun : MonoBehaviour
         { 
             UIController.instance.ammoText.text = "AMMO: " + currentAmmo;
         }
-        else if (updateUI && SceneManager.GetActiveScene().name == "OnlineLevel")
-        {
-            OnlineUIController.instance.ammoText.text = "AMMO: " + currentAmmo;
-        }
     }
 }

@@ -1,4 +1,3 @@
-using Mirror;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -24,11 +23,7 @@ public class ItemManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (SceneManager.GetActiveScene().name == "OnlineLevel")
-        {
-            ServerSpawns();
-        }
-        else if (SceneManager.GetActiveScene().name == "Level1")
+        if (SceneManager.GetActiveScene().name == "Level1")
         {
             NormalSpawns();
         }
@@ -41,11 +36,7 @@ public class ItemManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == "OnlineLevel")
-        {
-            ServerContinuousSpawn();
-        }
-        else if (SceneManager.GetActiveScene().name == "Level1")
+        if (SceneManager.GetActiveScene().name == "Level1")
         {
             NormalContinuousSpawn();
         }
@@ -141,71 +132,6 @@ public class ItemManager : MonoBehaviour
                 }
             }
         }
-    }
-
-    [Server]
-    void ServerContinuousSpawn()
-    {
-        spawnTimeout -= Time.deltaTime;
-
-        if (spawnTimeout <= 0)
-        {
-            bool checkOccupiedSpawnPoint = false;
-            int randomSpawnPoints = Random.Range(0, spawnPoints.Count);
-
-            while (!checkOccupiedSpawnPoint)
-            {
-                if (!spawnPoints[randomSpawnPoints].occupied)
-                {
-                    spawnTimeout = 5f;
-                    checkOccupiedSpawnPoint = true;
-                }
-                else
-                {
-                    randomSpawnPoints = Random.Range(0, spawnPoints.Count);
-                    spawnPoints[randomSpawnPoints].tried = true;
-                    if (!spawnPoints.Any(a => a.tried == false))
-                    {
-                        spawnTimeout = 5f;
-                        checkOccupiedSpawnPoint = true;
-                    }
-                }
-            }
-
-            int randomItem = Random.Range(1, 4);
-            if (!spawnPoints[randomSpawnPoints].occupied)
-            {
-                switch (randomItem)
-                {
-                    case 1:
-                        HealthPickup.instance.RespawnOnlineHealth(spawnPoints[randomSpawnPoints].spawnPoint);
-                        spawnPoints[randomSpawnPoints].occupied = true;
-                        break;
-                    case 2:
-                        AmmoPickup.instance.RespawnOnlineAmmo(spawnPoints[randomSpawnPoints].spawnPoint);
-                        spawnPoints[randomSpawnPoints].occupied = true;
-                        break;
-                    case 3:
-                        WeaponPickup.instance.RespawnOnlineWeapon(spawnPoints[randomSpawnPoints].spawnPoint);
-                        spawnPoints[randomSpawnPoints].occupied = true;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-    }
-
-    [Server]
-    void ServerSpawns()
-    {
-        CreateSpawnPoints();
-        spawnPoints[0].occupied = true;
-        spawnPoints[1].occupied = true;
-        spawnPoints[2].occupied = true;
-        HealthPickup.instance.RespawnOnlineHealth(spawnPoints[0].spawnPoint);
-        AmmoPickup.instance.RespawnOnlineAmmo(spawnPoints[1].spawnPoint);
-        WeaponPickup.instance.RespawnOnlineWeapon(spawnPoints[2].spawnPoint);
     }
 
     void NormalSpawns()

@@ -30,14 +30,6 @@ public class ScoreController : MonoBehaviour
             ScoreMultiplier();
             StartCoroutine("AddPoints");
         }
-        else
-        {
-            totalMultiplier = GameObject.FindGameObjectsWithTag("Player")
-                                        .Where(a => a.GetComponent<PlayerOnlineController>() != null)
-                                        .Select(a => a.GetComponent<PlayerOnlineController>())
-                                        .ToList()
-                                        .Count + 3;
-        }
     }
 
     // Update is called once per frame

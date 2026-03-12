@@ -65,3 +65,8 @@ UserSettings/Layouts/
 
 #db settings
 EnvData/
+
+#build
+webtest/
+test1_Data/
+test1.x86_64

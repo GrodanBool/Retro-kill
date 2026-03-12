@@ -42,14 +42,7 @@ public class BulletController : MonoBehaviour
                 other.gameObject.GetComponent<PlayerHealthController>().DamagePlayer(damage);
             }
         }
-        else if (SceneManager.GetActiveScene().name == "OnlineLevel")
-        {
-            if (other.tag == "Player" && damagePlayer)
-            {
-                other.gameObject.GetComponent<PlayerOnlineHealthController>().DamagePlayer(damage);
-            }
-        }
-
+        
         if (other.tag == "Enemy" && damageEnemy)
         {
             // If it's an enemy, fetch the class and run the correct function
