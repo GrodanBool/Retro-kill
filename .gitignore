@@ -78,3 +78,5 @@ test1.x86_64
 UnityPlayer.so
 libdecor-0.so.0
 libdecor-cairo.so
+steam_appid.txt
+app.config
